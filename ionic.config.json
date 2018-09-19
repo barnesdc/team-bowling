@@ -4,11 +4,7 @@
     "cordova": {}
   },
   "type": "ionic1",
-  "watchPatterns": [
-    "scss/**/*",
-    "www/**/*",
-    "!www/lib/**/*",
-    "!www/**/*.map"
-  ],
-  "pro_id": "e28bbc06"
+  "watchPatterns": ["scss/**/*", "www/**/*", "!www/lib/**/*", "!www/**/*.map"],
+  "pro_id": "e28bbc06",
+  "gulpStartupTasks": ["sass", "watch"]
 }
