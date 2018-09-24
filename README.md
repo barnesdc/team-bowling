@@ -6,4 +6,9 @@ Create a project plan:
 Requirments/Specification Document:
 -due next Tuesday
 
+09/24/2018
+-Requirements Doc
+-Data Structure in Firebase
+-SourceTree & Git setup
+
 Advisory Meeting Weekly
