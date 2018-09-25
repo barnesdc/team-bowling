@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Bowler Profile
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page4">
+  <ion-card id="bowlerProfile-card22">
+    <ion-list>
+      <ion-item color="none" id="bowlerProfile-list-item7">
+        <ion-avatar item-left>
+          <img />
+        </ion-avatar>
+        <h2>
+          [bowler.name]
+        </h2>
+      </ion-item>
+      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
+        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
+      </div>
+      <ion-item id="bowlerProfile-list-item-container4">
+        <div id="bowlerProfile-markdown4" class="show-list-numbers-and-dots">
+          <p style="margin-top:0px;color:#000000;">
+            Some friendly
+            <strong>
+              markdown
+            </strong>
+            <br />
+            <strong>
+              put a form here and include:
+            </strong>
+            <br /> Average: [bowler.average]
+            <br /> High: [bowler.high]
+            <br /> Handicap: [if n/a, put n/a; some number]
+            <br /> Handicap level: [use either this or actual]
+            <br /> Gender: [male or female]
+          </p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <button id="bowlerProfile-button5" ion-button color="positive" block on-click="goToEditProfile()">
+    <ion-icon name="more"></ion-icon>
+    Save
+  </button>
+</ion-content>
