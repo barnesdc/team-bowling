@@ -23,7 +23,7 @@ import {
   AngularFireDatabaseModule,
   AngularFireDatabase
 } from "angularfire2/database"; // database
-import { AngularFireStorageModule } from "angularfire2/storage"; // storage for images and other files
+import { AngularFireStorageModule } from "angularfire2/storage";
 
 // Initialize Firebase
 export const firebaseConfig = {
@@ -51,7 +51,7 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     AngularFireDatabaseModule,
     AngularFireStorageModule
     // AngularFireModule

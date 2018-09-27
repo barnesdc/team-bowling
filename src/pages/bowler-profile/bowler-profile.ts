@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { EditProfilePage } from "../edit-profile/edit-profile";
-import { BowlerProfilePage } from "../bowler-profile/bowler-profile";
+// import { BowlerProfilePage } from "../bowler-profile/bowler-profile";
 
 @Component({
   selector: "page-bowler-profile",
@@ -15,8 +15,8 @@ export class BowlerProfilePage {
     if (!params) params = {};
     this.navCtrl.push(EditProfilePage);
   }
-  goToBowlerProfile(params) {
-    if (!params) params = {};
-    this.navCtrl.push(BowlerProfilePage);
-  }
+  // goToBowlerProfile(params) {
+  //   if (!params) params = {};
+  //   this.navCtrl.push(BowlerProfilePage);
+  // }
 }

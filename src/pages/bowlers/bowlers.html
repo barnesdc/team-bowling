@@ -6,7 +6,16 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page3">
+  <p>The Bowlers collection currently includes: </p><br>
+  <hr>
   <ion-list id="bowlers-list6">
-    <ion-item id="bowlers-list-item-container6"></ion-item>
+    <ion-item id="bowlers-list-item-container6">
+      <div *ngFor="let bowler of bowlers | async">
+        <p>Bowler Name: {{bowler.name}}</p>
+        <p>Bowler Average: {{bowler.avg}}</p>
+        <hr>
+      </div>
+    </ion-item>
   </ion-list>
+
 </ion-content>
