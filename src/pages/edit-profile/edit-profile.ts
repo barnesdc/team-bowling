@@ -15,8 +15,8 @@ export class EditProfilePage {
     if (!params) params = {};
     this.navCtrl.push(BowlerProfilePage);
   }
-  goToEditProfile(params) {
-    if (!params) params = {};
-    this.navCtrl.push(EditProfilePage);
-  }
+  // goToEditProfile(params) {
+  //   if (!params) params = {};
+  //   this.navCtrl.push(EditProfilePage);
+  // }
 }
