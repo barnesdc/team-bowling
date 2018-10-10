@@ -17,3 +17,4 @@ Advisory Meeting Weekly
 
 ## 10/10/2018
 - Keep project plan up-to-date
+- https://github.com/barnesdc/team-bowling/wiki/Project-Plan
