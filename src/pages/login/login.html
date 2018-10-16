@@ -14,21 +14,23 @@
         <ion-label>
           Email
         </ion-label>
-        <ion-input type="email" placeholder=""></ion-input>
+        <!-- <ion-input type="email" placeholder="" [(ngModel)]="bowler.email"></ion-input> -->
       </ion-item>
       <ion-item id="login-input2">
         <ion-label>
           Password
         </ion-label>
-        <ion-input type="password" placeholder=""></ion-input>
+        <!-- <ion-input type="password" placeholder="" [[ngModel]]="bowler.password"></ion-input> -->
       </ion-item>
     </ion-list>
     <div class="spacer" style="height:40px;" id="login-spacer1"></div>
+    <!-- <button id="login-button1" ion-button color="stable" block on-click="signInWithEmail()"> -->
     <button id="login-button1" ion-button color="stable" block on-click="goToTabs()">
+
       Log in
     </button>
     <button id="login-button2" ion-button clear color="positive" block on-click="goToSignup()">
-      Or create an account
+      Create an account
     </button>
   </form>
 </ion-content>

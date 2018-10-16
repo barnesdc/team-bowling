@@ -14,3 +14,6 @@ Requirments/Specification Document:
 -SourceTree & Git setup
 
 Advisory Meeting Weekly
+
+#Randon Notes
+-ionic cordova run: creates allows you to either create an ios or android build

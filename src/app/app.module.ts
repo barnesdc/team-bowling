@@ -4,7 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
 import { MyApp } from "./app.component";
 
 import { GamesScoresPage } from "../pages/games-scores/games-scores";
-import { BowlersPage } from "../pages/bowlers/bowlers";
+import { TeamsPage } from "../pages/teams/teams";
 import { BowlerProfilePage } from "../pages/bowler-profile/bowler-profile";
 import { EditProfilePage } from "../pages/edit-profile/edit-profile";
 import { TabsPage } from "../pages/tabs/tabs";
@@ -17,6 +17,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 
 // firebase imports
 import { AngularFireModule } from "angularfire2";
+import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
 import { AngularFirestoreModule } from "angularfire2/firestore"; // user info, data dictionary
 import {
@@ -24,21 +25,18 @@ import {
   AngularFireDatabase
 } from "angularfire2/database"; // database
 import { AngularFireStorageModule } from "angularfire2/storage";
+import { AuthServiceProvider } from "../providers/auth-service/auth-service";
+import { firebaseConfig } from "../config";
+import { SQLite } from "@ionic-native/sqlite";
+import { Toast } from "@ionic-native/toast";
+import { DatabaseProvider } from "../providers/database/database";
+import { HttpModule } from "@angular/http";
 
-// Initialize Firebase
-export const firebaseConfig = {
-  apiKey: "AIzaSyBkjK4MXok4pe7HemheEPsQJ2x_miQia6Q",
-  authDomain: "bowling-app-b45c0.firebaseapp.com",
-  databaseURL: "https://bowling-app-b45c0.firebaseio.com",
-  projectId: "bowling-app-b45c0",
-  storageBucket: "bowling-app-b45c0.appspot.com",
-  messagingSenderId: "49362757433"
-};
 @NgModule({
   declarations: [
     MyApp,
     GamesScoresPage,
-    BowlersPage,
+    TeamsPage,
     BowlerProfilePage,
     EditProfilePage,
     TabsPage,
@@ -49,18 +47,17 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig.fire),
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     AngularFireDatabaseModule,
-    AngularFireStorageModule
-    // AngularFireModule
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     GamesScoresPage,
-    BowlersPage,
+    TeamsPage,
     BowlerProfilePage,
     EditProfilePage,
     TabsPage,
@@ -72,7 +69,12 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AngularFireAuth,
+    AuthServiceProvider,
+    SQLite,
+    Toast,
+    DatabaseProvider
   ]
 })
 export class AppModule {}

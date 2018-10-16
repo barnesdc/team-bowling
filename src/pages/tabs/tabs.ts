@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { GamesScoresPage } from "../games-scores/games-scores";
-import { BowlersPage } from "../bowlers/bowlers";
+import { TeamsPage } from "../teams/teams";
 import { BowlerProfilePage } from "../bowler-profile/bowler-profile";
 import { InformationPage } from "../information/information";
 
@@ -13,7 +13,7 @@ export class TabsPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
   tab1Root: any = GamesScoresPage;
-  tab2Root: any = BowlersPage;
+  tab2Root: any = TeamsPage;
   tab3Root: any = BowlerProfilePage;
   tab4Root: any = InformationPage;
   constructor(public navCtrl: NavController) {}
