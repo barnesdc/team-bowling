@@ -25,3 +25,4 @@ https://stackoverflow.com/questions/1884818/how-do-i-add-a-foreign-key-to-an-exi
 
 ## Need to update documentation on how to run cordova emulator
 - use cordova requirements
+-ionic cordova run ios --target="iPhone-x, 12.9" ??
