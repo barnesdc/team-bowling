@@ -22,3 +22,6 @@ Advisory Meeting Weekly
 ## SQLite tables
 - you cannot easily add foreign keys to tables, they need to be created whene the table is made
 https://stackoverflow.com/questions/1884818/how-do-i-add-a-foreign-key-to-an-existing-sqlite-table
+
+## Need to update documentation on how to run cordova emulator
+- use cordova requirements
