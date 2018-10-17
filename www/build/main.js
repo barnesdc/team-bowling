@@ -48,34 +48,28 @@ var DatabaseProvider = /** @class */ (function () {
                 console.log(error);
             });
         }
-        // if (!this.isOpen) {
-        //   this.storage = new SQLite();
-        //   this.storage.create({ name: "data.db", location: "default" }).then((db: SQLiteObject) => {
-        //     this.db = db;
-        //     db.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, identification INTEGER, name TEXT, lastname text)", []);
-        //     this.isOpen = true;
-        //   }).catch((error) => {
-        //     console.log(error);
-        //   })
-        // }
         console.log("Hello DatabaseProvider Provider");
     }
-    DatabaseProvider.prototype.CreateBowler = function (bowler_name, bowler_gender, bowler_average, bowler_handicap, bowler_score, team_id) {
+    DatabaseProvider.prototype.CreateBowler = function (bowler_name, bowler_gender, bowler_average, bowler_handicap, bowler_score) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var sql = "INSERT INTO users (bowler_name, bowler_gender, bowler_avg, bowler_handicap, bowler_score) VALUES (?, ?, ?, ?, ?)";
-            _this.db
-                .executeSql(sql, [
-                bowler_name,
-                bowler_gender,
-                bowler_average,
-                bowler_handicap,
-                bowler_score
-            ])
-                .then(function (data) {
-                resolve(data);
-            }, function (error) {
-                reject(error);
+            _this.storage
+                .create({ name: "bowlerData.db", location: "default" })
+                .then(function () {
+                var sql = "INSERT INTO bowlers (bowler_name, bowler_gender, bowler_avg, bowler_handicap, bowler_score) VALUES (?, ?, ?, ?, ?)";
+                _this.db
+                    .executeSql(sql, [
+                    bowler_name,
+                    bowler_gender,
+                    bowler_average,
+                    bowler_handicap,
+                    bowler_score
+                ])
+                    .then(function (data) {
+                    resolve(data);
+                }, function (error) {
+                    reject(error);
+                });
             });
         });
     };
@@ -298,7 +292,7 @@ var TeamsPage = /** @class */ (function () {
                     text: "Save",
                     handler: function (data) {
                         console.log(JSON.stringify(data));
-                        _this.database.CreateBowler(data.Name, data.Handicap, data.gender, data.AverageScore, data.Score, data.id);
+                        _this.database.CreateBowler(data.Name, data.Handicap, data.gender, data.AverageScore, data.Score);
                     }
                 }
             ]
@@ -417,12 +411,13 @@ var LoginPage = /** @class */ (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signup_signup__["a" /* SignupPage */]);
     };
     LoginPage.prototype.signOut = function () { };
-    var _a, _b, _c;
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-login",template:/*ion-inline-start:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Login\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding id="page6">\n  <div id="custom-overlay" [style.display]="splash ? \'flex\':\'none\'">\n    <div class="flb">\n      <div class="Aligner-item Aligner-item--top"></div>\n      <img src="https://media.giphy.com/media/l0HlW6GBSjbyFDCW4/giphy.gif">\n      <div class="Aligner-item Aligner-item--bottom"></div>\n    </div>\n  </div>\n  <form id="login-form1">\n    <img src="../../assets/imgs/bowl-pins.png" style="display:block;width:160px;height:auto;margin-left:auto;margin-right:auto;" />\n    <div class="spacer" style="height:40px;" id="login-spacer4"></div>\n    <ion-list id="login-list1">\n      <ion-item id="login-input1">\n        <ion-label>\n          Email\n        </ion-label>\n        <!-- <ion-input type="email" placeholder="" [(ngModel)]="bowler.email"></ion-input> -->\n      </ion-item>\n      <ion-item id="login-input2">\n        <ion-label>\n          Password\n        </ion-label>\n        <!-- <ion-input type="password" placeholder="" [[ngModel]]="bowler.password"></ion-input> -->\n      </ion-item>\n    </ion-list>\n    <div class="spacer" style="height:40px;" id="login-spacer1"></div>\n    <!-- <button id="login-button1" ion-button color="stable" block on-click="signInWithEmail()"> -->\n    <button id="login-button1" ion-button color="stable" block on-click="goToTabs()">\n\n      Log in\n    </button>\n    <button id="login-button2" ion-button clear color="positive" block on-click="goToSignup()">\n      Create an account\n    </button>\n  </form>\n</ion-content>'/*ion-inline-end:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/login/login.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__providers_database_database__["a" /* DatabaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_database_database__["a" /* DatabaseProvider */]) === "function" ? _c : Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_database_database__["a" /* DatabaseProvider */]])
     ], LoginPage);
     return LoginPage;
 }());
