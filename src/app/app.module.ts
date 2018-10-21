@@ -25,8 +25,11 @@ import {
 } from "angularfire2/database"; // database
 import { AngularFireStorageModule } from "angularfire2/storage";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { AuthServiceProvider } from "../providers/auth-service/auth-service";
+=======
+>>>>>>> SQL adding Table working
 import { SQLite } from "@ionic-native/sqlite";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
@@ -87,7 +90,6 @@ export const firebaseConfig = {
 =======
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AngularFireAuth,
-    AuthServiceProvider,
     SQLite,
     DatabaseProvider
 >>>>>>> no message
