@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
+<<<<<<< HEAD
+=======
+import {AlertController} from "ionic-angular";
+import { SQLite } from "@ionic-native/sqlite";
+>>>>>>> issues
 
 import {
   AngularFirestore,
@@ -8,6 +13,11 @@ import {
 } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
+<<<<<<< HEAD
+=======
+import { Placeholder } from "@angular/compiler/src/i18n/i18n_ast";
+import { DatabaseProvider } from "../../providers/database/database";
+>>>>>>> issues
 
 interface Bolwers {
   name: string;
@@ -21,14 +31,75 @@ interface Bolwers {
 export class BowlersPage {
   bowlersCollection: AngularFirestoreCollection<Bolwers>; //firestore collection
   bowlers: Observable<Bolwers[]>; //read collection
+<<<<<<< HEAD
   // bowlers: Observable<any[]>;
   // this tells the tabs component which Pages
   // should be each tab's root Page
   constructor(public navCtrl: NavController, private afs: AngularFirestore) {
     // this.bowlers = afDB.list("bolwers").valueChanges();
   }
+=======
+  private database : DatabaseProvider;
+  // bowlers: Observable<any[]>;
+  // this tells the tabs component which Pages
+  // should be each tab's root Page
+  constructor(public alertCtrl: AlertController, private afs: AngularFirestore){
+    
+  }
+  /*constructor(public navCtrl: NavController, private afs: AngularFirestore) {
+    // this.bowlers = afDB.list("bolwers").valueChanges();
+  }*/
+>>>>>>> issues
   ionViewWillEnter() {
     this.bowlersCollection = this.afs.collection("Bowlers");
     this.bowlers = this.bowlersCollection.valueChanges();
   }
+<<<<<<< HEAD
 }
+=======
+
+  AddBowlerPrompt()
+  {
+    const prompt = this.alertCtrl.create({
+    title: 'Add Bowler',
+    message: 'Fill out the following boxes to enter your bowler',
+    inputs: [
+      {
+        name: 'Name',
+        placeholder: 'Bowler name'
+      },
+      {
+        name: 'Handicap',
+        placeholder: 'Handicap (Ex. A, B or C)'
+      },
+      {
+        name: 'Gender',
+        placeholder: 'Gender (Ex. Male/Female)'
+      },
+      {
+        name: 'AverageScore',
+        placeholder: 'Average Score (Ex. 200)'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked')
+        }
+      },
+      {
+        text: 'Save',
+        handler: data => {
+          console.log(JSON.stringify(data));
+          this.database.CreateBowler(data.Name, data.Gender, data.AverageScore, data.Handicap, data.Score);
+        }
+      }
+    ]
+    
+  });
+  prompt.present();
+  
+  }
+}
+>>>>>>> issues
