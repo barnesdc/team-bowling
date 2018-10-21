@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/observable";
-import { Bowler } from "../../models/bowler";
 import "rxjs/add/operator/map";
 /*
   Generated class for the AuthServiceProvider provider.

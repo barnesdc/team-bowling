@@ -26,9 +26,7 @@ import {
 } from "angularfire2/database"; // database
 import { AngularFireStorageModule } from "angularfire2/storage";
 import { AuthServiceProvider } from "../providers/auth-service/auth-service";
-import { firebaseConfig } from "../config";
 import { SQLite } from "@ionic-native/sqlite";
-import { Toast } from "@ionic-native/toast";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
 
@@ -47,7 +45,6 @@ import { HttpModule } from "@angular/http";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig.fire),
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     AngularFireDatabaseModule,
@@ -73,7 +70,6 @@ import { HttpModule } from "@angular/http";
     AngularFireAuth,
     AuthServiceProvider,
     SQLite,
-    Toast,
     DatabaseProvider
   ]
 })
