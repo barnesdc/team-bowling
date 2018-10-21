@@ -29,7 +29,7 @@ export class BowlersPage {
   // bowlers: Observable<any[]>;
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  constructor(public alertCtrl: AlertController, private afs: AngularFirestore){
+  constructor(public alertCtrl: AlertController, private afs: AngularFirestore, public navCtrl: NavController){
     
   }
   /*constructor(public navCtrl: NavController, private afs: AngularFirestore) {
