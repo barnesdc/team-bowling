@@ -11,11 +11,22 @@
   <ion-list id="bowlers-list6">
     <ion-item id="bowlers-list-item-container6">
       <div *ngFor="let bowler of bowlers | async">
+<<<<<<< HEAD
         <p>Bowler Name: {{bowler.name}}</p>
         <p>Bowler Average: {{bowler.avg}}</p>
+=======
+        <p>Bowler Name: {{data.name}}</p>
+        <p>Bowler Average: {{data.avg}}</p>
+>>>>>>> no message
         <hr>
       </div>
     </ion-item>
   </ion-list>
+<<<<<<< HEAD
 
+=======
+  <button id="add-bowler-button" ion-button color="stable" block on-click="AddBowlerPrompt()">
+    Add Bowler
+  </button>
+>>>>>>> no message
 </ion-content>
