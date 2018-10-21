@@ -24,6 +24,13 @@ import {
   AngularFireDatabase
 } from "angularfire2/database"; // database
 import { AngularFireStorageModule } from "angularfire2/storage";
+<<<<<<< HEAD
+=======
+import { AuthServiceProvider } from "../providers/auth-service/auth-service";
+import { SQLite } from "@ionic-native/sqlite";
+import { DatabaseProvider } from "../providers/database/database";
+import { HttpModule } from "@angular/http";
+>>>>>>> no message
 
 // Initialize Firebase
 export const firebaseConfig = {
@@ -49,7 +56,10 @@ export const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+<<<<<<< HEAD
     AngularFireModule.initializeApp(firebaseConfig),
+=======
+>>>>>>> no message
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     AngularFireDatabaseModule,
@@ -72,7 +82,15 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
+<<<<<<< HEAD
     { provide: ErrorHandler, useClass: IonicErrorHandler }
+=======
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AngularFireAuth,
+    AuthServiceProvider,
+    SQLite,
+    DatabaseProvider
+>>>>>>> no message
   ]
 })
 export class AppModule {}

@@ -368,9 +368,13 @@ webpackEmptyAsyncContext.id = 201;
 var map = {
 	"../pages/teams/teams.module": [
 <<<<<<< HEAD
+<<<<<<< HEAD
 		520,
 =======
 		521,
+>>>>>>> no message
+=======
+		520,
 >>>>>>> no message
 		0
 	]
@@ -710,6 +714,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_information_information__ = __webpack_require__(293);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__ = __webpack_require__(287);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(288);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2__ = __webpack_require__(488);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angularfire2_auth__ = __webpack_require__(295);
@@ -724,6 +729,18 @@ throw new Error("Cannot find module \"../config\"");
 throw new Error("Cannot find module \"@ionic-native/toast\"");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_database_database__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__angular_http__ = __webpack_require__(245);
+>>>>>>> no message
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2_auth__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angularfire2_firestore__ = __webpack_require__(501);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angularfire2_firestore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_angularfire2_firestore__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angularfire2_database__ = __webpack_require__(508);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_auth_service_auth_service__ = __webpack_require__(518);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_sqlite__ = __webpack_require__(246);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_database_database__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__angular_http__ = __webpack_require__(245);
 >>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -745,12 +762,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+<<<<<<< HEAD
 // firebase imports
+=======
+>>>>>>> no message
 
  // authentication
  // user info, data dictionary
  // database
 
+<<<<<<< HEAD
 // Initialize Firebase
 var firebaseConfig = {
     apiKey: "AIzaSyBkjK4MXok4pe7HemheEPsQJ2x_miQia6Q",
@@ -760,6 +781,11 @@ var firebaseConfig = {
     storageBucket: "bowling-app-b45c0.appspot.com",
     messagingSenderId: "49362757433"
 };
+=======
+
+
+
+>>>>>>> no message
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -783,12 +809,19 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/teams/teams.module#TeamsPageModule', name: 'TeamsPage', segment: 'teams', priority: 'low', defaultHistory: [] }
                     ]
                 }),
+<<<<<<< HEAD
                 __WEBPACK_IMPORTED_MODULE_14_angularfire2__["AngularFireModule"].initializeApp(firebaseConfig),
                 __WEBPACK_IMPORTED_MODULE_15_angularfire2_auth__["AngularFireAuthModule"],
                 __WEBPACK_IMPORTED_MODULE_16_angularfire2_firestore__["AngularFirestoreModule"].enablePersistence(),
                 __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__["AngularFireDatabaseModule"],
                 __WEBPACK_IMPORTED_MODULE_18_angularfire2_storage__["AngularFireStorageModule"]
                 // AngularFireModule
+=======
+                __WEBPACK_IMPORTED_MODULE_14_angularfire2_auth__["AngularFireAuthModule"],
+                __WEBPACK_IMPORTED_MODULE_15_angularfire2_firestore__["AngularFirestoreModule"].enablePersistence(),
+                __WEBPACK_IMPORTED_MODULE_16_angularfire2_database__["AngularFireDatabaseModule"],
+                __WEBPACK_IMPORTED_MODULE_20__angular_http__["b" /* HttpModule */]
+>>>>>>> no message
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
             entryComponents: [
@@ -805,6 +838,7 @@ var AppModule = /** @class */ (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__["a" /* SplashScreen */],
+<<<<<<< HEAD
                 __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__["AngularFireDatabase"],
 <<<<<<< HEAD
                 { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
@@ -815,6 +849,14 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_20__ionic_native_sqlite__["a" /* SQLite */],
                 __WEBPACK_IMPORTED_MODULE_21__ionic_native_toast__["Toast"],
                 __WEBPACK_IMPORTED_MODULE_22__providers_database_database__["a" /* DatabaseProvider */]
+>>>>>>> no message
+=======
+                __WEBPACK_IMPORTED_MODULE_16_angularfire2_database__["AngularFireDatabase"],
+                { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
+                __WEBPACK_IMPORTED_MODULE_14_angularfire2_auth__["AngularFireAuth"],
+                __WEBPACK_IMPORTED_MODULE_17__providers_auth_service_auth_service__["a" /* AuthServiceProvider */],
+                __WEBPACK_IMPORTED_MODULE_18__ionic_native_sqlite__["a" /* SQLite */],
+                __WEBPACK_IMPORTED_MODULE_19__providers_database_database__["a" /* DatabaseProvider */]
 >>>>>>> no message
             ]
         })
@@ -887,15 +929,20 @@ var MyApp = /** @class */ (function () {
 /***/ }),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 521:
 =======
 /***/ 519:
+>>>>>>> no message
+=======
+/***/ 518:
 >>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BowlersPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_firestore__ = __webpack_require__(236);
@@ -904,6 +951,9 @@ var MyApp = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 =======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_observable__ = __webpack_require__(520);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_observable__ = __webpack_require__(519);
+>>>>>>> no message
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(244);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
