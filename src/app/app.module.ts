@@ -25,7 +25,6 @@ import {
   AngularFireDatabase
 } from "angularfire2/database"; // database
 import { AngularFireStorageModule } from "angularfire2/storage";
-import { AuthServiceProvider } from "../providers/auth-service/auth-service";
 import { SQLite } from "@ionic-native/sqlite";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
@@ -68,7 +67,6 @@ import { HttpModule } from "@angular/http";
     AngularFireDatabase,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AngularFireAuth,
-    AuthServiceProvider,
     SQLite,
     DatabaseProvider
   ]

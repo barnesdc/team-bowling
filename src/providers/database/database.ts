@@ -25,18 +25,15 @@ export class DatabaseProvider {
         .then((db: SQLiteObject) => {
           this.db = db;
           db.executeSql(
-            "CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name  TEXT, bowler_gender TEXT, bowler_avg INTEGER, bowler_score INTEGER, bowler_handicap TEXT,team_id INTEGER FOREIGN KEY (team_id) references teams(team_id))",
-            []
-          );
+            "CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name  TEXT, bowler_gender TEXT, bowler_avg INT, bowler_score INT, bowler_handicap TEXT)",
+            [])
+            .then(res => console.log('Executed SQL')).catch(e => console.log(e))
+            });
           //  db.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, identification INTEGER, name TEXT, lastname text)", []);
           this.isOpen = true;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
+      }
     console.log("Hello DatabaseProvider Provider");
-  }
+    }
 
   CreateBowler(
     bowler_name: string,
@@ -90,7 +87,7 @@ export class DatabaseProvider {
           resolve(arrayBowlers);
         },
         error => {
-          reject(error);
+          reject(error+"ERROR!!!!");
         }
       );
     });
