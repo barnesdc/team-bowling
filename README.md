@@ -29,3 +29,6 @@ https://stackoverflow.com/questions/1884818/how-do-i-add-a-foreign-key-to-an-exi
 - Issues with IOS 12
   - ionic cordova emulate ios -- --buildFlag="-UseModernBuildSystem=0"
   - https://github.com/apache/cordova-ios/issues/407
+- Android Requirements:
+  - errors with JDK 9, using JDK 8
+  - SDK Android 8.1(Oreo) with API level 27
