@@ -1,16 +1,26 @@
 webpackJsonp([1],{
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 156:
 =======
 /***/ 131:
+=======
+/***/ 123:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DatabaseProvider; });
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(243);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__ = __webpack_require__(244);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__ = __webpack_require__(227);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -56,8 +66,8 @@ var DatabaseProvider = /** @class */ (function () {
                 db.executeSql("CREATE TABLE IF NOT EXISTS teams (team_id INT PRIMARY KEY AUTOINCREMENT, team_bowlers INT, team_score INT, game_id INT, FOREIGN KEY (game_id) references game(game_id))", [])
                     .then(function (res) { return console.log("Executed SQL for teams"); })
                     .catch(function (e) { return console.log(e); });
-                db.executeSql("CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_avg INTEGER, bowler_score INTEGER, bowler_handicap TEXT,team_id INTEGER, FOREIGN KEY (team_id) references teams(team_id))", [])
-                    .then(function (res) { return console.log("Executed SQL bowlers"); })
+                db.executeSql("CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_handicap TEXT, bowler_average INTEGER, bowler_score INTEGER, team_id INTEGER, FOREIGN KEY (team_id) references teams(team_id))", [])
+                    .then(function (res) { return console.log("Executed SQL for bowlers"); })
                     .catch(function (e) { return console.log(e); });
             });
             this.isOpen = true;
@@ -86,20 +96,20 @@ var DatabaseProvider = /** @class */ (function () {
             });
         });
     };
-    DatabaseProvider.prototype.CreateBowler = function (bowler_name, bowler_gender, bowler_average, bowler_handicap, bowler_score) {
+    DatabaseProvider.prototype.CreateBowler = function (bowler_name, bowler_gender, bowler_handicap, bowler_average, bowler_score) {
         var _this = this;
         // start game table first, then teams, then bowlers
         return new Promise(function (resolve, reject) {
             _this.storage
                 .create({ name: "bowlerData.db", location: "default" })
                 .then(function () {
-                var sql = "INSERT INTO bowlers (bowler_name, bowler_gender, bowler_avg, bowler_handicap, bowler_score) VALUES (?, ?, ?, ?, ?)";
+                var sql = "INSERT INTO bowlers (bowler_name, bowler_gender,bowler_handicap, bowler_average, bowler_score) VALUES (?, ?, ?, ?, ?)";
                 _this.db
                     .executeSql(sql, [
                     bowler_name,
                     bowler_gender,
-                    bowler_average,
                     bowler_handicap,
+                    bowler_average,
                     bowler_score
                 ])
                     .then(function (data) {
@@ -153,7 +163,21 @@ var DatabaseProvider = /** @class */ (function () {
             });
         });
     };
-    DatabaseProvider.prototype.DeleteUser = function (bowler_id) { };
+    DatabaseProvider.prototype.DeleteBowler = function (bowler_id) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.storage
+                .create({ name: "bowlerData.db", location: "default" })
+                .then(function () {
+                var sql = "SELECT * FROM bowlers WHERE bowler_id = ? ";
+                _this.db.executeSql(sql, [bowler_id]).then(function (data) {
+                    resolve(data);
+                }, function (error) {
+                    reject(error);
+                });
+            });
+        });
+    };
     DatabaseProvider.prototype.DeleteGame = function (game_id) { };
     DatabaseProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
@@ -166,13 +190,18 @@ var DatabaseProvider = /** @class */ (function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 155:
+>>>>>>> no message
+=======
+/***/ 148:
 >>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__games_scores_games_scores__ = __webpack_require__(295);
@@ -190,6 +219,13 @@ var DatabaseProvider = /** @class */ (function () {
 =======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__information_information__ = __webpack_require__(291);
 >>>>>>> SQL adding Table working
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__games_scores_games_scores__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__teams_teams__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bowler_profile_bowler_profile__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__information_information__ = __webpack_require__(281);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -229,12 +265,17 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 157:
+=======
+/***/ 149:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BowlerProfilePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(296);
@@ -246,6 +287,10 @@ var TabsPage = /** @class */ (function () {
 =======
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(290);
 >>>>>>> SQL adding Table working
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__edit_profile_edit_profile__ = __webpack_require__(280);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -284,18 +329,29 @@ var BowlerProfilePage = /** @class */ (function () {
 /***/ }),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 193:
 =======
 /***/ 162:
+=======
+/***/ 150:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(461);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_database_database__ = __webpack_require__(131);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_database_database__ = __webpack_require__(123);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -340,15 +396,14 @@ var TeamsPage = /** @class */ (function () {
     };
     TeamsPage.prototype.addGame = function () {
         this.database.CreateGames(2, 200);
-        this.getGames();
     };
     TeamsPage.prototype.getGames = function () {
         var _this = this;
         this.database.getGames().then(function (data) {
-            console.log(JSON.stringify(data) + "I AM WORKING for Games");
+            console.log(data + "I AM WORKING for Games");
             _this.ListGame = data;
         }, function (error) {
-            console.log(error);
+            console.log(error + "getGames() error");
         });
     };
     TeamsPage.prototype.AddBowlerPrompt = function () {
@@ -362,15 +417,15 @@ var TeamsPage = /** @class */ (function () {
                     placeholder: "Bowler name"
                 },
                 {
-                    name: "Handicap",
-                    placeholder: "Handicap (Ex. A, B or C)"
-                },
-                {
                     name: "Gender",
                     placeholder: "Gender (Ex. Male/Female)"
                 },
                 {
-                    name: "AverageScore",
+                    name: "Handicap",
+                    placeholder: "Handicap (Ex. A, B or C)"
+                },
+                {
+                    name: "Average",
                     placeholder: "Average Score (Ex. 200)"
                 }
             ],
@@ -385,24 +440,32 @@ var TeamsPage = /** @class */ (function () {
                     text: "Save",
                     handler: function (data) {
                         console.log(JSON.stringify(data));
-                        _this.database.CreateBowler(data.Name, data.Handicap, data.gender, data.AverageScore, data.Score);
+                        _this.database.CreateBowler(data.Name, data.Gender, data.Handicap, data.Average, data.Score);
                     }
                 }
             ]
         });
         prompt.present();
-        this.GetAllBowlers();
     };
+<<<<<<< HEAD
 <<<<<<< HEAD
     TeamsPage.prototype.deleteGame = function (game_id) { };
     TeamsPage.prototype.deleteBowler = function (bowler_id) { };
 =======
     TeamsPage.prototype.deleteGame = function (game_id) {
         console.log(game_id);
+=======
+    TeamsPage.prototype.deleteGame = function (item) {
+        console.log(item.game_id);
+        window.alert("Attempting to delete " + item.game_id);
+>>>>>>> no message
     };
-    TeamsPage.prototype.deleteBowler = function (bowler_id) {
-        console.log(bowler_id);
+    TeamsPage.prototype.deleteBowler = function (item) {
+        console.log("first print " + item);
+        window.alert("Attempting to delete " + item + " " + item.bowler_id);
+        // this.database.DeleteBowler;
     };
+<<<<<<< HEAD
     var _a, _b, _c, _d;
 >>>>>>> console log to delete function
     TeamsPage = __decorate([
@@ -412,8 +475,16 @@ var TeamsPage = /** @class */ (function () {
 =======
             selector: "page-teams",template:/*ion-inline-start:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/teams/teams.html"*/'<!--\n  Generated template for the TeamsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Teams</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding id="page3">\n  <h2>The Bowlers currently include: </h2><br>\n  <hr>\n  <button ion-button block on-click="addGame()"> Add Game</button>\n  <ion-list id="bowlers-list6">\n    <ion-item-sliding *ngFor="let game of ListGame" #item (ionSwipe)="deleteGame(item)">\n      <ion-item id="bowlers-list-item-container6">\n        <h3>{{game.game_id}}</h3>\n        <h3>{{game.game_number}}</h3>\n        <h3>{{game.game_score}}</h3>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button expandable (click)="deleteGame(item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n  <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>\n  <ion-list id="bowlers-list6">\n    <ion-item-sliding *ngFor="let bowler of ListBowler" #item (ionSwipe)="deleteBowler(item)">\n      <ion-item id="bowlers-list-item-container6">\n        <h3>{{bowler.bowler_id}}</h3>\n        <h3>{{bowler.bowler_name}}</h3>\n        <h3>{{bowler.bowler_gender}}</h3>\n        <h3>{{bowler.bowler_average}}</h3>\n        <h3>{{bowler.bowler_handicap}}</h3>\n        <h3>{{bowler.bowler_score}}</h3>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button expandable (click)="deleteBowler(item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/teams/teams.html"*/
 >>>>>>> Updated Teams Page and database provider:
+=======
+    TeamsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: "page-teams",template:/*ion-inline-start:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/teams/teams.html"*/'<!--\n  Generated template for the TeamsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Teams</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding id="page3">\n  <h2>The Bowlers currently include: </h2><br>\n  <hr>\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>\n        <button ion-button block on-click="addGame()"> Add Game</button>\n        <!-- <button ion-button full> -->\n      </ion-col>\n      <ion-col col-6>\n        <button ion-button block on-click="getGames()"> List Games</button>\n        <!-- <button ion-button full> -->\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <!-- <button ion-button block on-click="addGame()"> Add Game</button> -->\n  <ion-list id="bowlers-list6">\n    <hr>\n    <h2>Game List: </h2>\n    <ion-item-sliding *ngFor="let game of ListGame" #item (ionSwipe)="deleteGame(item)">\n      <ion-item id="bowlers-list-item-container6">\n        <h3>{{game.game_id}}</h3>\n        <h3>{{game.game_number}}</h3>\n        <h3>{{game.game_score}}</h3>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button expandable (click)="deleteGame(item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n  <!-- <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button> -->\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>\n        <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>\n        <!-- <button ion-button full> -->\n      </ion-col>\n      <ion-col col-6>\n        <button ion-button block on-click="GetAllBowlers()"> List Bowlers</button>\n        <!-- <button ion-button full> -->\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <ion-list id="bowlers-list6">\n    <hr>\n    <h2>Bowlers List: </h2>\n    <ion-item-sliding *ngFor="let bowler of ListBowler" #item (ionSwipe)="deleteBowler(item)">\n      <ion-item id="bowlers-list-item-container6">\n        <h3>{{bowler.bowler_id}}</h3>\n        <h3>Name: {{bowler.bowler_name}}</h3>\n        <h3>Gender: {{bowler.bowler_gender}}</h3>\n        <h3>Handicap: {{bowler.bowler_handicap}}</h3>\n        <h3>Average: {{bowler.bowler_average}}</h3>\n        <h3>Score: {{bowler.bowler_score}}</h3>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button expandable (click)="deleteBowler(item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/teams/teams.html"*/
+>>>>>>> no message
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" ? _b : Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" ? _c : Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_database_database__["a" /* DatabaseProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_database_database__["a" /* DatabaseProvider */]) === "function" ? _d : Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_database_database__["a" /* DatabaseProvider */]])
     ], TeamsPage);
     return TeamsPage;
 }());
@@ -423,11 +494,15 @@ var TeamsPage = /** @class */ (function () {
 /***/ }),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 201:
 >>>>>>> no message
 =======
 /***/ 200:
 >>>>>>> SQL adding Table working
+=======
+/***/ 183:
+>>>>>>> no message
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -440,6 +515,7 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 webpackEmptyAsyncContext.id = 193;
@@ -461,10 +537,18 @@ webpackEmptyAsyncContext.id = 200;
 
 /***/ 242:
 >>>>>>> SQL adding Table working
+=======
+webpackEmptyAsyncContext.id = 183;
+
+/***/ }),
+
+/***/ 225:
+>>>>>>> no message
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/teams/teams.module": [
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -478,6 +562,9 @@ var map = {
 =======
 		518,
 >>>>>>> SQL adding Table working
+=======
+		458,
+>>>>>>> no message
 		0
 	]
 };
@@ -494,6 +581,7 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 };
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 webpackAsyncContext.id = 235;
 =======
 webpackAsyncContext.id = 243;
@@ -501,10 +589,14 @@ webpackAsyncContext.id = 243;
 =======
 webpackAsyncContext.id = 242;
 >>>>>>> SQL adding Table working
+=======
+webpackAsyncContext.id = 225;
+>>>>>>> no message
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 /***/ 293:
@@ -514,11 +606,15 @@ module.exports = webpackAsyncContext;
 =======
 /***/ 287:
 >>>>>>> SQL adding Table working
+=======
+/***/ 277:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(294);
@@ -528,6 +624,12 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(288);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_database_database__ = __webpack_require__(131);
+>>>>>>> no message
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_database_database__ = __webpack_require__(123);
 >>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -600,6 +702,7 @@ var LoginPage = /** @class */ (function () {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 294:
 =======
 /***/ 290:
@@ -607,12 +710,20 @@ var LoginPage = /** @class */ (function () {
 =======
 /***/ 288:
 >>>>>>> SQL adding Table working
+=======
+/***/ 278:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(148);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -646,6 +757,7 @@ var SignupPage = /** @class */ (function () {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 295:
 =======
 /***/ 291:
@@ -653,12 +765,19 @@ var SignupPage = /** @class */ (function () {
 =======
 /***/ 289:
 >>>>>>> SQL adding Table working
+=======
+/***/ 279:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GamesScoresPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -694,6 +813,7 @@ var GamesScoresPage = /** @class */ (function () {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 296:
 =======
 /***/ 292:
@@ -701,13 +821,21 @@ var GamesScoresPage = /** @class */ (function () {
 =======
 /***/ 290:
 >>>>>>> SQL adding Table working
+=======
+/***/ 280:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditProfilePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bowler_profile_bowler_profile__ = __webpack_require__(157);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bowler_profile_bowler_profile__ = __webpack_require__(149);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -747,6 +875,7 @@ var EditProfilePage = /** @class */ (function () {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 297:
 =======
 /***/ 293:
@@ -754,12 +883,19 @@ var EditProfilePage = /** @class */ (function () {
 =======
 /***/ 291:
 >>>>>>> SQL adding Table working
+=======
+/***/ 281:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InformationPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -792,6 +928,7 @@ var InformationPage = /** @class */ (function () {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 310:
 =======
 /***/ 305:
@@ -799,10 +936,14 @@ var InformationPage = /** @class */ (function () {
 =======
 /***/ 303:
 >>>>>>> SQL adding Table working
+=======
+/***/ 282:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(311);
@@ -815,6 +956,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(304);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(436);
 >>>>>>> SQL adding Table working
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(397);
+>>>>>>> no message
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -824,6 +969,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 424:
 =======
 /***/ 437:
@@ -831,12 +977,16 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 =======
 /***/ 436:
 >>>>>>> SQL adding Table working
+=======
+/***/ 397:
+>>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export firebaseConfig */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(30);
@@ -918,6 +1068,24 @@ throw new Error("Cannot find module \"@ionic-native/toast\"");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_database_database__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__angular_http__ = __webpack_require__(243);
 >>>>>>> SQL adding Table working
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(457);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_games_scores_games_scores__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_teams_teams__ = __webpack_require__(150);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_bowler_profile_bowler_profile__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_edit_profile_edit_profile__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_tabs_tabs__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_login_login__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_signup_signup__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_information_information__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_sqlite__ = __webpack_require__(227);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_database_database__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_http__ = __webpack_require__(226);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1057,15 +1225,20 @@ var AppModule = /** @class */ (function () {
 /***/ }),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /***/ 477:
 =======
 /***/ 487:
+>>>>>>> no message
+=======
+/***/ 457:
 >>>>>>> no message
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+<<<<<<< HEAD
 <<<<<<< HEAD
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(281);
@@ -1083,6 +1256,12 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(286);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(287);
 >>>>>>> SQL adding Table working
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(277);
+>>>>>>> no message
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1201,6 +1380,10 @@ var BowlersPage = /** @class */ (function () {
 =======
 /***/ })
 
+<<<<<<< HEAD
 },[303]);
 >>>>>>> SQL adding Table working
+=======
+},[282]);
+>>>>>>> no message
 //# sourceMappingURL=main.js.map
