@@ -43,16 +43,52 @@ var DatabaseProvider = /** @class */ (function () {
             })
                 .then(function (db) {
                 _this.db = db;
+<<<<<<< HEAD
                 db.executeSql("CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name  TEXT, bowler_gender TEXT, bowler_avg INT, bowler_score INT, bowler_handicap TEXT)", [])
                     .then(function (res) { return console.log('Executed SQL'); }).catch(function (e) { return console.log(e); });
             });
             //  db.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, identification INTEGER, name TEXT, lastname text)", []);
             this.isOpen = true;
+=======
+                db.executeSql("CREATE TABLE IF NOT EXISTS game (game_id INTEGER PRIMARY KEY AUTOINCREMENT, game_score INT, game_number INT)", [])
+                    .then(function (res) { return console.log("Executed SQL for game"); })
+                    .catch(function (e) { return console.log(e); });
+                db.executeSql("CREATE TABLE IF NOT EXISTS teams (team_id INT PRIMARY KEY AUTOINCREMENT, team_bowlers INT, team_score INT, game_id INT, FOREIGN KEY (game_id) references game(game_id))", [])
+                    .then(function (res) { return console.log("Executed SQL for teams"); })
+                    .catch(function (e) { return console.log(e); });
+                db.executeSql("CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_avg INTEGER, bowler_score INTEGER, bowler_handicap TEXT,team_id INTEGER, FOREIGN KEY (team_id) references teams(team_id))", [])
+                    .then(function (res) { return console.log("Executed SQL bowlers"); })
+                    .catch(function (e) { return console.log(e); });
+            });
+            this.isOpen = true;
+            //     })
+            //     .catch(error => {
+            //       console.log("There was an error:");
+            //       console.log(error);
+            //     });
+            // }
+            console.log("Hello DatabaseProvider Provider");
+>>>>>>> Updated Teams Page and database provider:
         }
-        console.log("Hello DatabaseProvider Provider");
     }
+    DatabaseProvider.prototype.CreateGames = function (game_number, game_score) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.storage
+                .create({ name: "bowlerData.db", location: "default" })
+                .then(function () {
+                var sql = "INSERT INTO game(game_number, game_score) VALUES (?, ?)";
+                _this.db.executeSql(sql, [game_number, game_score]).then(function (data) {
+                    resolve(data);
+                }, function (error) {
+                    reject(error);
+                });
+            });
+        });
+    };
     DatabaseProvider.prototype.CreateBowler = function (bowler_name, bowler_gender, bowler_average, bowler_handicap, bowler_score) {
         var _this = this;
+        // start game table first, then teams, then bowlers
         return new Promise(function (resolve, reject) {
             _this.storage
                 .create({ name: "bowlerData.db", location: "default" })
@@ -71,6 +107,26 @@ var DatabaseProvider = /** @class */ (function () {
                 }, function (error) {
                     reject(error);
                 });
+            });
+        });
+    };
+    DatabaseProvider.prototype.getGames = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.db.executeSql("SELECT * FROM game", []).then(function (data) {
+                var arrayGames = [];
+                if (data.rows.length > 0) {
+                    for (var i = 0; i < data.rows.length; i++) {
+                        arrayGames.push({
+                            game_id: data.rows.item(i).game_id,
+                            game_number: data.rows.item(i).game_number,
+                            game_score: data.rows.item(i).game_score
+                        });
+                    }
+                }
+                resolve(arrayGames);
+            }, function (error) {
+                reject(error + "Error with games");
             });
         });
     };
@@ -98,6 +154,7 @@ var DatabaseProvider = /** @class */ (function () {
         });
     };
     DatabaseProvider.prototype.DeleteUser = function (bowler_id) { };
+    DatabaseProvider.prototype.DeleteGame = function (game_id) { };
     DatabaseProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */]])
@@ -267,23 +324,35 @@ var TeamsPage = /** @class */ (function () {
         this.database = database;
     }
     TeamsPage.prototype.ionViewDidLoad = function () {
-        this.GetAllUser();
+        // this.GetAllBowlers();
     };
     TeamsPage.prototype.ionViewWillEnter = function () {
-        this.GetAllUser();
+        // this.GetAllBowlers();
     };
-    TeamsPage.prototype.GetAllUser = function () {
+    TeamsPage.prototype.GetAllBowlers = function () {
         var _this = this;
         this.database.GetAllBowlers().then(function (data) {
-            console.log(data + "I AM WORKING");
+            console.log(data + "I AM WORKING for Bowlers");
             _this.ListBowler = data;
-            window.alert("I am working");
         }, function (error) {
             console.log(error);
         });
     };
     TeamsPage.prototype.DeleteUser = function (bowler_id) {
         console.log(bowler_id);
+    };
+    TeamsPage.prototype.addGame = function () {
+        this.database.CreateGames(2, 200);
+        this.getGames();
+    };
+    TeamsPage.prototype.getGames = function () {
+        var _this = this;
+        this.database.getGames().then(function (data) {
+            console.log(JSON.stringify(data) + "I AM WORKING for Games");
+            _this.ListGame = data;
+        }, function (error) {
+            console.log(error);
+        });
     };
     TeamsPage.prototype.AddBowlerPrompt = function () {
         var _this = this;
@@ -325,10 +394,17 @@ var TeamsPage = /** @class */ (function () {
             ]
         });
         prompt.present();
+        this.GetAllBowlers();
     };
+    TeamsPage.prototype.deleteGame = function (game_id) { };
+    TeamsPage.prototype.deleteBowler = function (bowler_id) { };
     TeamsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: "page-teams",template:/*ion-inline-start:"C:\Users\mdtro\Documents\team-bowling\src\pages\teams\teams.html"*/'<!--\n\n  Generated template for the TeamsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Teams</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding id="page3">\n\n  <h2>The Bowlers currently include: </h2><br>\n\n  <hr>\n\n  <button ion-button block on-click="GetAllUser()"> List Bowlers</button>\n\n\n\n  <ion-list id="bowlers-list6">\n\n    <ion-item-sliding *ngFor="let bowler of ListBowler" #item>\n\n      <ion-item id="bowlers-list-item-container6">\n\n        <h3>{{bowler.name}}</h3>\n\n      </ion-item>\n\n    </ion-item-sliding>\n\n  </ion-list>\n\n  <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\mdtro\Documents\team-bowling\src\pages\teams\teams.html"*/
+=======
+            selector: "page-teams",template:/*ion-inline-start:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/teams/teams.html"*/'<!--\n  Generated template for the TeamsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Teams</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding id="page3">\n  <h2>The Bowlers currently include: </h2><br>\n  <hr>\n  <button ion-button block on-click="addGame()"> Add Game</button>\n  <ion-list id="bowlers-list6">\n    <ion-item-sliding *ngFor="let game of ListGame" #item (ionSwipe)="deleteGame(item)">\n      <ion-item id="bowlers-list-item-container6">\n        <h3>{{game.game_id}}</h3>\n        <h3>{{game.game_number}}</h3>\n        <h3>{{game.game_score}}</h3>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button expandable (click)="deleteGame(item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n  <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>\n  <ion-list id="bowlers-list6">\n    <ion-item-sliding *ngFor="let bowler of ListBowler" #item (ionSwipe)="deleteBowler(item)">\n      <ion-item id="bowlers-list-item-container6">\n        <h3>{{bowler.bowler_id}}</h3>\n        <h3>{{bowler.bowler_name}}</h3>\n        <h3>{{bowler.bowler_gender}}</h3>\n        <h3>{{bowler.bowler_average}}</h3>\n        <h3>{{bowler.bowler_handicap}}</h3>\n        <h3>{{bowler.bowler_score}}</h3>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button expandable (click)="deleteBowler(item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/teams/teams.html"*/
+>>>>>>> Updated Teams Page and database provider:
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
@@ -463,10 +539,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var LoginPage = /** @class */ (function () {
+<<<<<<< HEAD
     // this tells the tabs component which Pages
     // should be each tab's root Page
     function LoginPage(navCtrl) {
         this.navCtrl = navCtrl;
+=======
+    function LoginPage(navCtrl, 
+    // private alertCtrl: AlertController,
+    database) {
+        this.navCtrl = navCtrl;
+        this.database = database;
+        this.splash = true;
+>>>>>>> Updated Teams Page and database provider:
     }
     // goToBowlers(params) {
     //   if (!params) params = {};
@@ -475,6 +560,14 @@ var LoginPage = /** @class */ (function () {
     LoginPage.prototype.goToTabs = function (params) {
         if (!params)
             params = {};
+<<<<<<< HEAD
+=======
+        // this.database
+        //   .CreateBowler("John", "Male", 300, "A", 0)
+        //   .then((data: any) => {
+        //     console.log("something happened");
+        //   });
+>>>>>>> Updated Teams Page and database provider:
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__tabs_tabs__["a" /* TabsPage */]);
     };
     LoginPage.prototype.goToSignup = function (params) {
@@ -487,7 +580,12 @@ var LoginPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-login",template:/*ion-inline-start:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Login\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding id="page6">\n  <form id="login-form1">\n    <img src="../../assets/imgs/bowl-pins.png" style="display:block;width:160px;height:auto;margin-left:auto;margin-right:auto;" />\n    <div class="spacer" style="height:40px;" id="login-spacer4"></div>\n    <ion-list id="login-list1">\n      <ion-item id="login-input1">\n        <ion-label>\n          Email\n        </ion-label>\n        <ion-input type="email" placeholder=""></ion-input>\n      </ion-item>\n      <ion-item id="login-input2">\n        <ion-label>\n          Password\n        </ion-label>\n        <ion-input type="password" placeholder=""></ion-input>\n      </ion-item>\n    </ion-list>\n    <div class="spacer" style="height:40px;" id="login-spacer1"></div>\n    <button id="login-button1" ion-button color="stable" block on-click="goToTabs()">\n      Log in\n    </button>\n    <button id="login-button2" ion-button clear color="positive" block on-click="goToSignup()">\n      Or create an account\n    </button>\n  </form>\n</ion-content>'/*ion-inline-end:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/login/login.html"*/
         }),
+<<<<<<< HEAD
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" ? _a : Object])
+=======
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_4__providers_database_database__["a" /* DatabaseProvider */]])
+>>>>>>> Updated Teams Page and database provider:
     ], LoginPage);
     return LoginPage;
 }());
@@ -994,6 +1092,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+// import { NavController } from
 
 var MyApp = /** @class */ (function () {
     // rootPage: any = BowlersPage;

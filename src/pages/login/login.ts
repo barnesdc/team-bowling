@@ -9,6 +9,7 @@ import { TabsPage } from "../tabs/tabs";
   templateUrl: "login.html"
 })
 export class LoginPage {
+<<<<<<< HEAD
   // this tells the tabs component which Pages
   // should be each tab's root Page
   constructor(public navCtrl: NavController) {}
@@ -18,6 +19,31 @@ export class LoginPage {
   // }
   goToTabs(params) {
     if (!params) params = {};
+=======
+  splash = true;
+
+  constructor(
+    public navCtrl: NavController,
+    // private alertCtrl: AlertController,
+    private database: DatabaseProvider
+  ) {}
+
+  ionViewDidLoad() {
+    setTimeout(() => {
+      this.splash = false;
+    }, 3000);
+  }
+
+  createUser() {}
+
+  goToTabs(params) {
+    if (!params) params = {};
+    // this.database
+    //   .CreateBowler("John", "Male", 300, "A", 0)
+    //   .then((data: any) => {
+    //     console.log("something happened");
+    //   });
+>>>>>>> Updated Teams Page and database provider:
     this.navCtrl.push(TabsPage);
   }
   goToSignup(params) {
