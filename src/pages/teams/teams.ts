@@ -5,6 +5,7 @@ import { AlertController } from "ionic-angular";
 
 import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
+import { Title } from "@angular/platform-browser";
 
 /**
  * Generated class for the TeamsPage page.
@@ -27,21 +28,21 @@ export class TeamsPage {
   ) {}
 
   private ListBowler: any;
+  private ListGame: any;
 
   ionViewDidLoad() {
-    this.GetAllUser();
+    // this.GetAllBowlers();
   }
 
   ionViewWillEnter() {
-    this.GetAllUser();
+    // this.GetAllBowlers();
   }
 
-  GetAllUser() {
+  GetAllBowlers() {
     this.database.GetAllBowlers().then(
       (data: any) => {
-        console.log(data + "I AM WORKING");
+        console.log(data + "I AM WORKING for Bowlers");
         this.ListBowler = data;
-        window.alert("I am working");
       },
       error => {
         console.log(error);
@@ -51,6 +52,23 @@ export class TeamsPage {
 
   DeleteUser(bowler_id) {
     console.log(bowler_id);
+  }
+
+  addGame() {
+    this.database.CreateGames(2, 200);
+    this.getGames();
+  }
+
+  getGames() {
+    this.database.getGames().then(
+      (data: any) => {
+        console.log(JSON.stringify(data) + "I AM WORKING for Games");
+        this.ListGame = data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
   AddBowlerPrompt() {
     const prompt = this.alertCtrl.create({
@@ -97,5 +115,10 @@ export class TeamsPage {
       ]
     });
     prompt.present();
+    this.GetAllBowlers();
   }
+
+  deleteGame(game_id) {}
+
+  deleteBowler(bowler_id) {}
 }

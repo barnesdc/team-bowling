@@ -25,17 +25,52 @@ export class DatabaseProvider {
         .then((db: SQLiteObject) => {
           this.db = db;
           db.executeSql(
-            "CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name  TEXT, bowler_gender TEXT, bowler_avg INTEGER, bowler_score INTEGER, bowler_handicap TEXT,team_id INTEGER FOREIGN KEY (team_id) references teams(team_id))",
+            "CREATE TABLE IF NOT EXISTS game (game_id INTEGER PRIMARY KEY AUTOINCREMENT, game_score INT, game_number INT)",
             []
-          );
-          //  db.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, identification INTEGER, name TEXT, lastname text)", []);
-          this.isOpen = true;
-        })
-        .catch(error => {
-          console.log(error);
+          )
+            .then(res => console.log("Executed SQL for game"))
+            .catch(e => console.log(e));
+
+          db.executeSql(
+            "CREATE TABLE IF NOT EXISTS teams (team_id INT PRIMARY KEY AUTOINCREMENT, team_bowlers INT, team_score INT, game_id INT, FOREIGN KEY (game_id) references game(game_id))",
+            []
+          )
+            .then(res => console.log("Executed SQL for teams"))
+            .catch(e => console.log(e));
+
+          db.executeSql(
+            "CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_avg INTEGER, bowler_score INTEGER, bowler_handicap TEXT,team_id INTEGER, FOREIGN KEY (team_id) references teams(team_id))",
+            []
+          )
+            .then(res => console.log("Executed SQL bowlers"))
+            .catch(e => console.log(e));
         });
+      this.isOpen = true;
+      //     })
+      //     .catch(error => {
+      //       console.log("There was an error:");
+      //       console.log(error);
+      //     });
+      // }
+      console.log("Hello DatabaseProvider Provider");
     }
-    console.log("Hello DatabaseProvider Provider");
+  }
+  CreateGames(game_number: number, game_score: number) {
+    return new Promise((resolve, reject) => {
+      this.storage
+        .create({ name: "bowlerData.db", location: "default" })
+        .then(() => {
+          let sql = "INSERT INTO game(game_number, game_score) VALUES (?, ?)";
+          this.db.executeSql(sql, [game_number, game_score]).then(
+            data => {
+              resolve(data);
+            },
+            error => {
+              reject(error);
+            }
+          );
+        });
+    });
   }
 
   CreateBowler(
@@ -45,6 +80,7 @@ export class DatabaseProvider {
     bowler_handicap: string,
     bowler_score: number
   ) {
+    // start game table first, then teams, then bowlers
     return new Promise((resolve, reject) => {
       this.storage
         .create({ name: "bowlerData.db", location: "default" })
@@ -68,6 +104,28 @@ export class DatabaseProvider {
               }
             );
         });
+    });
+  }
+  getGames() {
+    return new Promise((resolve, reject) => {
+      this.db.executeSql("SELECT * FROM game", []).then(
+        data => {
+          let arrayGames = [];
+          if (data.rows.length > 0) {
+            for (var i = 0; i < data.rows.length; i++) {
+              arrayGames.push({
+                game_id: data.rows.item(i).game_id,
+                game_number: data.rows.item(i).game_number,
+                game_score: data.rows.item(i).game_score
+              });
+            }
+          }
+          resolve(arrayGames);
+        },
+        error => {
+          reject(error + "Error with games");
+        }
+      );
     });
   }
   GetAllBowlers() {
@@ -97,4 +155,6 @@ export class DatabaseProvider {
   }
 
   DeleteUser(bowler_id) {}
+  DeleteGame(game_id) {}
+  
 }

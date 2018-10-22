@@ -18,7 +18,7 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    private alertCtrl: AlertController,
+    // private alertCtrl: AlertController,
     private database: DatabaseProvider
   ) {}
 
@@ -32,7 +32,11 @@ export class LoginPage {
 
   goToTabs(params) {
     if (!params) params = {};
-    // this.database.CreateBowler("John", "Male", 300, "A", null, 1);
+    // this.database
+    //   .CreateBowler("John", "Male", 300, "A", 0)
+    //   .then((data: any) => {
+    //     console.log("something happened");
+    //   });
     this.navCtrl.push(TabsPage);
   }
   goToSignup(params) {
