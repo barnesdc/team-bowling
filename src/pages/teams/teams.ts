@@ -50,10 +50,6 @@ export class TeamsPage {
     );
   }
 
-  DeleteUser(bowler_id) {
-    console.log(bowler_id);
-  }
-
   addGame() {
     this.database.CreateGames(2, 200);
     this.getGames();
@@ -118,7 +114,11 @@ export class TeamsPage {
     this.GetAllBowlers();
   }
 
-  deleteGame(game_id) {}
+  deleteGame(game_id) {
+    console.log(game_id);
+  }
 
-  deleteBowler(bowler_id) {}
+  deleteBowler(bowler_id) {
+    console.log(bowler_id);
+  }
 }
