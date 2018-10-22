@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Bowlers
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page3">
+  <p>The Bowlers collection currently includes: </p><br>
+  <hr>
+  <ion-list id="bowlers-list6">
+    <ion-item id="bowlers-list-item-container6">
+      <div *ngFor="let bowler of bowlers | async">
+        <p>Bowler Name: {{data.name}}</p>
+        <p>Bowler Average: {{data.avg}}</p>
+        <hr>
+      </div>
+    </ion-item>
+  </ion-list>
+  <button id="add-bowler-button" ion-button color="stable" block on-click="AddBowlerPrompt()">
+    Add Bowler
+  </button>
+</ion-content>

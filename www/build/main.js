@@ -138,15 +138,16 @@ var DatabaseProvider = /** @class */ (function () {
                 }
                 resolve(arrayBowlers);
             }, function (error) {
-                reject(error);
+                reject(error + "ERROR!!!!");
             });
         });
     };
     DatabaseProvider.prototype.DeleteUser = function (bowler_id) { };
     DatabaseProvider.prototype.DeleteGame = function (game_id) { };
+    var _a, _b;
     DatabaseProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */]) === "function" ? _a : Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */]) === "function" ? _b : Object])
     ], DatabaseProvider);
     return DatabaseProvider;
 }());
@@ -359,8 +360,6 @@ var TeamsPage = /** @class */ (function () {
         prompt.present();
         this.GetAllBowlers();
     };
-    TeamsPage.prototype.deleteGame = function (game_id) { };
-    TeamsPage.prototype.deleteBowler = function (bowler_id) { };
     TeamsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-teams",template:/*ion-inline-start:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/teams/teams.html"*/'<!--\n  Generated template for the TeamsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Teams</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding id="page3">\n  <h2>The Bowlers currently include: </h2><br>\n  <hr>\n  <button ion-button block on-click="addGame()"> Add Game</button>\n  <ion-list id="bowlers-list6">\n    <ion-item-sliding *ngFor="let game of ListGame" #item (ionSwipe)="deleteGame(item)">\n      <ion-item id="bowlers-list-item-container6">\n        <h3>{{game.game_id}}</h3>\n        <h3>{{game.game_number}}</h3>\n        <h3>{{game.game_score}}</h3>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button expandable (click)="deleteGame(item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n  <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>\n  <ion-list id="bowlers-list6">\n    <ion-item-sliding *ngFor="let bowler of ListBowler" #item (ionSwipe)="deleteBowler(item)">\n      <ion-item id="bowlers-list-item-container6">\n        <h3>{{bowler.bowler_id}}</h3>\n        <h3>{{bowler.bowler_name}}</h3>\n        <h3>{{bowler.bowler_gender}}</h3>\n        <h3>{{bowler.bowler_average}}</h3>\n        <h3>{{bowler.bowler_handicap}}</h3>\n        <h3>{{bowler.bowler_score}}</h3>\n      </ion-item>\n      <ion-item-options>\n        <button ion-button expandable (click)="deleteBowler(item)">Delete</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/dantebarnes/Documents/programming/senior-project/team-bowling/src/pages/teams/teams.html"*/
@@ -704,20 +703,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_information_information__ = __webpack_require__(294);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__ = __webpack_require__(288);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2__ = __webpack_require__(479);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_angularfire2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angularfire2_auth__ = __webpack_require__(296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angularfire2_firestore__ = __webpack_require__(493);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angularfire2_firestore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_angularfire2_firestore__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__ = __webpack_require__(500);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_auth_service_auth_service__ = __webpack_require__(510);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__config__ = __webpack_require__(512);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_sqlite__ = __webpack_require__(240);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_toast__ = __webpack_require__(513);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_database_database__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__angular_http__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_sqlite__ = __webpack_require__(240);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_database_database__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_http__ = __webpack_require__(239);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -739,14 +727,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 // firebase imports
-
-
- // authentication
- // user info, data dictionary
- // database
-
-
-
+// import { AngularFireModule } from "angularfire2";
+// import { AngularFireAuth } from "angularfire2/auth";
+// import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
+// import { AngularFirestoreModule } from "angularfire2/firestore"; // user info, data dictionary
+// import {
+//   AngularFireDatabaseModule,
+//   AngularFireDatabase
+// } from "angularfire2/database"; // database
+// import { AngularFireStorageModule } from "angularfire2/storage";
 
 
 
@@ -773,11 +762,10 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/teams/teams.module#TeamsPageModule', name: 'TeamsPage', segment: 'teams', priority: 'low', defaultHistory: [] }
                     ]
                 }),
-                __WEBPACK_IMPORTED_MODULE_14_angularfire2__["AngularFireModule"].initializeApp(__WEBPACK_IMPORTED_MODULE_19__config__["a" /* firebaseConfig */].fire),
-                __WEBPACK_IMPORTED_MODULE_15_angularfire2_auth__["AngularFireAuthModule"],
-                __WEBPACK_IMPORTED_MODULE_16_angularfire2_firestore__["AngularFirestoreModule"].enablePersistence(),
-                __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__["AngularFireDatabaseModule"],
-                __WEBPACK_IMPORTED_MODULE_23__angular_http__["b" /* HttpModule */]
+                // AngularFireAuthModule,
+                // AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
+                // AngularFireDatabaseModule,
+                __WEBPACK_IMPORTED_MODULE_16__angular_http__["b" /* HttpModule */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
             entryComponents: [
@@ -794,13 +782,11 @@ var AppModule = /** @class */ (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__["a" /* SplashScreen */],
-                __WEBPACK_IMPORTED_MODULE_17_angularfire2_database__["AngularFireDatabase"],
+                // AngularFireDatabase,
                 { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_15_angularfire2_auth__["AngularFireAuth"],
-                __WEBPACK_IMPORTED_MODULE_18__providers_auth_service_auth_service__["a" /* AuthServiceProvider */],
-                __WEBPACK_IMPORTED_MODULE_20__ionic_native_sqlite__["a" /* SQLite */],
-                __WEBPACK_IMPORTED_MODULE_21__ionic_native_toast__["a" /* Toast */],
-                __WEBPACK_IMPORTED_MODULE_22__providers_database_database__["a" /* DatabaseProvider */]
+                // AngularFireAuth,
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_sqlite__["a" /* SQLite */],
+                __WEBPACK_IMPORTED_MODULE_15__providers_database_database__["a" /* DatabaseProvider */]
             ]
         })
     ], AppModule);
@@ -857,77 +843,6 @@ var MyApp = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=app.component.js.map
-
-/***/ }),
-
-/***/ 510:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthServiceProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_observable__ = __webpack_require__(511);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(238);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-/*
-  Generated class for the AuthServiceProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-var AuthServiceProvider = /** @class */ (function () {
-    function AuthServiceProvider() {
-    }
-    AuthServiceProvider.prototype.login = function (credentials) {
-        if (this.bowler.email === null || this.bowler.password === null) {
-            return __WEBPACK_IMPORTED_MODULE_1_rxjs_observable__["Observable"].throw("Please enter in your login credentials");
-        }
-        else {
-            return __WEBPACK_IMPORTED_MODULE_1_rxjs_observable__["Observable"].create(function (observer) {
-                var access = credentials.password === "pass" && credentials.email === "email";
-                // this.currentUser = new Bowler("Dante", "dcbarnes@aggies.ncat.edu");
-                observer.next(access);
-                observer.complete();
-            });
-        }
-    };
-    AuthServiceProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
-    ], AuthServiceProvider);
-    return AuthServiceProvider;
-}());
-
-//# sourceMappingURL=auth-service.js.map
-
-/***/ }),
-
-/***/ 512:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return firebaseConfig; });
-// firebase API key information
-var firebaseConfig = {
-    fire: {
-        apiKey: "AIzaSyBkjK4MXok4pe7HemheEPsQJ2x_miQia6Q",
-        authDomain: "bowling-app-b45c0.firebaseapp.com",
-        databaseURL: "https://bowling-app-b45c0.firebaseio.com",
-        projectId: "bowling-app-b45c0",
-        storageBucket: "bowling-app-b45c0.appspot.com",
-        messagingSenderId: "49362757433"
-    }
-};
-//# sourceMappingURL=config.js.map
 
 /***/ })
 

@@ -16,19 +16,16 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 // firebase imports
-import { AngularFireModule } from "angularfire2";
-import { AngularFireAuth } from "angularfire2/auth";
-import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
-import { AngularFirestoreModule } from "angularfire2/firestore"; // user info, data dictionary
-import {
-  AngularFireDatabaseModule,
-  AngularFireDatabase
-} from "angularfire2/database"; // database
-import { AngularFireStorageModule } from "angularfire2/storage";
-import { AuthServiceProvider } from "../providers/auth-service/auth-service";
-import { firebaseConfig } from "../config";
+// import { AngularFireModule } from "angularfire2";
+// import { AngularFireAuth } from "angularfire2/auth";
+// import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
+// import { AngularFirestoreModule } from "angularfire2/firestore"; // user info, data dictionary
+// import {
+//   AngularFireDatabaseModule,
+//   AngularFireDatabase
+// } from "angularfire2/database"; // database
+// import { AngularFireStorageModule } from "angularfire2/storage";
 import { SQLite } from "@ionic-native/sqlite";
-import { Toast } from "@ionic-native/toast";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
 
@@ -47,10 +44,9 @@ import { HttpModule } from "@angular/http";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig.fire),
-    AngularFireAuthModule,
-    AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
-    AngularFireDatabaseModule,
+    // AngularFireAuthModule,
+    // AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
+    // AngularFireDatabaseModule,
     HttpModule
   ],
   bootstrap: [IonicApp],
@@ -68,12 +64,10 @@ import { HttpModule } from "@angular/http";
   providers: [
     StatusBar,
     SplashScreen,
-    AngularFireDatabase,
+    // AngularFireDatabase,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AngularFireAuth,
-    AuthServiceProvider,
+    // AngularFireAuth,
     SQLite,
-    Toast,
     DatabaseProvider
   ]
 })

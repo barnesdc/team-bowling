@@ -148,7 +148,7 @@ export class DatabaseProvider {
           resolve(arrayBowlers);
         },
         error => {
-          reject(error);
+          reject(error+"ERROR!!!!");
         }
       );
     });
@@ -156,5 +156,5 @@ export class DatabaseProvider {
 
   DeleteUser(bowler_id) {}
   DeleteGame(game_id) {}
-  
+
 }
