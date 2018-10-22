@@ -52,17 +52,16 @@ export class TeamsPage {
 
   addGame() {
     this.database.CreateGames(2, 200);
-    this.getGames();
   }
 
   getGames() {
     this.database.getGames().then(
       (data: any) => {
-        console.log(JSON.stringify(data) + "I AM WORKING for Games");
+        console.log(data + "I AM WORKING for Games");
         this.ListGame = data;
       },
       error => {
-        console.log(error);
+        console.log(error + "getGames() error");
       }
     );
   }
@@ -76,15 +75,15 @@ export class TeamsPage {
           placeholder: "Bowler name"
         },
         {
-          name: "Handicap",
-          placeholder: "Handicap (Ex. A, B or C)"
-        },
-        {
           name: "Gender",
           placeholder: "Gender (Ex. Male/Female)"
         },
         {
-          name: "AverageScore",
+          name: "Handicap",
+          placeholder: "Handicap (Ex. A, B or C)"
+        },
+        {
+          name: "Average",
           placeholder: "Average Score (Ex. 200)"
         }
       ],
@@ -101,9 +100,9 @@ export class TeamsPage {
             console.log(JSON.stringify(data));
             this.database.CreateBowler(
               data.Name,
+              data.Gender,
               data.Handicap,
-              data.gender,
-              data.AverageScore,
+              data.Average,
               data.Score
             );
           }
@@ -111,14 +110,16 @@ export class TeamsPage {
       ]
     });
     prompt.present();
-    this.GetAllBowlers();
   }
 
-  deleteGame(game_id) {
-    console.log(game_id);
+  deleteGame(item) {
+    console.log(item.game_id);
+    window.alert("Attempting to delete " + item.game_id);
   }
 
-  deleteBowler(bowler_id) {
-    console.log(bowler_id);
+  deleteBowler(item) {
+    console.log("first print " + item);
+    window.alert("Attempting to delete " + item + " " + item.bowler_id);
+    // this.database.DeleteBowler;
   }
 }
