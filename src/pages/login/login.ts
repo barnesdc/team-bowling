@@ -3,23 +3,13 @@ import { NavController } from "ionic-angular";
 import { BowlersPage } from "../bowlers/bowlers";
 import { SignupPage } from "../signup/signup";
 import { TabsPage } from "../tabs/tabs";
+import { DatabaseProvider } from "../../providers/database/database";
 
 @Component({
   selector: "page-login",
   templateUrl: "login.html"
 })
 export class LoginPage {
-<<<<<<< HEAD
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
-  constructor(public navCtrl: NavController) {}
-  // goToBowlers(params) {
-  //   if (!params) params = {};
-  //   this.navCtrl.push(BowlersPage);
-  // }
-  goToTabs(params) {
-    if (!params) params = {};
-=======
   splash = true;
 
   constructor(
@@ -43,7 +33,6 @@ export class LoginPage {
     //   .then((data: any) => {
     //     console.log("something happened");
     //   });
->>>>>>> Updated Teams Page and database provider:
     this.navCtrl.push(TabsPage);
   }
   goToSignup(params) {

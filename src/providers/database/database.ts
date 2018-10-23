@@ -25,17 +25,6 @@ export class DatabaseProvider {
         .then((db: SQLiteObject) => {
           this.db = db;
           db.executeSql(
-<<<<<<< HEAD
-            "CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name  TEXT, bowler_gender TEXT, bowler_avg INT, bowler_score INT, bowler_handicap TEXT)",
-            [])
-            .then(res => console.log('Executed SQL')).catch(e => console.log(e))
-            });
-          //  db.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, identification INTEGER, name TEXT, lastname text)", []);
-          this.isOpen = true;
-      }
-    console.log("Hello DatabaseProvider Provider");
-    }
-=======
             "CREATE TABLE IF NOT EXISTS game (game_id INTEGER PRIMARY KEY AUTOINCREMENT, game_score INT, game_number INT)",
             []
           )
@@ -83,7 +72,6 @@ export class DatabaseProvider {
         });
     });
   }
->>>>>>> Updated Teams Page and database provider:
 
   CreateBowler(
     bowler_name: string,
@@ -184,8 +172,5 @@ export class DatabaseProvider {
     });
   }
   DeleteGame(game_id) {}
-<<<<<<< HEAD
   
-=======
->>>>>>> fixed bowler SQL issue where data was not being saved correctly:
 }

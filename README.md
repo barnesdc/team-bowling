@@ -18,8 +18,6 @@ Requirments/Specification Document:
 - SourceTree & Git setup
 
 Advisory Meeting Weekly
-<<<<<<< HEAD
-=======
 
 ## 10/10/2018
 
@@ -51,4 +49,3 @@ Advisory Meeting Weekly
   - Xcode
   - CocoaPods installed
   - ios-deploy installed
->>>>>>> update local readme
