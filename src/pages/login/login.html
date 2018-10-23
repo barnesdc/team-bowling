@@ -5,26 +5,26 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page6">
+<ion-content padding id="page6" class="page">
   <form id="login-form1">
     <img src="../../assets/imgs/bowl-pins.png" style="display:block;width:160px;height:auto;margin-left:auto;margin-right:auto;" />
     <div class="spacer" style="height:40px;" id="login-spacer4"></div>
     <ion-list id="login-list1">
       <ion-item id="login-input1">
-        <ion-label>
+        <ion-label floating>
           Email
         </ion-label>
         <ion-input type="email" placeholder=""></ion-input>
       </ion-item>
       <ion-item id="login-input2">
-        <ion-label>
+        <ion-label floating>
           Password
         </ion-label>
         <ion-input type="password" placeholder=""></ion-input>
       </ion-item>
     </ion-list>
     <div class="spacer" style="height:40px;" id="login-spacer1"></div>
-    <button id="login-button1" ion-button color="stable" block on-click="goToTabs()">
+    <button id="login-button1" ion-button color="secondary" block on-click="goToTabs()">
       Log in
     </button>
     <button id="login-button2" ion-button clear color="positive" block on-click="goToSignup()">
