@@ -16,6 +16,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 // firebase imports
+<<<<<<< HEAD
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
@@ -26,6 +27,17 @@ import {
 } from "angularfire2/database"; // database
 import { AngularFireStorageModule } from "angularfire2/storage";
 <<<<<<< HEAD
+=======
+// import { AngularFireModule } from "angularfire2";
+// import { AngularFireAuth } from "angularfire2/auth";
+// import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
+// import { AngularFirestoreModule } from "angularfire2/firestore"; // user info, data dictionary
+// import {
+//   AngularFireDatabaseModule,
+//   AngularFireDatabase
+// } from "angularfire2/database"; // database
+// import { AngularFireStorageModule } from "angularfire2/storage";
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 import { SQLite } from "@ionic-native/sqlite";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
@@ -58,6 +70,7 @@ import { HttpModule } from "@angular/http";
     BrowserModule,
     IonicModule.forRoot(MyApp),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
     AngularFireModule.initializeApp(firebaseConfig),
@@ -67,6 +80,11 @@ import { HttpModule } from "@angular/http";
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     AngularFireDatabaseModule,
+=======
+    // AngularFireAuthModule,
+    // AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
+    // AngularFireDatabaseModule,
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
     HttpModule
   ],
   bootstrap: [IonicApp],
@@ -84,6 +102,7 @@ import { HttpModule } from "@angular/http";
   providers: [
     StatusBar,
     SplashScreen,
+<<<<<<< HEAD
     AngularFireDatabase,
 <<<<<<< HEAD
 =======
@@ -91,8 +110,11 @@ import { HttpModule } from "@angular/http";
     { provide: ErrorHandler, useClass: IonicErrorHandler }
 =======
 >>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+=======
+    // AngularFireDatabase,
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AngularFireAuth,
+    // AngularFireAuth,
     SQLite,
     DatabaseProvider
 <<<<<<< HEAD

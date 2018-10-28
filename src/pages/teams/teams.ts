@@ -6,9 +6,13 @@ import { AlertController } from "ionic-angular";
 import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { Title } from "@angular/platform-browser";
 >>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+=======
+import { Title } from "@angular/platform-browser";
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 
 /**
  * Generated class for the TeamsPage page.
@@ -32,20 +36,25 @@ export class TeamsPage {
 
   private ListBowler: any;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  private ListGame: any;
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 
   ionViewDidLoad() {
-    this.GetAllUser();
+    // this.GetAllBowlers();
   }
 
   ionViewWillEnter() {
-    this.GetAllUser();
+    // this.GetAllBowlers();
   }
 
-  GetAllUser() {
+  GetAllBowlers() {
     this.database.GetAllBowlers().then(
       (data: any) => {
-        console.log(data + "I AM WORKING");
+        console.log(data + "I AM WORKING for Bowlers");
         this.ListBowler = data;
+<<<<<<< HEAD
         window.alert("I am working");
 =======
   private ListGame: any;
@@ -64,6 +73,8 @@ export class TeamsPage {
         console.log(data + "I AM WORKING for Bowlers");
         this.ListBowler = data;
 >>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+=======
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
       },
       error => {
         console.log(error);
@@ -72,9 +83,12 @@ export class TeamsPage {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   DeleteUser(bowler_id) {
     console.log(bowler_id);
 =======
+=======
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
   addGame() {
     this.database.CreateGames(2, 200);
   }
@@ -89,7 +103,10 @@ export class TeamsPage {
         console.log(error + "getGames() error");
       }
     );
+<<<<<<< HEAD
 >>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+=======
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
   }
   AddBowlerPrompt() {
     const prompt = this.alertCtrl.create({
@@ -102,25 +119,34 @@ export class TeamsPage {
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           name: "Handicap",
           placeholder: "Handicap (Ex. A, B or C)"
         },
         {
 =======
 >>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+=======
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
           name: "Gender",
           placeholder: "Gender (Ex. Male/Female)"
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           name: "AverageScore",
 =======
+=======
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
           name: "Handicap",
           placeholder: "Handicap (Ex. A, B or C)"
         },
         {
           name: "Average",
+<<<<<<< HEAD
 >>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+=======
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
           placeholder: "Average Score (Ex. 200)"
         }
       ],
@@ -138,6 +164,7 @@ export class TeamsPage {
             this.database.CreateBowler(
               data.Name,
 <<<<<<< HEAD
+<<<<<<< HEAD
               data.Handicap,
               data.gender,
               data.AverageScore,
@@ -146,6 +173,11 @@ export class TeamsPage {
               data.Handicap,
               data.Average,
 >>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+=======
+              data.Gender,
+              data.Handicap,
+              data.Average,
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
               data.Score
             );
           }
@@ -155,7 +187,10 @@ export class TeamsPage {
     prompt.present();
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 
   deleteGame(item) {
     console.log(item.game_id);
@@ -167,5 +202,8 @@ export class TeamsPage {
     window.alert("Attempting to delete " + item + " " + item.bowler_id);
     // this.database.DeleteBowler;
   }
+<<<<<<< HEAD
 >>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+=======
+>>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 }
