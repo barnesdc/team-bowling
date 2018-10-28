@@ -16,6 +16,7 @@
 <ion-content padding id="page3">
   <h2>The Bowlers currently include: </h2><br>
   <hr>
+<<<<<<< HEAD
   <button ion-button block on-click="GetAllUser()"> List Bowlers</button>
 
   <ion-list id="bowlers-list6">
@@ -27,4 +28,64 @@
   </ion-list>
   <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>
 
+=======
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button block on-click="addGame()"> Add Game</button>
+        <!-- <button ion-button full> -->
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button block on-click="getGames()"> List Games</button>
+        <!-- <button ion-button full> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <button ion-button block on-click="addGame()"> Add Game</button> -->
+  <ion-list id="bowlers-list6">
+    <hr>
+    <h2>Game List: </h2>
+    <ion-item-sliding *ngFor="let game of ListGame" #item (ionSwipe)="deleteGame(item)">
+      <ion-item id="bowlers-list-item-container6">
+        <h3>{{game.game_id}}</h3>
+        <h3>{{game.game_number}}</h3>
+        <h3>{{game.game_score}}</h3>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button expandable (click)="deleteGame(item)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <!-- <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>
+        <!-- <button ion-button full> -->
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button block on-click="GetAllBowlers()"> List Bowlers</button>
+        <!-- <button ion-button full> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list id="bowlers-list6">
+    <hr>
+    <h2>Bowlers List: </h2>
+    <ion-item-sliding *ngFor="let bowler of ListBowler" #item (ionSwipe)="deleteBowler(item)">
+      <ion-item id="bowlers-list-item-container6">
+        <h3>{{bowler.bowler_id}}</h3>
+        <h3>Name: {{bowler.bowler_name}}</h3>
+        <h3>Gender: {{bowler.bowler_gender}}</h3>
+        <h3>Handicap: {{bowler.bowler_handicap}}</h3>
+        <h3>Average: {{bowler.bowler_average}}</h3>
+        <h3>Score: {{bowler.bowler_score}}</h3>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button expandable (click)="deleteBowler(item)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
 </ion-content>

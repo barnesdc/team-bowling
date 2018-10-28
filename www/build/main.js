@@ -189,7 +189,11 @@ var BowlerProfilePage = /** @class */ (function () {
     };
     BowlerProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: "page-bowler-profile",template:/*ion-inline-start:"C:\Users\mdtro\Documents\team-bowling\src\pages\bowler-profile\bowler-profile.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Bowler Profile\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page4">\n\n  <ion-card id="bowlerProfile-card22">\n\n    <ion-list>\n\n      <ion-item color="none" id="bowlerProfile-list-item7">\n\n        <ion-avatar item-left>\n\n          <img src="../../assets/imgs/adult-beach-beard-736716.png">\n\n        </ion-avatar>\n\n\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>John Doe</ion-label>\n\n\n\n      </ion-item>\n\n      <ion-item id="bowlerProfile-list-item-container4">\n\n        <div id="bowlerProfile-markdown4" class="show-list-numbers-and-dots">\n\n          <p style="margin-top:0px;color:#000000;">\n\n            Some friendly\n\n            <strong>\n\n              markdown\n\n            </strong>\n\n            <br />\n\n            <strong>\n\n              put a form here and include:\n\n            </strong>\n\n            <br /> Average: [bowler.average]\n\n            <br /> High: [bowler.high]\n\n            <br /> Handicap: [if n/a, put n/a; some number]\n\n            <br /> Handicap level: [use either this or actual]\n\n            <br /> Gender: [male or female]\n\n          </p>\n\n        </div>\n\n      </ion-item>\n\n    </ion-list>\n\n  </ion-card>\n\n\n\n  <button id="bowlerProfile-button5" ion-button color="positive" block on-click="goToEditProfile()">\n\n    <ion-icon name="more"></ion-icon>\n\n    Edit\n\n  </button>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mdtro\Documents\team-bowling\src\pages\bowler-profile\bowler-profile.html"*/
+=======
+            selector: "page-bowler-profile",template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\pages\bowler-profile\bowler-profile.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Bowler Profile\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page4">\n\n  <ion-card id="bowlerProfile-card22">\n\n    <ion-list>\n\n      <ion-item color="none" id="bowlerProfile-list-item7">\n\n        <ion-avatar item-left>\n\n          <img />\n\n        </ion-avatar>\n\n        <h2>\n\n          [bowler.name]\n\n        </h2>\n\n      </ion-item>\n\n      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">\n\n        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;">\n\n          <img src="../../assets/imgs/adult-beach-beard-736716.png"> </i> </div>\n\n      <ion-item id="bowlerProfile-list-item-container4">\n\n        <div id="bowlerProfile-markdown4" class="show-list-numbers-and-dots">\n\n          <p style="margin-top:0px;color:#000000;">\n\n            Some friendly\n\n            <strong>\n\n              markdown\n\n            </strong>\n\n            <br />\n\n            <strong>\n\n              put a form here and include:\n\n            </strong>\n\n            <br /> Average: [bowler.average]\n\n            <br /> High: [bowler.high]\n\n            <br /> Handicap: [if n/a, put n/a; some number]\n\n            <br /> Handicap level: [use either this or actual]\n\n            <br /> Gender: [male or female]\n\n          </p>\n\n        </div>\n\n      </ion-item>\n\n    </ion-list>\n\n  </ion-card>\n\n  <button id="bowlerProfile-button5" ion-button color="positive" block on-click="goToEditProfile()">\n\n    <ion-icon name="more"></ion-icon>\n\n    Edit\n\n  </button>\n\n</ion-content>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\pages\bowler-profile\bowler-profile.html"*/
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], BowlerProfilePage);
@@ -411,7 +415,11 @@ var LoginPage = /** @class */ (function () {
     LoginPage.prototype.signOut = function () { };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: "page-login",template:/*ion-inline-start:"C:\Users\mdtro\Documents\team-bowling\src\pages\login\login.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Login\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page6">\n\n  <div id="custom-overlay" [style.display]="splash ? \'flex\':\'none\'">\n\n    <div class="flb">\n\n      <div class="Aligner-item Aligner-item--top"></div>\n\n      <img src="https://media.giphy.com/media/l0HlW6GBSjbyFDCW4/giphy.gif">\n\n      <div class="Aligner-item Aligner-item--bottom"></div>\n\n    </div>\n\n  </div>\n\n  <form id="login-form1">\n\n    <img src="../../assets/imgs/bowl-pins.png" style="display:block;width:160px;height:auto;margin-left:auto;margin-right:auto;" />\n\n    <div class="spacer" style="height:40px;" id="login-spacer4"></div>\n\n    <ion-list id="login-list1">\n\n      <ion-item id="login-input1">\n\n        <ion-label>\n\n          Email\n\n        </ion-label>\n\n        <!-- <ion-input type="email" placeholder="" [(ngModel)]="bowler.email"></ion-input> -->\n\n      </ion-item>\n\n      <ion-item id="login-input2">\n\n        <ion-label>\n\n          Password\n\n        </ion-label>\n\n        <!-- <ion-input type="password" placeholder="" [[ngModel]]="bowler.password"></ion-input> -->\n\n      </ion-item>\n\n    </ion-list>\n\n    <div class="spacer" style="height:40px;" id="login-spacer1"></div>\n\n    <!-- <button id="login-button1" ion-button color="stable" block on-click="signInWithEmail()"> -->\n\n    <button id="login-button1" ion-button color="stable" block on-click="goToTabs()">\n\n\n\n      Log in\n\n    </button>\n\n    <button id="login-button2" ion-button clear color="positive" block on-click="goToSignup()">\n\n      Create an account\n\n    </button>\n\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mdtro\Documents\team-bowling\src\pages\login\login.html"*/
+=======
+            selector: "page-login",template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\pages\login\login.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Login\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page6" class="page">\n\n  <form id="login-form1">\n\n    <img src="../../assets/imgs/bowl-pins.png" style="display:block;width:160px;height:auto;margin-left:auto;margin-right:auto;" />\n\n    <div class="spacer" style="height:40px;" id="login-spacer4"></div>\n\n    <ion-list id="login-list1">\n\n      <ion-item id="login-input1">\n\n        <ion-label floating>\n\n          Email\n\n        </ion-label>\n\n        <ion-input type="email" placeholder=""></ion-input>\n\n      </ion-item>\n\n      <ion-item id="login-input2">\n\n        <ion-label floating>\n\n          Password\n\n        </ion-label>\n\n        <ion-input type="password" placeholder=""></ion-input>\n\n      </ion-item>\n\n    </ion-list>\n\n    <div class="spacer" style="height:40px;" id="login-spacer1"></div>\n\n    <button id="login-button1" ion-button color="secondary" block on-click="goToTabs()">\n\n      Log in\n\n    </button>\n\n    <button id="login-button2" ion-button clear color="positive" block on-click="goToSignup()">\n\n      Or create an account\n\n    </button>\n\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\pages\login\login.html"*/
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
@@ -470,7 +478,11 @@ var SignupPage = /** @class */ (function () {
     };
     SignupPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: "page-signup",template:/*ion-inline-start:"C:\Users\mdtro\Documents\team-bowling\src\pages\signup\signup.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Signup\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page7">\n\n  <form id="signup-form2">\n\n    <!-- <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">\n\n      <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>\n\n    </div>\n\n    <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">\n\n      <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>\n\n    </div> -->\n\n    <img src="../../assets/imgs/bowl-pins.png" style="display:block;width:160px;height:auto;margin-left:auto;margin-right:auto;" />\n\n    <div class="spacer" style="height:40px;" id="signup-spacer2"></div>\n\n    <ion-list id="signup-list2">\n\n      <ion-item id="signup-input3">\n\n        <ion-label>\n\n          Name\n\n        </ion-label>\n\n        <ion-input type="text" placeholder=""></ion-input>\n\n      </ion-item>\n\n      <ion-item id="signup-input4">\n\n        <ion-label>\n\n          Email\n\n        </ion-label>\n\n        <ion-input type="email" placeholder=""></ion-input>\n\n      </ion-item>\n\n      <ion-item id="signup-input5">\n\n        <ion-label>\n\n          Password\n\n        </ion-label>\n\n        <ion-input type="text" placeholder=""></ion-input>\n\n      </ion-item>\n\n    </ion-list>\n\n    <div class="spacer" style="height:40px;" id="signup-spacer3"></div>\n\n    <!-- <button id="signup-button3" ion-button color="stable" block on-click="createUserWithEmail()"> -->\n\n    <button id="signup-button3" ion-button color="stable" block on-click="test()">\n\n\n\n      Sign up\n\n    </button>\n\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mdtro\Documents\team-bowling\src\pages\signup\signup.html"*/
+=======
+            selector: 'page-signup',template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\pages\signup\signup.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Signup\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page7">\n\n  <form id="signup-form2">\n\n    <!-- <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">\n\n      <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>\n\n    </div>\n\n    <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">\n\n      <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>\n\n    </div> -->\n\n    <img src="../../assets/imgs/bowl-pins.png" style="display:block;width:160px;height:auto;margin-left:auto;margin-right:auto;" />\n\n    <div class="spacer" style="height:40px;" id="signup-spacer2"></div>\n\n    <ion-list id="signup-list2">\n\n      <ion-item id="signup-input3">\n\n        <ion-label>\n\n          Name\n\n        </ion-label>\n\n        <ion-input type="text" placeholder=""></ion-input>\n\n      </ion-item>\n\n      <ion-item id="signup-input4">\n\n        <ion-label>\n\n          Email\n\n        </ion-label>\n\n        <ion-input type="email" placeholder=""></ion-input>\n\n      </ion-item>\n\n      <ion-item id="signup-input5">\n\n        <ion-label>\n\n          Password\n\n        </ion-label>\n\n        <ion-input type="text" placeholder=""></ion-input>\n\n      </ion-item>\n\n    </ion-list>\n\n    <div class="spacer" style="height:40px;" id="signup-spacer3"></div>\n\n    <button id="signup-button3" ion-button color="stable" block>\n\n      Sign up\n\n    </button>\n\n  </form>\n\n</ion-content>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\pages\signup\signup.html"*/
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], SignupPage);
@@ -481,7 +493,60 @@ var SignupPage = /** @class */ (function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 289:
+=======
+/***/ 284:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__games_scores_games_scores__ = __webpack_require__(285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bowlers_bowlers__ = __webpack_require__(286);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bowler_profile_bowler_profile__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__information_information__ = __webpack_require__(292);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var TabsPage = /** @class */ (function () {
+    function TabsPage(navCtrl) {
+        this.navCtrl = navCtrl;
+        // this tells the tabs component which Pages
+        // should be each tab's root Page
+        this.tab1Root = __WEBPACK_IMPORTED_MODULE_2__games_scores_games_scores__["a" /* GamesScoresPage */];
+        this.tab2Root = __WEBPACK_IMPORTED_MODULE_3__bowlers_bowlers__["a" /* BowlersPage */];
+        this.tab3Root = __WEBPACK_IMPORTED_MODULE_4__bowler_profile_bowler_profile__["a" /* BowlerProfilePage */];
+        this.tab4Root = __WEBPACK_IMPORTED_MODULE_5__information_information__["a" /* InformationPage */];
+    }
+    TabsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: "page-tabs",template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\pages\tabs\tabs.html"*/'<ion-tabs id="tabs-tabs1">\n\n  <ion-tab [root]="tab1Root" tabTitle="Games/Scores" tabIcon="grid" id="tabs-tab1"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="Bowlers" tabIcon="people" id="tabs-tab2"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="Profile" tabIcon="body" id="tabs-tab3"></ion-tab>\n\n  <ion-tab [root]="tab4Root" tabTitle="About" tabIcon="information-circle" id="tabs-tab4"></ion-tab>\n\n</ion-tabs>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\pages\tabs\tabs.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
+    ], TabsPage);
+    return TabsPage;
+}());
+
+//# sourceMappingURL=tabs.js.map
+
+/***/ }),
+
+/***/ 285:
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -510,7 +575,11 @@ var GamesScoresPage = /** @class */ (function () {
     };
     GamesScoresPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: "page-games-scores",template:/*ion-inline-start:"C:\Users\mdtro\Documents\team-bowling\src\pages\games-scores\games-scores.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Games Scores\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page2">\n\n  <button id="startGame-button1" ion-button color="stable" block on-click="startGame()">\n\n    Start A Game\n\n  </button>\n\n  <hr>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\mdtro\Documents\team-bowling\src\pages\games-scores\games-scores.html"*/
+=======
+            selector: "page-games-scores",template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\pages\games-scores\games-scores.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Games Scores\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page2">\n\n  <button id="startGame-button1" ion-button color="stable" block color="secondary" on-click="startGame()">\n\n    Start A Game\n\n  </button>\n\n  <hr>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\pages\games-scores\games-scores.html"*/
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], GamesScoresPage);
@@ -521,7 +590,61 @@ var GamesScoresPage = /** @class */ (function () {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 290:
+=======
+/***/ 286:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BowlersPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_firestore__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_firestore___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_firestore__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(501);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var BowlersPage = /** @class */ (function () {
+    // bowlers: Observable<any[]>;
+    // this tells the tabs component which Pages
+    // should be each tab's root Page
+    function BowlersPage(navCtrl, afs) {
+        this.navCtrl = navCtrl;
+        this.afs = afs;
+        // this.bowlers = afDB.list("bolwers").valueChanges();
+    }
+    BowlersPage.prototype.ionViewWillEnter = function () {
+        this.bowlersCollection = this.afs.collection("Bowlers");
+        this.bowlers = this.bowlersCollection.valueChanges();
+    };
+    BowlersPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: "page-bowlers",template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\pages\bowlers\bowlers.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Bowlers\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page3">\n\n  <p>The Bowlers collection currently includes: </p><br>\n\n  <hr>\n\n  <ion-list id="bowlers-list6">\n\n    <ion-item id="bowlers-list-item-container6">\n\n      <div *ngFor="let bowler of bowlers | async">\n\n        <p>Bowler Name: {{bowler.name}}</p>\n\n        <p>Bowler Average: {{bowler.avg}}</p>\n\n        <hr>\n\n      </div>\n\n    </ion-item>\n\n  </ion-list>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\pages\bowlers\bowlers.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_firestore__["AngularFirestore"]])
+    ], BowlersPage);
+    return BowlersPage;
+}());
+
+//# sourceMappingURL=bowlers.js.map
+
+/***/ }),
+
+/***/ 291:
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -555,7 +678,11 @@ var EditProfilePage = /** @class */ (function () {
     };
     EditProfilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: "page-edit-profile",template:/*ion-inline-start:"C:\Users\mdtro\Documents\team-bowling\src\pages\edit-profile\edit-profile.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Edit Profile\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page5">\n\n  <ion-card id="editProfile-card21">\n\n    <ion-list>\n\n      <ion-item color="none" id="editProfile-list-item3">\n\n        <ion-avatar item-left>\n\n          <img />\n\n        </ion-avatar>\n\n        <h2>\n\n          [bowler.name]\n\n        </h2>\n\n      </ion-item>\n\n      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">\n\n        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>\n\n      </div>\n\n      <ion-item id="editProfile-list-item-container2">\n\n        <div id="editProfile-markdown2" class="show-list-numbers-and-dots">\n\n          <p style="margin-top:0px;color:#000000;">\n\n            Some friendly\n\n            <strong>\n\n              markdown\n\n            </strong>\n\n            <br />\n\n            <strong>\n\n              put a form here and include:\n\n            </strong>\n\n            <br /> Average: [bowler.average]\n\n            <br /> High: [bowler.high]\n\n            <br /> Handicap: [if n/a, put n/a; some number]\n\n            <br /> Handicap level: [use either this or actual]\n\n            <br /> Gender: [male or female]\n\n          </p>\n\n        </div>\n\n      </ion-item>\n\n    </ion-list>\n\n  </ion-card>\n\n  <button id="editProfile-button4" ion-button color="positive" block on-click="goToBowlerProfile()">\n\n    Save\n\n  </button>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mdtro\Documents\team-bowling\src\pages\edit-profile\edit-profile.html"*/
+=======
+            selector: "page-edit-profile",template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\pages\edit-profile\edit-profile.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Edit Profile\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page5">\n\n  <ion-card id="editProfile-card21">\n\n    <ion-list>\n\n      <ion-item color="none" id="editProfile-list-item3">\n\n        <ion-avatar item-left>\n\n          <img />\n\n        </ion-avatar>\n\n        <h2>\n\n          [bowler.name]\n\n        </h2>\n\n      </ion-item>\n\n      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">\n\n        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>\n\n      </div>\n\n      <ion-item id="editProfile-list-item-container2">\n\n        <div id="editProfile-markdown2" class="show-list-numbers-and-dots">\n\n          <p style="margin-top:0px;color:#000000;">\n\n            Some friendly\n\n            <strong>\n\n              markdown\n\n            </strong>\n\n            <br />\n\n            <strong>\n\n              put a form here and include:\n\n            </strong>\n\n            <br /> Average: [bowler.average]\n\n            <br /> High: [bowler.high]\n\n            <br /> Handicap: [if n/a, put n/a; some number]\n\n            <br /> Handicap level: [use either this or actual]\n\n            <br /> Gender: [male or female]\n\n          </p>\n\n        </div>\n\n      </ion-item>\n\n    </ion-list>\n\n  </ion-card>\n\n  <button id="editProfile-button4" ion-button color="positive" block on-click="goToBowlerProfile()">\n\n    Save\n\n  </button>\n\n</ion-content>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\pages\edit-profile\edit-profile.html"*/
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], EditProfilePage);
@@ -592,7 +719,11 @@ var InformationPage = /** @class */ (function () {
     }
     InformationPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+<<<<<<< HEAD
             selector: 'page-information',template:/*ion-inline-start:"C:\Users\mdtro\Documents\team-bowling\src\pages\information\information.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Information\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page8">\n\n  <h2 id="information-heading1" style="color:#000000;">\n\n    Senior Project 2018\n\n  </h2>\n\n  <img src="../../assets/imgs/ ncat.jpg">\n\n  <div id="information-markdown5" class="show-list-numbers-and-dots">\n\n    <p style="color:#000000;">\n\n      Some friendly\n\n      <strong>\n\n        markdown\n\n      </strong>\n\n      <br /> This project was created by:\n\n    </p>\n\n    <p style="color:#000000;">\n\n      <strong>\n\n        D&#39;Ante Barnes\n\n        <br /> Charles Carrington\n\n        <br /> Mathew Trotter\n\n      </strong>\n\n    </p>\n\n    <p style="color:#000000;">\n\n      The goal was to build an application that would benefit bowlers.\n\n    </p>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\mdtro\Documents\team-bowling\src\pages\information\information.html"*/
+=======
+            selector: 'page-information',template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\pages\information\information.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Information\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding id="page8">\n\n  <h2 id="information-heading1" style="color:#000000;">\n\n    Senior Project 2018\n\n  </h2>\n\n  <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">\n\n    <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>\n\n  </div>\n\n  <div id="information-markdown5" class="show-list-numbers-and-dots">\n\n    <p style="color:#000000;">\n\n      Some friendly\n\n      <strong>\n\n        markdown\n\n      </strong>\n\n      <br /> This project was created by:\n\n    </p>\n\n    <p style="color:#000000;">\n\n      <strong>\n\n        D&#39;Ante Barnes\n\n        <br /> Charles Carrington\n\n        <br /> Mathew Trotter\n\n      </strong>\n\n    </p>\n\n    <p style="color:#000000;">\n\n      The goal was to build an application that would benefit bowlers.\n\n    </p>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\pages\information\information.html"*/
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], InformationPage);
@@ -765,7 +896,11 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
+<<<<<<< HEAD
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\mdtro\Documents\team-bowling\src\app\app.html"*/'<!-- <ion-nav [root]="rootPage"></ion-nav> -->\n\n<ion-nav #mainContent [root]="rootPage"></ion-nav>'/*ion-inline-end:"C:\Users\mdtro\Documents\team-bowling\src\app\app.html"*/
+=======
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\DEVGRU\team-bowling\src\app\app.html"*/'<!-- <ion-nav [root]="rootPage"></ion-nav> -->\n\n<ion-nav #mainContent [root]="rootPage"></ion-nav>'/*ion-inline-end:"C:\Users\DEVGRU\team-bowling\src\app\app.html"*/
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],

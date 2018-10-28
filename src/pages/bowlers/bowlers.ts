@@ -1,7 +1,15 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
+<<<<<<< HEAD
 import {AlertController} from "ionic-angular";
 import { SQLite } from "@ionic-native/sqlite";
+=======
+<<<<<<< HEAD
+=======
+import {AlertController} from "ionic-angular";
+import { SQLite } from "@ionic-native/sqlite";
+>>>>>>> issues
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
 
 import {
   AngularFirestore,
@@ -10,8 +18,16 @@ import {
 } from "angularfire2/firestore";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
+<<<<<<< HEAD
 import { Placeholder } from "@angular/compiler/src/i18n/i18n_ast";
 import { DatabaseProvider } from "../../providers/database/database";
+=======
+<<<<<<< HEAD
+=======
+import { Placeholder } from "@angular/compiler/src/i18n/i18n_ast";
+import { DatabaseProvider } from "../../providers/database/database";
+>>>>>>> issues
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
 
 interface Bolwers {
   name: string;
@@ -25,6 +41,23 @@ interface Bolwers {
 export class BowlersPage {
   bowlersCollection: AngularFirestoreCollection<Bolwers>; //firestore collection
   bowlers: Observable<Bolwers[]>; //read collection
+<<<<<<< HEAD
+  private database : DatabaseProvider;
+=======
+<<<<<<< HEAD
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
+  // bowlers: Observable<any[]>;
+  // this tells the tabs component which Pages
+  // should be each tab's root Page
+  constructor(public alertCtrl: AlertController, private afs: AngularFirestore, public navCtrl: NavController){
+    
+  }
+<<<<<<< HEAD
+  /*constructor(public navCtrl: NavController, private afs: AngularFirestore) {
+    // this.bowlers = afDB.list("bolwers").valueChanges();
+  }*/
+=======
+=======
   private database : DatabaseProvider;
   // bowlers: Observable<any[]>;
   // this tells the tabs component which Pages
@@ -35,10 +68,18 @@ export class BowlersPage {
   /*constructor(public navCtrl: NavController, private afs: AngularFirestore) {
     // this.bowlers = afDB.list("bolwers").valueChanges();
   }*/
+>>>>>>> issues
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
   ionViewWillEnter() {
     this.bowlersCollection = this.afs.collection("Bowlers");
     this.bowlers = this.bowlersCollection.valueChanges();
   }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+}
+=======
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
 
   AddBowlerPrompt()
   {
@@ -83,4 +124,9 @@ export class BowlersPage {
   prompt.present();
   
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> issues
+>>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
