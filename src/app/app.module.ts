@@ -16,18 +16,6 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 // firebase imports
-<<<<<<< HEAD
-import { AngularFireModule } from "angularfire2";
-import { AngularFireAuth } from "angularfire2/auth";
-import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
-import { AngularFirestoreModule } from "angularfire2/firestore"; // user info, data dictionary
-import {
-  AngularFireDatabaseModule,
-  AngularFireDatabase
-} from "angularfire2/database"; // database
-import { AngularFireStorageModule } from "angularfire2/storage";
-<<<<<<< HEAD
-=======
 // import { AngularFireModule } from "angularfire2";
 // import { AngularFireAuth } from "angularfire2/auth";
 // import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
@@ -37,22 +25,10 @@ import { AngularFireStorageModule } from "angularfire2/storage";
 //   AngularFireDatabase
 // } from "angularfire2/database"; // database
 // import { AngularFireStorageModule } from "angularfire2/storage";
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
-import { SQLite } from "@ionic-native/sqlite";
-import { DatabaseProvider } from "../providers/database/database";
-import { HttpModule } from "@angular/http";
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import { AuthServiceProvider } from "../providers/auth-service/auth-service";
-=======
->>>>>>> SQL adding Table working
 import { SQLite } from "@ionic-native/sqlite";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
->>>>>>> no message
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
 
 @NgModule({
   declarations: [

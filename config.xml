@@ -81,20 +81,12 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-<<<<<<< HEAD
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
+    <plugin name="cordova-sqlite-storage" spec="2.4.0" />
+    <plugin name="cordova-plugin-x-toast" spec="2.7.0" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-sqlite-storage" spec="2.4.0" />
     <plugin name="cordova-plugin-x-toast" spec="2.7.0" />
     <engine name="android" spec="7.1.1" />
     <engine name="ios" spec="4.5.5" />
-=======
-<<<<<<< HEAD
-=======
-    <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-sqlite-storage" spec="2.4.0" />
-    <plugin name="cordova-plugin-x-toast" spec="2.7.0" />
-    <engine name="android" spec="7.1.1" />
-    <engine name="ios" spec="4.5.5" />
->>>>>>> Updated Teams Page and database provider:
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
 </widget>
