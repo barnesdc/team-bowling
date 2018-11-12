@@ -25,78 +25,63 @@ export class DatabaseProvider {
         .then((db: SQLiteObject) => {
           this.db = db;
           db.executeSql(
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name  TEXT, bowler_gender TEXT, bowler_avg INT, bowler_score INT, bowler_handicap TEXT)",
-            [])
-            .then(res => console.log('Executed SQL')).catch(e => console.log(e))
+            "CREATE TABLE IF NOT EXISTS 'bowlers' (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_handicap INTEGER, bowler_average INTEGER, bowler_score INTEGER, bowler_date DATE)",
+            []
+          )
+            .then(res => console.log("Executed SQL for bowlers"))
+            .catch(e => console.log("Error in creating bowlers table" + e));
+
+          db.executeSql(
+            "CREATE TABLE IF NOT EXISTS 'team' (team_id INTEGER PRIMARY KEY AUTOINCREMENT, team_bowlers INT, bowler_id INTEGER, FOREIGN KEY (bowler_id) references bowler(bowler_id))",
+            []
+          )
+            .then(res => console.log("Executed SQL for team"))
+            .catch(e => {
+              console.log("Error in creating team table");
+              console.log(e);
             });
-          //  db.executeSql("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, identification INTEGER, name TEXT, lastname text)", []);
-          this.isOpen = true;
-      }
-    console.log("Hello DatabaseProvider Provider");
-    }
-=======
-            "CREATE TABLE IF NOT EXISTS game (game_id INTEGER PRIMARY KEY AUTOINCREMENT, game_score INT, game_number INT)",
+          db.executeSql(
+            "CREATE TABLE IF NOT EXISTS 'game' (game_id INTEGER PRIMARY KEY AUTOINCREMENT, team_id INTEGER, FOREIGN KEY (team_id) references team(team_id))",
             []
           )
             .then(res => console.log("Executed SQL for game"))
-            .catch(e => console.log(e));
+            .catch(e => {
+              console.log("Error in creating game table");
+              console.log(e);
+            });
 
           db.executeSql(
-            "CREATE TABLE IF NOT EXISTS teams (team_id INT PRIMARY KEY AUTOINCREMENT, team_bowlers INT, team_score INT, game_id INT, FOREIGN KEY (game_id) references game(game_id))",
+            "CREATE TABLE IF NOT EXISTS 'scores'(bowler_id INTEGER ,score_date DATE, FOREIGN KEY (bowler_id) references bowler(bowler_id))",
             []
           )
-            .then(res => console.log("Executed SQL for teams"))
-            .catch(e => console.log(e));
-
+            .then(res => console.log("Executed SQL for scores"))
+            .catch(e => {
+              console.log("Error in creating scores table");
+              console.log(e);
+            });
           db.executeSql(
-            "CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_handicap TEXT, bowler_average INTEGER, bowler_score INTEGER, team_id INTEGER, FOREIGN KEY (team_id) references teams(team_id))",
+            "CREATE TABLE IF NOT EXISTS 'history'(bowler_id INTEGER, team_id INTEGER, game_id INTEGER, history_date DATE, history_score INTEGER, FOREIGN KEY (bowler_id)references bowler(bowler_id))",
             []
           )
-            .then(res => console.log("Executed SQL for bowlers"))
-            .catch(e => console.log(e));
+            .then(res => console.log("Executed SQL for history"))
+            .catch(e => {
+              console.log("Error in creating history table");
+              console.log(e);
+            });
+          db.executeSql(
+            "CREATE TABLE IF NOT EXISTS 'handicap'(handicap_id INTEGER PRIMARY KEY, handicap_start INTEGER, handicap_end INTEGER, handicap_numPins DATE)",
+            []
+          )
+            .then(res => console.log("Executed SQL for handicap"))
+            .catch(e => {
+              console.log("Error in creating handicap table");
+              console.log(e);
+            });
         });
       this.isOpen = true;
-      //     })
-      //     .catch(error => {
-      //       console.log("There was an error:");
-      //       console.log(error);
-      //     });
-      // }
+
       console.log("Hello DatabaseProvider Provider");
     }
-=======
-            "CREATE TABLE IF NOT EXISTS game (game_id INTEGER PRIMARY KEY AUTOINCREMENT, game_score INT, game_number INT)",
-            []
-          )
-            .then(res => console.log("Executed SQL for game"))
-            .catch(e => console.log(e));
-
-          db.executeSql(
-            "CREATE TABLE IF NOT EXISTS teams (team_id INT PRIMARY KEY AUTOINCREMENT, team_bowlers INT, team_score INT, game_id INT, FOREIGN KEY (game_id) references game(game_id))",
-            []
-          )
-            .then(res => console.log("Executed SQL for teams"))
-            .catch(e => console.log(e));
-
-          db.executeSql(
-            "CREATE TABLE IF NOT EXISTS bowlers (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_handicap TEXT, bowler_average INTEGER, bowler_score INTEGER, team_id INTEGER, FOREIGN KEY (team_id) references teams(team_id))",
-            []
-          )
-            .then(res => console.log("Executed SQL for bowlers"))
-            .catch(e => console.log(e));
-        });
-      this.isOpen = true;
-      //     })
-      //     .catch(error => {
-      //       console.log("There was an error:");
-      //       console.log(error);
-      //     });
-      // }
-      console.log("Hello DatabaseProvider Provider");
-    }
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
   }
   CreateGames(game_number: number, game_score: number) {
     return new Promise((resolve, reject) => {
@@ -115,64 +100,27 @@ export class DatabaseProvider {
         });
     });
   }
-<<<<<<< HEAD
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 
   CreateBowler(
     bowler_name: string,
     bowler_gender: string,
-<<<<<<< HEAD
-<<<<<<< HEAD
-    bowler_average: number,
-=======
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
     bowler_handicap: string,
     bowler_average: number,
     bowler_score: number
   ) {
-<<<<<<< HEAD
-=======
-    bowler_handicap: string,
-    bowler_average: number,
-    bowler_score: number
-  ) {
-    // start game table first, then teams, then bowlers
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
-    // start game table first, then teams, then bowlers
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
     return new Promise((resolve, reject) => {
       this.storage
         .create({ name: "bowlerData.db", location: "default" })
         .then(() => {
           let sql =
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "INSERT INTO bowlers (bowler_name, bowler_gender, bowler_avg, bowler_handicap, bowler_score) VALUES (?, ?, ?, ?, ?)";
-=======
             "INSERT INTO bowlers (bowler_name, bowler_gender,bowler_handicap, bowler_average, bowler_score) VALUES (?, ?, ?, ?, ?)";
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
             "INSERT INTO bowlers (bowler_name, bowler_gender,bowler_handicap, bowler_average, bowler_score) VALUES (?, ?, ?, ?, ?)";
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
           this.db
             .executeSql(sql, [
               bowler_name,
               bowler_gender,
-<<<<<<< HEAD
-<<<<<<< HEAD
-              bowler_average,
-              bowler_handicap,
-=======
               bowler_handicap,
               bowler_average,
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
-              bowler_handicap,
-              bowler_average,
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
               bowler_score
             ])
             .then(
@@ -186,11 +134,6 @@ export class DatabaseProvider {
         });
     });
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
   getGames() {
     return new Promise((resolve, reject) => {
       this.db.executeSql("SELECT * FROM game", []).then(
@@ -213,10 +156,6 @@ export class DatabaseProvider {
       );
     });
   }
-<<<<<<< HEAD
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
   GetAllBowlers() {
     return new Promise((resolve, reject) => {
       this.db.executeSql("SELECT * FROM bowlers", []).then(
@@ -237,33 +176,19 @@ export class DatabaseProvider {
           resolve(arrayBowlers);
         },
         error => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-          reject(error+"ERROR!!!!");
-=======
           reject(error + "ERROR!!!!");
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
-          reject(error + "ERROR!!!!");
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
         }
       );
     });
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  DeleteUser(bowler_id) {}
-=======
-=======
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
-  DeleteBowler(bowler_id) {
+  DeleteBowler(item: any) {
     return new Promise((resolve, reject) => {
       this.storage
         .create({ name: "bowlerData.db", location: "default" })
         .then(() => {
           let sql = "SELECT * FROM bowlers WHERE bowler_id = ? ";
-          this.db.executeSql(sql, [bowler_id]).then(
+          this.db.executeSql(sql, [item.bowler_id]).then(
             data => {
               resolve(data);
             },
@@ -275,9 +200,45 @@ export class DatabaseProvider {
     });
   }
   DeleteGame(game_id) {}
-<<<<<<< HEAD
-  
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 }
+
+/*
+Datagrip Table
+
+CREATE TABLE 'bowler'(
+  bowler_id  INTEGER primary key AUTOINCREMENT,
+  bowler_name TEXT,
+  bowler_gender TEXT,
+  bowler_avg INTEGER,
+  bowler_handicap INTEGER,
+  bowler_date DATE );
+
+CREATE TABLE 'team'(
+  team_id INTEGER primary key,
+  bowler_id INTEGER ,
+  FOREIGN KEY (bowler_id) references  bowler(bowler_id));
+
+CREATE TABLE 'game'(
+  game_id INTEGER primary key,
+  team_id INTEGER ,
+  FOREIGN KEY (team_id) references team(team_id));
+
+CREATE TABLE 'scores'(
+  bowler_id INTEGER ,
+  score_date DATE ,
+  FOREIGN KEY (bowler_id)references bowler(bowler_id));
+
+CREATE TABLE 'history'(
+  bowler_id INTEGER,
+  team_id INTEGER,
+  game_id INTEGER,
+  history_date DATE,
+  history_score INTEGER,
+  FOREIGN KEY (bowler_id)references bowler(bowler_id));
+
+CREATE TABLE 'handicap'(
+  handicap_id INTEGER PRIMARY KEY ,
+  handicap_start INTEGER,
+  handicap_end INTEGER,
+  handicap_numPins DATE);
+*/

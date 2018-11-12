@@ -25,7 +25,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 //   AngularFireDatabase
 // } from "angularfire2/database"; // database
 // import { AngularFireStorageModule } from "angularfire2/storage";
-import { AuthServiceProvider } from "../providers/auth-service/auth-service";
+//import { AuthServiceProvider } from "../providers/auth-service/auth-service";
 import { SQLite } from "@ionic-native/sqlite";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
@@ -45,22 +45,9 @@ import { HttpModule } from "@angular/http";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    AngularFireModule.initializeApp(firebaseConfig),
-=======
->>>>>>> no message
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-    AngularFireAuthModule,
-    AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
-    AngularFireDatabaseModule,
-=======
     // AngularFireAuthModule,
     // AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     // AngularFireDatabaseModule,
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
     HttpModule
   ],
   bootstrap: [IonicApp],
@@ -78,25 +65,10 @@ import { HttpModule } from "@angular/http";
   providers: [
     StatusBar,
     SplashScreen,
-<<<<<<< HEAD
-    AngularFireDatabase,
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
-=======
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
     // AngularFireDatabase,
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
     // AngularFireAuth,
     SQLite,
     DatabaseProvider
-<<<<<<< HEAD
-=======
->>>>>>> no message
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
   ]
 })
 export class AppModule {}
