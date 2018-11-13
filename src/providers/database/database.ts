@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
 import { dateValueRange } from "ionic-angular/umd/util/datetime-util";
 import { database } from "firebase";
-import { error } from "@angular/compiler/src/util";
 
 /*
   Generated class for the DatabaseProvider provider.
