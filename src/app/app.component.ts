@@ -4,13 +4,14 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 // import { NavController } from
 import { LoginPage } from "../pages/login/login";
+import { TabsPage } from "../pages/tabs/tabs";
 
 @Component({
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = LoginPage;
-
+  rootPage: any = TabsPage;
+  splash = true;
   constructor(
     platform: Platform,
     statusBar: StatusBar,
@@ -22,5 +23,10 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+  ionViewDidLoad() {
+    setTimeout(() => {
+      this.splash = false;
+    }, 3000);
   }
 }

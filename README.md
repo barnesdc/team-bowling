@@ -19,25 +19,14 @@ Requirments/Specification Document:
 
 Advisory Meeting Weekly
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 #Randon Notes
 -ionic cordova run: creates allows you to either create an ios or android build
-=======
 ## 10/10/2018
 
 - Keep project plan up-to-date
 - https://github.com/barnesdc/team-bowling/wiki/Project-Plan
 
 #Randon Notes
-=======
-## 10/10/2018
-
-- Keep project plan up-to-date
-- https://github.com/barnesdc/team-bowling/wiki/Project-Plan
-
-#Randon Notes
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 
 - ionic cordova run: creates allows you to either create an ios or android build
 
@@ -62,7 +51,3 @@ Advisory Meeting Weekly
   - Xcode
   - CocoaPods installed
   - ios-deploy installed
-<<<<<<< HEAD
->>>>>>> dfa1b776ed77da55f13ad3c2e2e4f6a85837af30
-=======
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
