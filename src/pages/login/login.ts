@@ -32,11 +32,6 @@ export class LoginPage {
 
   goToTabs(params) {
     if (!params) params = {};
-    // this.database
-    //   .CreateBowler("John", "Male", 300, "A", 0)
-    //   .then((data: any) => {
-    //     console.log("something happened");
-    //   });
     this.navCtrl.push(TabsPage);
   }
   goToSignup(params) {

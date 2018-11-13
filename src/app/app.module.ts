@@ -5,8 +5,6 @@ import { MyApp } from "./app.component";
 
 import { GamesScoresPage } from "../pages/games-scores/games-scores";
 import { TeamsPage } from "../pages/teams/teams";
-import { BowlerProfilePage } from "../pages/bowler-profile/bowler-profile";
-import { EditProfilePage } from "../pages/edit-profile/edit-profile";
 import { TabsPage } from "../pages/tabs/tabs";
 import { LoginPage } from "../pages/login/login";
 import { SignupPage } from "../pages/signup/signup";
@@ -28,14 +26,14 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { SQLite } from "@ionic-native/sqlite";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
+import { BowlersPage } from "../pages/bowlers/bowlers";
 
 @NgModule({
   declarations: [
     MyApp,
     GamesScoresPage,
     TeamsPage,
-    BowlerProfilePage,
-    EditProfilePage,
+    BowlersPage,
     TabsPage,
     LoginPage,
     SignupPage,
@@ -53,9 +51,8 @@ import { HttpModule } from "@angular/http";
   entryComponents: [
     MyApp,
     GamesScoresPage,
+    BowlersPage,
     TeamsPage,
-    BowlerProfilePage,
-    EditProfilePage,
     TabsPage,
     LoginPage,
     SignupPage,
