@@ -166,7 +166,7 @@ export class DatabaseProvider {
               for (var i = 0; i < data.rows.length; i++) {
                 arrayTeams.push({
                   bowler_id: data.rows.item(i).bowler_id,
-                  bowler_name: data.rows.item(i).bowler_name
+                  bowler_name: data.rows.item(i).bowler_namef
                 });
               }
             }
