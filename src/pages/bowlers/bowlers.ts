@@ -99,6 +99,7 @@ export class BowlersPage {
       ]
     });
     prompt.present();
+    // refresh after exiting prompt
     prompt.onDidDismiss(() => {
       this.GetAllBowlers();
     })
