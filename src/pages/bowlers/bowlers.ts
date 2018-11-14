@@ -94,11 +94,13 @@ export class BowlersPage {
               null,
               null
             );
-            this.GetAllBowlers();
           }
         }
       ]
     });
     prompt.present();
+    prompt.onDidDismiss(() => {
+      this.GetAllBowlers();
+    })
   }
 }

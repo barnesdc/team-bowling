@@ -28,23 +28,10 @@ plugins/
 plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
-<<<<<<< HEAD
-www/build
-<<<<<<< HEAD
-
-=======
->>>>>>> add www/build folder to gitignore
-=======
 www/
 package-lock.json
->>>>>>> 237052c7b27570405932c856f553ac0a8e436d89
 
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-<<<<<<< HEAD
-package-lock.json
-=======
-package-lock.json
 
->>>>>>> add www/build folder to gitignore
