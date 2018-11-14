@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
+import { BowlersPage } from "../bowlers/bowlers";
 
 @Component({
   selector: "page-games-scores",
@@ -10,6 +11,6 @@ export class GamesScoresPage {
   // should be each tab's root Page
   constructor(public navCtrl: NavController) {}
   startGame() {
-    window.alert("This feature is coming soon");
+    this.navCtrl.push(BowlersPage);
   }
 }

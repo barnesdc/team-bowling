@@ -1,67 +1,53 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Bowlers
-    </ion-title>
-  </ion-navbar>
+  <ion-navbar> <ion-title> Bowlers </ion-title> </ion-navbar>
 </ion-header>
-
 
 <ion-content padding id="page3">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <p>The Bowlers currently includes: </p><br>
-  <hr>
-  <!-- <ion-list id="bowlers-list6">
-    <ion-item id="bowlers-list-item-container6">
-      <div *ngFor="let bowler of bowlers | async">
-        <p>Bowler Name: {{data.name}}</p>
-        <p>Bowler Average: {{data.avg}}</p>
-        <hr>
-      </div>
-    </ion-item>
-  </ion-list> -->
+  <p>The Bowlers currently includes:</p>
+  <br />
+  <hr />
+
   <!-- Checkboxes in a List -->
   <ion-list>
     <ion-item *ngFor="let bowler of ListBowler">
-      <ion-label>Name: {{bowler.name}} {{bowler.bowler_name}}</ion-label>
-      <ion-label>Gender: {{bowler.gender}}{{bowler.bowler_gender}}</ion-label>
-      <ion-label>Current Average: {{bowler.average}}{{bowler.bowler_average}}</ion-label>
+      <ion-label>Name: {{ bowler.name }} {{ bowler.bowler_name }}</ion-label>
+      <ion-label
+        >Gender: {{ bowler.gender }}{{ bowler.bowler_gender }}</ion-label
+      >
+      <ion-label
+        >Current Average: {{ bowler.average
+        }}{{ bowler.bowler_average }}</ion-label
+      >
       <ion-checkbox slot="end" checked="false"></ion-checkbox>
     </ion-item>
   </ion-list>
-  <!-- <p>The Bowlers currently includes: </p><br>
-    <hr>
-    <ion-item-sliding *ngFor="let bowler of ListBowler" #item (ionSwipe)="deleteBowler(item)">
-      <ion-item id="bowlers-list-item-container6">
-        <h3>{{bowler.bowler_id}}</h3>
-        <h3>Name: {{bowler.bowler_name}}</h3>
-        <h3>Gender: {{bowler.bowler_gender}}</h3>
-        <h3>Handicap: {{bowler.bowler_handicap}}</h3>
-        <h3>Average: {{bowler.bowler_average}}</h3>
-        <h3>Date: {{bowler.bowler_date}}</h3>
-      </ion-item>
-      <ion-item-options>
-        <button ion-button expandable (click)="deleteBowler(item.bowler_id)">Delete</button>
-      </ion-item-options>
-    </ion-item-sliding> -->
-  <!-- <button id="add-bowler-button" ion-button color="stable" block on-click="AddBowlerPrompt()">
-    Add Bowler
-  </button> -->
-  <!-- <ion-list>
-    <ion-item *ngFor="let bowler of ListBowler">
-      <ion-label>Name: {{bowler.bowler_name}}</ion-label>
-      <ion-label>Gender: {{bowler.bowler_gender}}</ion-label>
-      <ion-label>Current Average:{{bowler.bowler_average}}</ion-label>
-      <ion-checkbox slot="end" checked="false"></ion-checkbox>
-    </ion-item>
-  </ion-list> -->
-  <ion-fab center bottom>
-    <button ion-fab color="danger" on-click="AddBowlerPrompt()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
 
+  <h1>Add handicaps to prompt</h1>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-auto>
+        <button ion-button color="light" icon-end on-click="showNextPage()">
+          Back
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-fab center bottom>
+          <button ion-fab color="danger" on-click="AddBowlerPrompt()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-fab>
+      </ion-col>
+      <ion-col col-auto>
+        <button ion-button color="light" icon-end on-click="showNextPage()">
+          Next
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

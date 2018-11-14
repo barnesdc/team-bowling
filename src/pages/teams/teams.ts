@@ -47,19 +47,6 @@ export class TeamsPage {
         this.ListBowler = data;
         teams = data;
         console.log("the number of bowlers are: " + teams.length);
-        this.database.CreateTeams(teams).then(
-          (data: any) => {
-            console.log("\nGenerating teams");
-            console.log(data);
-            this.ListTeam = data;
-            showTeams = data;
-            console.log("Teams List\n" + showTeams.length);
-          },
-          error => {
-            console.log("Error generating teams");
-            console.log(error);
-          }
-        );
       },
       error => {
         console.log("Error randomizing teams");
@@ -67,10 +54,19 @@ export class TeamsPage {
       }
     );
   }
-
-  DeleteUser(bowler_id) {
-    console.log(bowler_id);
-  }
+  // this.database.CreateTeams(teams).then(
+  //   (data: any) => {
+  //     console.log("\nGenerating teams");
+  //     console.log(data);
+  //     this.ListTeam = data;
+  //     showTeams = data;
+  //     console.log("Teams List\n" + showTeams.length);
+  //   },
+  //   error => {
+  //     console.log("Error generating teams");
+  //     console.log(error);
+  //   }
+  // );
   addGame() {
     this.database.CreateGames(2, 200);
   }
@@ -145,4 +141,7 @@ export class TeamsPage {
   //   );
   //   this.database.DeleteBowler(item);
   // }
+  showTeams() {
+    window.alert("Working on queries at the moment");
+  }
 }

@@ -4,6 +4,7 @@ import { AlertController } from "ionic-angular";
 
 import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
+import { TeamsPage } from "../teams/teams";
 
 @Component({
   selector: "page-bowlers",
@@ -98,10 +99,12 @@ export class BowlersPage {
         }
       ]
     });
-    prompt.present();
-    // refresh after exiting prompt
-    prompt.onDidDismiss(() => {
-      this.GetAllBowlers();
-    })
+    prompt.present(),
+      prompt.onDidDismiss(() => {
+        this.GetAllBowlers();
+      });
+  }
+  showNextPage() {
+    this.navCtrl.push(TeamsPage);
   }
 }

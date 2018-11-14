@@ -9,88 +9,14 @@
 </ion-header>
 
 <ion-content padding id="page3">
-  <h2>The Bowlers currently include: </h2><br>
-  <hr>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-6>
-        <button ion-button block on-click="addGame()"> Add Game</button>
-        <!-- <button ion-button full> -->
-      </ion-col>
-      <ion-col col-6>
-        <button ion-button block on-click="getGames()"> List Games</button>
-        <!-- <button ion-button full> -->
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <!-- <button ion-button block on-click="addGame()"> Add Game</button> -->
-  <ion-list id="bowlers-list6">
-  <!--
-    <h2>The Bowlers currently include: </h2><br>
-    <hr>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-6>
-          <button ion-button block on-click="addGame()"> Add Game</button>
-          <button ion-button full>
-        </ion-col>
-        <ion-col col-6>
-          <button ion-button block on-click="getGames()"> List Games</button>
-          <button ion-button full>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  -->
-  <!--
-    <ion-list id="bowlers-list6">
-      <hr>
-      <h2>Game List: </h2>
-      <ion-item-sliding *ngFor="let game of ListGame" #item (ionSwipe)="deleteGame(item)">
-        <ion-item id="bowlers-list-item-container6">
-          <h3>{{game.game_id}}</h3>
-          <h3>{{game.game_number}}</h3>
-          <h3>{{game.game_score}}</h3>
-        </ion-item>
-        <ion-item-options>
-          <button ion-button expandable (click)="deleteGame(item)">Delete</button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-
-  <!-- <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button> -->
-  <ion-grid>
-    <ion-row>
-      <ion-col col-6>
-        <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>
-        <!-- <button ion-button full> -->
-      </ion-col>
-      <ion-col col-6>
-        <button ion-button block on-click="GetAllBowlers()"> List Bowlers</button>
-        <!-- <button ion-button full> -->
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-    <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-6>
-          <button ion-button block on-click="AddBowlerPrompt()"> Add a Bowler</button>
-          <button ion-button full>
-        </ion-col>
-        <ion-col col-6>
-          <button ion-button block on-click="GetAllBowlers()"> List Bowlers</button>
-          <button ion-button full>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  -->
   <ion-list id="bowlers-list6">
     <hr />
-    <button ion-button block on-click="generateTeams()">Generate Teams</button>
-
+    <button ion-button block on-click="generateTeams()">Randomize Teams</button>
+    <button ion-button block on-click="showTeams()">Generate Teams</button>
+    <p>assigning high handicaps is important</p>
     <h2>Teams List:</h2>
     <ion-item-sliding
-      *ngFor="let bowler of ListTeam"
+      *ngFor="let bowler of ListBowler"
       #item
       (ionSwipe)="deleteBowler(item)"
     >
