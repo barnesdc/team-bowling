@@ -22,7 +22,7 @@
         >Current Average: {{ bowler.average
         }}{{ bowler.bowler_average }}</ion-label
       >
-      <ion-checkbox slot="end" checked="false"></ion-checkbox>
+      <ion-checkbox slot="end" checked="false" (ionChange)="addCheckbox($event, bowler.bowler_name)"></ion-checkbox>
     </ion-item>
   </ion-list>
 

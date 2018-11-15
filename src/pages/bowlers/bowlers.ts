@@ -35,12 +35,42 @@ export class BowlersPage {
   }
 
   private ListBowler: any;
+  checked = [];
 
   ionViewDidLoad() {
     this.GetAllBowlers();
   }
   ionViewWillEnter() {
     this.GetAllBowlers();
+  }
+
+  //adds checked names to checked[] array and checks if unchecked, removing it from checked[] array
+  addCheckbox(event, checkbox: String){
+    if(event.checked){
+      console.log(checkbox+" checked");
+      this.checked.push(checkbox);
+    }else{
+      console.log(checkbox+" unchecked");
+      let index = this.removeCheckedFromArray(checkbox);
+      this.checked.splice(index, 1);
+    }
+  }
+
+  //removes checked element from checked[] array
+  removeCheckedFromArray(checkbox: String){
+    return this.checked.findIndex((category) => {
+      return category === checkbox;
+    })
+  }
+
+  //Empties checked[] array
+  emptyCheckedArray(){
+    this.checked = [];
+  }
+
+  //Log elements of checked[] array
+  getCheckedBoxes(){
+    console.log(this.checked);
   }
 
   GetAllBowlers() {
@@ -69,9 +99,9 @@ export class BowlersPage {
         //   placeholder: 'Handicap (Ex. A, B or C)'
         // },
         {
-          name: "Gender",
-          placeholder: "Gender (Ex. Male/Female)"
-        }
+          name: "Handicap",
+          placeholder: "# pins"
+        },
         // {
         //   name: 'AverageScore',
         //   placeholder: 'Average Score (Ex. 200)'
@@ -85,16 +115,29 @@ export class BowlersPage {
           }
         },
         {
-          text: "Save",
+          text: "Male",
           handler: data => {
             console.log(JSON.stringify(data));
             this.database.CreateBowler(
               data.Name,
-              data.Gender,
+              "Male",
               null,
-              null,
+              data.Handicap,
               null
             );
+          }
+        },
+        {
+          text: "Female",
+          handler: data => {
+            console.log(JSON.stringify(data));
+            this.database.CreateBowler(
+              data.Name,
+              "Female",
+              null,
+              data.Handicap,
+              null
+            )
           }
         }
       ]
@@ -105,6 +148,7 @@ export class BowlersPage {
       });
   }
   showNextPage() {
+    this.getCheckedBoxes();
     this.navCtrl.push(TeamsPage);
   }
 }
