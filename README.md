@@ -50,3 +50,7 @@ Advisory Meeting Weekly
   - Xcode
   - CocoaPods installed
   - ios-deploy installed
+  
+## Building IOS app from Xcode
+  - missing team: https://stackoverflow.com/questions/19407439/general-tab-missing
+
