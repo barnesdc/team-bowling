@@ -16,14 +16,11 @@
       <button ion-button block on-click="showTeams()">Generate Teams</button>
     -->
     <h2>Teams List:</h2>
-    <ion-item-sliding
-      *ngFor="let bowler of ListBowler"
-      #item
-      (ionSwipe)="deleteBowler(item)"
-    >
+    <ion-item-sliding *ngFor="let bowler of ListTeam" #item>
       <ion-item id="bowlers-list-item-container6">
         <h3>Team #: {{ bowler.team_id }}</h3>
         <h3>Bowler ID: {{ bowler.bowler_id }}</h3>
+        <h3>Bowler Name: {{ bowler.bowler_name }}</h3>
       </ion-item>
       <ion-item>
         <ion-input type="text" placeholder="Score"></ion-input>
