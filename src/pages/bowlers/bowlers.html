@@ -7,47 +7,72 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <p>The Bowlers currently includes:</p>
+  <h2>The Bowlers currently includes:</h2>
   <br />
   <hr />
 
   <!-- Checkboxes in a List -->
-  <ion-list>
-    <ion-item *ngFor="let bowler of ListBowler">
-      <ion-label>Name: {{ bowler.name }} {{ bowler.bowler_name }}</ion-label>
-      <ion-label
-        >Gender: {{ bowler.gender }}{{ bowler.bowler_gender }}</ion-label
-      >
-      <ion-label
-        >Current Average: {{ bowler.average
-        }}{{ bowler.bowler_average }}</ion-label
-      >
-      <ion-checkbox slot="end" checked="false" (ionChange)="addCheckbox($event, bowler.bowler_name)"></ion-checkbox>
-    </ion-item>
-  </ion-list>
+  <div>
+    <ion-scroll scrollY="true" style="width:100%;height:100vh">
+      <ion-list>
+        <ion-item *ngFor="let bowler of ListBowler">
+          <ion-label
+            >Name: {{ bowler.name }} {{ bowler.bowler_name }}</ion-label
+          >
+          <ion-label
+            >Gender: {{ bowler.gender }}{{ bowler.bowler_gender }}</ion-label
+          >
+          <ion-label
+            >Current Average: {{ bowler.average
+            }}{{ bowler.bowler_average }}</ion-label
+          >
+          <ion-checkbox
+            slot="end"
+            checked="false"
+            (ionChange)="addCheckbox($event, bowler.bowler_name)"
+          ></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-scroll>
+  </div>
 
-  <h1>Add handicaps to prompt</h1>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-auto>
-        <button ion-button color="light" icon-end on-click="showNextPage()">
-          Back
-          <ion-icon name="arrow-back"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col col-auto>
-        <ion-fab center bottom>
-          <button ion-fab color="danger" on-click="AddBowlerPrompt()">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-fab>
-      </ion-col>
-      <ion-col col-auto>
-        <button ion-button color="light" icon-end on-click="showNextPage()">
-          Next
-          <ion-icon name="arrow-forward"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div>
+    <ion-footer style="align-items: center">
+      <ion-grid align-self-center>
+        <ion-row no-padding no-margin>
+          <ion-col col-4 no-padding>
+            <button
+              ion-button
+              color="light"
+              icon-end
+              on-click="showBackPage()"
+              float-start
+            >
+              Back
+              <ion-icon name="arrow-back"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4 no-padding>
+            <ion-fab center>
+              <button ion-fab color="danger" on-click="AddBowlerPrompt()">
+                <ion-icon name="add"></ion-icon>
+              </button>
+            </ion-fab>
+          </ion-col>
+          <ion-col col-4 no-padding>
+            <button
+              ion-button
+              color="light"
+              icon-end
+              on-click="showNextPage()"
+              float-end
+            >
+              Next
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-footer>
+  </div>
 </ion-content>

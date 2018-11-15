@@ -12,8 +12,9 @@
   <ion-list id="bowlers-list6">
     <hr />
     <button ion-button block on-click="generateTeams()">Randomize Teams</button>
-    <button ion-button block on-click="showTeams()">Generate Teams</button>
-    <p>assigning high handicaps is important</p>
+    <!--
+      <button ion-button block on-click="showTeams()">Generate Teams</button>
+    -->
     <h2>Teams List:</h2>
     <ion-item-sliding
       *ngFor="let bowler of ListBowler"
@@ -24,11 +25,9 @@
         <h3>Team #: {{ bowler.team_id }}</h3>
         <h3>Bowler ID: {{ bowler.bowler_id }}</h3>
       </ion-item>
-      <ion-item-options>
-        <button ion-button expandable (click)="deleteBowler(item.bowler_id)">
-          Delete
-        </button>
-      </ion-item-options>
+      <ion-item>
+        <ion-input type="text" placeholder="Score"></ion-input>
+      </ion-item>
     </ion-item-sliding>
   </ion-list>
 </ion-content>
