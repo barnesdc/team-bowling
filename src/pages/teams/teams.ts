@@ -42,20 +42,33 @@ export class TeamsPage {
   generateTeams() {
     let teams = [];
     let showTeams = [];
-    let count = 0;
+    let count = 0, teamNum = 1;
+
+    //returns array with indexes "bowler_name" and "bowler_id"
     this.database.randomizeBowlers(this.checked).then(
       (data: any) => {
         console.log("\nRandomizing bowlers");
         console.log(data);
+        console.log("Team "+teamNum);
         teams = data;
+
+        //loops through checked[] array and matches it with bowlers returned from randomizeBowlers()
         for(var i=0; i<teams.length; i++){
           if(this.checked.indexOf(teams[i]["bowler_name"]) > -1){
             showTeams[count] = teams[i];
             count++;
+            console.log(showTeams[count-1]["bowler_name"]);
+            if(count%3 == 0){
+              teamNum++;
+              console.log("Team "+teamNum);
+            }
           }
         }
+
+        //call function here passing showteams[] array to put bowlers into teams table, which should include handicap checking
+
         this.ListBowler = showTeams;
-        console.log("the number of bowlers are: " + teams.length);
+        console.log("the number of bowlers are: " + showTeams.length);
       },
       error => {
         console.log("Error randomizing teams");
