@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
 import { dateValueRange } from "ionic-angular/umd/util/datetime-util";
 import { database } from "firebase";
+import { ConvertActionBindingResult } from "@angular/compiler/src/compiler_util/expression_converter";
 
 /*
   Generated class for the DatabaseProvider provider.
@@ -152,7 +153,7 @@ export class DatabaseProvider {
   /*****************************************************/
   /*       Randomize bowlers for team generation       */
   /*****************************************************/
-  randomizeBowlers() {
+  randomizeBowlers(names: string[]) {
     return new Promise((resolve, reject) => {
       this.db
         .executeSql(
@@ -166,7 +167,7 @@ export class DatabaseProvider {
               for (var i = 0; i < data.rows.length; i++) {
                 arrayTeams.push({
                   bowler_id: data.rows.item(i).bowler_id,
-                  bowler_name: data.rows.item(i).bowler_namef
+                  bowler_name: data.rows.item(i).bowler_name
                 });
               }
             }
@@ -317,6 +318,36 @@ export class DatabaseProvider {
   }
 }
 
+  /*****************************************************/
+  /*          Convert Array of Names to ID's           */
+  /*****************************************************/
+  /*ConvertToID(names: any[]){
+    return new Promise((resolve, reject) => {
+      this.db
+        .executeSql(
+          "SELECT bowler_id, bowler_name FROM bowlers ORDER BY random()",
+          []
+        )
+        .then(
+          data => {
+            let arrayTeams = [];
+            if (data.rows.length > 0) {
+              for (var i = 0; i < data.rows.length; i++) {
+                arrayTeams.push({
+                  bowler_id: data.rows.item(i).bowler_id,
+                  bowler_name: data.rows.item(i).bowler_name
+                });
+              }
+            }
+
+            resolve(arrayTeams);
+          },
+          error => {
+            reject(error) + "Get team error";
+          }
+        );
+    })
+  }
 /*
 Datagrip Table
 

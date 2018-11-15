@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
+import {NavParams} from "ionic-angular";
 import { AlertController } from "ionic-angular";
 
 import "rxjs/add/operator/map";
@@ -147,8 +148,12 @@ export class BowlersPage {
         this.GetAllBowlers();
       });
   }
+
+  //console logs values in checked[] array, goes to teams page and shares checked[] array to teams page
   showNextPage() {
     this.getCheckedBoxes();
-    this.navCtrl.push(TeamsPage);
+    this.navCtrl.push(TeamsPage, {
+      'checked' : this.checked
+    });
   }
 }

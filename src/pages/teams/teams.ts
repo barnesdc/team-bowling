@@ -28,24 +28,33 @@ export class TeamsPage {
 
   private ListBowler: any;
   private ListTeam: any;
+  checked = [];
 
+  //Will save checked bowlers into checked[] array
   ionViewDidLoad() {
-    // this.GetAllBowlers();
+    this.checked = this.navParams.get('checked');
+    console.log(this.checked);
   }
 
   ionViewWillEnter() {
-    // this.GetAllBowlers();
   }
 
   generateTeams() {
     let teams = [];
     let showTeams = [];
-    this.database.randomizeBowlers().then(
+    let count = 0;
+    this.database.randomizeBowlers(this.checked).then(
       (data: any) => {
         console.log("\nRandomizing bowlers");
         console.log(data);
-        this.ListBowler = data;
         teams = data;
+        for(var i=0; i<teams.length; i++){
+          if(this.checked.indexOf(teams[i]["bowler_name"]) > -1){
+            showTeams[count] = teams[i];
+            count++;
+          }
+        }
+        this.ListBowler = showTeams;
         console.log("the number of bowlers are: " + teams.length);
       },
       error => {
