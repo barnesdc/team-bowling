@@ -46,6 +46,7 @@ Advisory Meeting Weekly
   - SDK Android 8.1(Oreo) with API level 27
   - Gradle installed
 - Apple Requirements
+  - IOS 10 build issies: https://github.com/apache/cordova-ios/issues/407
   - Xcode
   - CocoaPods installed
   - ios-deploy installed
