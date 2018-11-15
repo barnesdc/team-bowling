@@ -53,4 +53,5 @@ Advisory Meeting Weekly
   
 ## Building IOS app from Xcode
   - missing team: https://stackoverflow.com/questions/19407439/general-tab-missing
+  - ionic starter bundle issue: https://forums.developer.apple.com/thread/81887
 
