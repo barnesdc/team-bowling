@@ -192,26 +192,28 @@ export class DatabaseProvider {
         - if not divisble by 3, remainder on a team of two
     - select these bowlers and 
   */
-  CreateTeams(teamNum: number, team: any[]) {
+  CreateTeams(teamNum: number, team1: any, team2: any, team3: any) {
     /*
     
     */
     console.log("Stepped into Create Teams function");
-    let bowler1 = team[0];
-    let bowler2 = team[1];
-    let bowler3 = team[2];
+    let bowler1 = team1.bowler_id;
+    let bowler2 = team2.bowler_id;
+    let bowler3 = team3.bowler_id;
     return new Promise((resolve, reject) => {
       this.storage
         .create({ name: "bolwerData.db", location: "default" })
         .then(() => {
           let sql =
             "INSERT INTO team (team_id, bowler_id1, bowler_id2, bowler_id3) VALUES(?, ?, ?, ?)";
+            console.log("Team Test: "+teamNum);
+            console.log("ID "+team1.bowler_id);
           this.db
             .executeSql(sql, [
               teamNum,
-              bowler1.bowler_id,
-              bowler2.bowler_id,
-              bowler3.bowler_id
+              bowler1,
+              bowler2,
+              bowler3
             ])
             .then(
               data => {
@@ -324,38 +326,18 @@ export class DatabaseProvider {
         });
     });
   }
-}
 
-/*****************************************************/
-/*          Convert Array of Names to ID's           */
-/*****************************************************/
-/*ConvertToID(names: any[]){
+  //clear teams table
+  ClearTeams(){
+    console.log("Clearing Teams");
     return new Promise((resolve, reject) => {
-      this.db
-        .executeSql(
-          "SELECT bowler_id, bowler_name FROM bowlers ORDER BY random()",
-          []
-        )
-        .then(
-          data => {
-            let arrayTeams = [];
-            if (data.rows.length > 0) {
-              for (var i = 0; i < data.rows.length; i++) {
-                arrayTeams.push({
-                  bowler_id: data.rows.item(i).bowler_id,
-                  bowler_name: data.rows.item(i).bowler_name
-                });
-              }
-            }
-
-            resolve(arrayTeams);
-          },
-          error => {
-            reject(error) + "Get team error";
-          }
-        );
+      this.db.executeSql("DELETE FROM team");
     })
   }
+
+}
+
+
 /*
 Datagrip Table
 

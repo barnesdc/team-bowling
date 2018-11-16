@@ -47,34 +47,37 @@ export class TeamsPage {
     let count = 0,
       teamNum = 1;
 
+    //clear teams table
+    this.database.ClearTeams();
+
     //returns array with indexes "bowler_name" and "bowler_id"
     this.database.randomizeBowlers(this.checked).then(
       (data: any) => {
         console.log("\nRandomizing bowlers");
         console.log(data);
-        console.log("Team " + teamNum);
         teams = data;
 
         //loops through checked[] array and matches it with bowlers returned from randomizeBowlers()
         for (var i = 0; i < teams.length; i++) {
-          if (this.checked.indexOf(teams[i]["bowler_name"]) > -1) {
+          if (this.checked.indexOf(teams[i]["bowler_id"]) > -1) {
             showTeams[count] = teams[i];
+            showTeams[count]["team_id"] = teamNum;
             count++;
             console.log(showTeams[count - 1]["bowler_name"]);
             if (count % 3 == 0) {
               console.log("Team " + teamNum);
-              this.database.CreateTeams(teamNum, showTeams);
+              this.database.CreateTeams(teamNum, showTeams[count-3], showTeams[count-2], showTeams[count-1]);
               teamNum++;
             }
           }
         }
 
         //call function here passing showteams[] array to put bowlers into teams table, which should include handicap checking
-        this.database.GetAllBowlers().then((data: any) => {
+        /*this.database.GetAllBowlers().then((data: any) => {
           console.log(data + "\nI AM WORKING for Teams");
           this.ListTeam = data;
-        });
-        this.ListBowler = showTeams;
+        });*/
+        this.ListTeam = showTeams;
         console.log("the number of bowlers are: " + showTeams.length);
       },
       error => {
