@@ -12,7 +12,6 @@ import { DatabaseProvider } from "../../providers/database/database";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: "page-teams",
   templateUrl: "teams.html"
@@ -32,42 +31,53 @@ export class TeamsPage {
 
   //Will save checked bowlers into checked[] array
   ionViewDidLoad() {
-    this.checked = this.navParams.get('checked');
+    this.checked = this.navParams.get("checked");
     console.log(this.checked);
   }
 
-  ionViewWillEnter() {
-  }
+  ionViewWillEnter() {}
 
   generateTeams() {
+    // grabs all bowlers
     let teams = [];
+    // same as checked array, includes names and ids
+    // compares teams to checked (pplaying bowlers)
     let showTeams = [];
-    let count = 0, teamNum = 1;
+    // counting of bowlers,
+    let count = 0,
+      teamNum = 1;
+
+    //clear teams table
+    this.database.ClearTeams();
 
     //returns array with indexes "bowler_name" and "bowler_id"
     this.database.randomizeBowlers(this.checked).then(
       (data: any) => {
         console.log("\nRandomizing bowlers");
         console.log(data);
-        console.log("Team "+teamNum);
         teams = data;
 
         //loops through checked[] array and matches it with bowlers returned from randomizeBowlers()
-        for(var i=0; i<teams.length; i++){
-          if(this.checked.indexOf(teams[i]["bowler_id"]) > -1){
+        for (var i = 0; i < teams.length; i++) {
+          if (this.checked.indexOf(teams[i]["bowler_id"]) > -1) {
             showTeams[count] = teams[i];
+            showTeams[count]["team_id"] = teamNum;
             count++;
-            console.log(showTeams[count-1]["bowler_id"]);
-            if(count%3 == 0){
+            console.log(showTeams[count - 1]["bowler_name"]);
+            if (count % 3 == 0) {
+              console.log("Team " + teamNum);
+              this.database.CreateTeams(teamNum, showTeams[count-3], showTeams[count-2], showTeams[count-1]);
               teamNum++;
-              console.log("Team "+teamNum);
             }
           }
         }
 
         //call function here passing showteams[] array to put bowlers into teams table, which should include handicap checking
-
-        this.ListBowler = showTeams;
+        /*this.database.GetAllBowlers().then((data: any) => {
+          console.log(data + "\nI AM WORKING for Teams");
+          this.ListTeam = data;
+        });*/
+        this.ListTeam = showTeams;
         console.log("the number of bowlers are: " + showTeams.length);
       },
       error => {

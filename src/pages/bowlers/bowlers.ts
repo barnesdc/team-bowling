@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
-import {NavParams} from "ionic-angular";
+import { NavParams } from "ionic-angular";
 import { AlertController } from "ionic-angular";
 
 import "rxjs/add/operator/map";
@@ -46,31 +46,31 @@ export class BowlersPage {
   }
 
   //adds checked names to checked[] array and checks if unchecked, removing it from checked[] array
-  addCheckbox(event, checkbox: String){
-    if(event.checked){
-      console.log(checkbox+" checked");
+  addCheckbox(event, checkbox: String) {
+    if (event.checked) {
+      console.log(checkbox + " checked");
       this.checked.push(checkbox);
-    }else{
-      console.log(checkbox+" unchecked");
+    } else {
+      console.log(checkbox + " unchecked");
       let index = this.removeCheckedFromArray(checkbox);
       this.checked.splice(index, 1);
     }
   }
 
   //removes checked element from checked[] array
-  removeCheckedFromArray(checkbox: String){
-    return this.checked.findIndex((category) => {
+  removeCheckedFromArray(checkbox: String) {
+    return this.checked.findIndex(category => {
       return category === checkbox;
-    })
+    });
   }
 
   //Empties checked[] array
-  emptyCheckedArray(){
+  emptyCheckedArray() {
     this.checked = [];
   }
 
   //Log elements of checked[] array
-  getCheckedBoxes(){
+  getCheckedBoxes() {
     console.log(this.checked);
   }
 
@@ -95,14 +95,14 @@ export class BowlersPage {
           name: "Name",
           placeholder: "Bowler name"
         },
-        // {
-        //   name: 'Handicap',
-        //   placeholder: 'Handicap (Ex. A, B or C)'
-        // },
+        {
+          name: "Average",
+          placeholder: "Average (Enter 0 if none)"
+        },
         {
           name: "Handicap",
           placeholder: "# pins"
-        },
+        }
         // {
         //   name: 'AverageScore',
         //   placeholder: 'Average Score (Ex. 200)'
@@ -122,7 +122,7 @@ export class BowlersPage {
             this.database.CreateBowler(
               data.Name,
               "Male",
-              null,
+              data.Average,
               data.Handicap,
               null
             );
@@ -135,10 +135,10 @@ export class BowlersPage {
             this.database.CreateBowler(
               data.Name,
               "Female",
-              null,
+              data.Average,
               data.Handicap,
               null
-            )
+            );
           }
         }
       ]
@@ -153,7 +153,7 @@ export class BowlersPage {
   showNextPage() {
     this.getCheckedBoxes();
     this.navCtrl.push(TeamsPage, {
-      'checked' : this.checked
+      checked: this.checked
     });
   }
 }
