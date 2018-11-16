@@ -48,6 +48,12 @@ Advisory Meeting Weekly
   - SDK Android 8.1(Oreo) with API level 27
   - Gradle installed
 - Apple Requirements
+  - IOS 10 build issies: https://github.com/apache/cordova-ios/issues/407
   - Xcode
   - CocoaPods installed
   - ios-deploy installed
+  
+## Building IOS app from Xcode
+  - missing team: https://stackoverflow.com/questions/19407439/general-tab-missing
+  - ionic starter bundle issue: https://forums.developer.apple.com/thread/81887
+
