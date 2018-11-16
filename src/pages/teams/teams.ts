@@ -54,10 +54,10 @@ export class TeamsPage {
 
         //loops through checked[] array and matches it with bowlers returned from randomizeBowlers()
         for(var i=0; i<teams.length; i++){
-          if(this.checked.indexOf(teams[i]["bowler_name"]) > -1){
+          if(this.checked.indexOf(teams[i]["bowler_id"]) > -1){
             showTeams[count] = teams[i];
             count++;
-            console.log(showTeams[count-1]["bowler_name"]);
+            console.log(showTeams[count-1]["bowler_id"]);
             if(count%3 == 0){
               teamNum++;
               console.log("Team "+teamNum);
