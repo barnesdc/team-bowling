@@ -332,9 +332,11 @@ export class DatabaseProvider {
     console.log("Clearing Teams");
     return new Promise((resolve, reject) => {
       this.db.executeSql("DELETE FROM team");
+      error => {
+        reject(error);
+      }
     })
   }
-
 }
 
 
