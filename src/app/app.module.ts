@@ -7,7 +7,6 @@ import { GamesScoresPage } from "../pages/games-scores/games-scores";
 import { TeamsPage } from "../pages/teams/teams";
 import { TabsPage } from "../pages/tabs/tabs";
 import { LoginPage } from "../pages/login/login";
-import { SignupPage } from "../pages/signup/signup";
 import { InformationPage } from "../pages/information/information";
 
 import { StatusBar } from "@ionic-native/status-bar";
@@ -37,7 +36,6 @@ import { BowlersPage } from "../pages/bowlers/bowlers";
     BowlersPage,
     TabsPage,
     LoginPage,
-    SignupPage,
     InformationPage
   ],
   imports: [
@@ -56,7 +54,6 @@ import { BowlersPage } from "../pages/bowlers/bowlers";
     TeamsPage,
     TabsPage,
     LoginPage,
-    SignupPage,
     InformationPage
   ],
   providers: [
