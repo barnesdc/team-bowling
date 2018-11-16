@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
+import { NavParams } from "ionic-angular";
 import { AlertController } from "ionic-angular";
 
 import "rxjs/add/operator/map";
@@ -35,12 +36,42 @@ export class BowlersPage {
   }
 
   private ListBowler: any;
+  checked = [];
 
   ionViewDidLoad() {
     this.GetAllBowlers();
   }
   ionViewWillEnter() {
     this.GetAllBowlers();
+  }
+
+  //adds checked names to checked[] array and checks if unchecked, removing it from checked[] array
+  addCheckbox(event, checkbox: String) {
+    if (event.checked) {
+      console.log(checkbox + " checked");
+      this.checked.push(checkbox);
+    } else {
+      console.log(checkbox + " unchecked");
+      let index = this.removeCheckedFromArray(checkbox);
+      this.checked.splice(index, 1);
+    }
+  }
+
+  //removes checked element from checked[] array
+  removeCheckedFromArray(checkbox: String) {
+    return this.checked.findIndex(category => {
+      return category === checkbox;
+    });
+  }
+
+  //Empties checked[] array
+  emptyCheckedArray() {
+    this.checked = [];
+  }
+
+  //Log elements of checked[] array
+  getCheckedBoxes() {
+    console.log(this.checked);
   }
 
   GetAllBowlers() {
@@ -64,13 +95,13 @@ export class BowlersPage {
           name: "Name",
           placeholder: "Bowler name"
         },
-        // {
-        //   name: 'Handicap',
-        //   placeholder: 'Handicap (Ex. A, B or C)'
-        // },
         {
-          name: "Gender",
-          placeholder: "Gender (Ex. Male/Female)"
+          name: "Average",
+          placeholder: "Average (Enter 0 if none)"
+        },
+        {
+          name: "Handicap",
+          placeholder: "# pins"
         }
         // {
         //   name: 'AverageScore',
@@ -85,14 +116,27 @@ export class BowlersPage {
           }
         },
         {
-          text: "Save",
+          text: "Male",
           handler: data => {
             console.log(JSON.stringify(data));
             this.database.CreateBowler(
               data.Name,
-              data.Gender,
-              null,
-              null,
+              "Male",
+              data.Average,
+              data.Handicap,
+              null
+            );
+          }
+        },
+        {
+          text: "Female",
+          handler: data => {
+            console.log(JSON.stringify(data));
+            this.database.CreateBowler(
+              data.Name,
+              "Female",
+              data.Average,
+              data.Handicap,
               null
             );
           }
@@ -104,7 +148,12 @@ export class BowlersPage {
         this.GetAllBowlers();
       });
   }
+
+  //console logs values in checked[] array, goes to teams page and shares checked[] array to teams page
   showNextPage() {
-    this.navCtrl.push(TeamsPage);
+    this.getCheckedBoxes();
+    this.navCtrl.push(TeamsPage, {
+      checked: this.checked
+    });
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
 import { dateValueRange } from "ionic-angular/umd/util/datetime-util";
 import { database } from "firebase";
-import { error } from "@angular/compiler/src/util";
+import { ConvertActionBindingResult } from "@angular/compiler/src/compiler_util/expression_converter";
 
 /*
   Generated class for the DatabaseProvider provider.
@@ -37,7 +37,7 @@ export class DatabaseProvider {
             .catch(e => console.log("Error in creating bowlers table" + e));
 
           db.executeSql(
-            "CREATE TABLE IF NOT EXISTS 'team' (team_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_id1 INTEGER, bowler_id2 INTEGER, bowler_id3 INTEGER, FOREIGN KEY (bowler_id1) references bowler(bowler_id), FOREIGN KEY (bowler_id2) references bowler(bowler_id), FOREIGN KEY (bowler_id3) references bowler(bowler_id))",
+            "CREATE TABLE IF NOT EXISTS 'team' (team_id INTEGER, bowler_id1 INTEGER, bowler_id2 INTEGER, bowler_id3 INTEGER, FOREIGN KEY (bowler_id1) references bowler(bowler_id), FOREIGN KEY (bowler_id2) references bowler(bowler_id), FOREIGN KEY (bowler_id3) references bowler(bowler_id))",
             []
           )
             .then(res => console.log("Executed SQL for team"))
@@ -121,7 +121,6 @@ export class DatabaseProvider {
     bowler_handicapPins: number,
     bowler_date: number
   ) {
-    // start game table first, then teams, then bowlers
     return new Promise((resolve, reject) => {
       this.storage
         .create({ name: "bowlerData.db", location: "default" })
@@ -154,7 +153,7 @@ export class DatabaseProvider {
   /*****************************************************/
   /*       Randomize bowlers for team generation       */
   /*****************************************************/
-  randomizeBowlers() {
+  randomizeBowlers(names: string[]) {
     return new Promise((resolve, reject) => {
       this.db
         .executeSql(
@@ -168,7 +167,7 @@ export class DatabaseProvider {
               for (var i = 0; i < data.rows.length; i++) {
                 arrayTeams.push({
                   bowler_id: data.rows.item(i).bowler_id,
-                  bowler_name: data.rows.item(i).bowler_namef
+                  bowler_name: data.rows.item(i).bowler_name
                 });
               }
             }
@@ -193,52 +192,39 @@ export class DatabaseProvider {
         - if not divisble by 3, remainder on a team of two
     - select these bowlers and 
   */
-  CreateTeams(teams: any[]) {
+  CreateTeams(teamNum: number, team1: any, team2: any, team3: any) {
     /*
     
     */
     console.log("Stepped into Create Teams function");
+    let bowler1 = team1.bowler_id;
+    let bowler2 = team2.bowler_id;
+    let bowler3 = team3.bowler_id;
     return new Promise((resolve, reject) => {
       this.storage
         .create({ name: "bolwerData.db", location: "default" })
         .then(() => {
-          // SELECT * from bowlers where date=now()
-          // let sql = "SELECT bowler_id FROM bowlers";
-          for (var i = 0; i < teams.length; i += 3) {
-            console.log("Stepped into for loop");
-            if (teams.length % 3 === 0) {
-              let bowler1 = teams[i];
-              console.log(teams[i]);
-              let bowler2 = teams[i + 1];
-              console.log(teams[i + 1]);
-              let bowler3 = teams[i + 2];
-              console.log(teams[i + 2]);
-              let sql =
-                "INSERT INTO team (bowler_id1, bowler_id2, bowler_id3) VALUES(?, ?, ?)";
-              this.db.executeSql(sql, [bowler1, bowler2, bowler3]).then(
-                data => {
-                  let arrayTeams = [];
-                  if (data.rows.length > 0) {
-                    for (var i = 0; i < data.rows.length; i++) {
-                      arrayTeams.push({
-                        bowler_id: data.rows.item(i).bowler_id,
-                        bowler_name: data.rows.item(i).bowler_name
-                      });
-                    }
-                  }
-                  console.log("attempting to insert into array");
-                  resolve(arrayTeams);
-                },
-                error => {
-                  reject(error) + "Get team error";
-                }
-              );
+          let sql =
+            "INSERT INTO team (team_id, bowler_id1, bowler_id2, bowler_id3) VALUES(?, ?, ?, ?)";
+            console.log("Team Test: "+teamNum);
+            console.log("ID "+team1.bowler_id);
+          this.db
+            .executeSql(sql, [
+              teamNum,
+              bowler1,
+              bowler2,
+              bowler3
+            ])
+            .then(
+              data => {
+                console.log("Team insertion complete");
+                resolve(data);
+              },
               error => {
                 console.log(error);
                 reject(error);
-              };
-            }
-          }
+              }
+            );
         });
     });
   }
@@ -297,6 +283,29 @@ export class DatabaseProvider {
     });
   }
 
+  GetTeams() {
+    return new Promise((resolve, reject) => {
+      this.db.executeSql("SELECT * FROM team", []).then(
+        data => {
+          let arrayTeams = [];
+          if (data.rows.length > 0) {
+            for (var i = 0; i < data.rows.length; i++) {
+              arrayTeams.push({
+                team_id: data.rows.item(i).team_id,
+                bowler_id: data.rows.item(i).bowler_id,
+                bowler_name: data.rows.item(i).bowler_name
+              });
+            }
+          }
+          resolve(arrayTeams);
+        },
+        error => {
+          reject(error + "Team GET error!");
+        }
+      );
+    });
+  }
+
   /*****************************************************/
   /*                 Delete a Bowler                   */
   /*****************************************************/
@@ -317,7 +326,19 @@ export class DatabaseProvider {
         });
     });
   }
+
+  //clear teams table
+  ClearTeams(){
+    console.log("Clearing Teams");
+    return new Promise((resolve, reject) => {
+      this.db.executeSql("DELETE FROM team");
+      error => {
+        reject(error);
+      }
+    })
+  }
 }
+
 
 /*
 Datagrip Table

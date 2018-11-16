@@ -19,6 +19,8 @@ Requirments/Specification Document:
 
 Advisory Meeting Weekly
 
+#Randon Notes
+-ionic cordova run: creates allows you to either create an ios or android build
 ## 10/10/2018
 
 - Keep project plan up-to-date
