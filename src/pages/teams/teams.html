@@ -23,8 +23,9 @@
         <h3>Bowler Name: {{ bowler.bowler_name }}</h3>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="Score"></ion-input>
+        <ion-input type="number" [(ngModel)]="bowler.score"></ion-input>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
+  <button ion-button block on-click="displayWinner()">Submit Scores</button>
 </ion-content>

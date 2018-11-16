@@ -1,9 +1,12 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, Checkbox } from "ionic-angular";
 import { AlertController } from "ionic-angular";
+import { FormsModule } from "@angular/forms";
 
 import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
+import { LoginPage } from "../login/login";
+import { GamesScoresPage } from "../games-scores/games-scores";
 
 /**
  * Generated class for the TeamsPage page.
@@ -28,6 +31,7 @@ export class TeamsPage {
   private ListBowler: any;
   private ListTeam: any;
   checked = [];
+  winner: any;
 
   //Will save checked bowlers into checked[] array
   ionViewDidLoad() {
@@ -62,6 +66,7 @@ export class TeamsPage {
           if (this.checked.indexOf(teams[i]["bowler_id"]) > -1) {
             showTeams[count] = teams[i];
             showTeams[count]["team_id"] = teamNum;
+            showTeams[count]["score"] = 0;
             count++;
             console.log(showTeams[count - 1]["bowler_name"]);
             if (count % 3 == 0) {
@@ -85,6 +90,14 @@ export class TeamsPage {
         console.log(error);
       }
     );
+  }
+
+  displayWinner(){
+    console.log("Display Winner");
+    console.log(this.ListTeam);
+    this.navCtrl.push(GamesScoresPage, {
+      Teams: this.ListTeam
+    });
   }
   // this.database.CreateTeams(teams).then(
   //   (data: any) => {
