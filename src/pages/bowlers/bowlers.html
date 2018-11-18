@@ -14,13 +14,13 @@
   <!-- Checkboxes in a List -->
   <div>
     <ion-scroll scrollY="true" style="width:100%;height:100vh">
-      <ion-list>
+      <ion-list class=heads>
         <ion-item *ngFor="let bowler of ListBowler">
           <ion-label>
             <ion-grid>
               <ion-row>
-                <ion-col
-                  >Name: {{ bowler.name }} {{ bowler.bowler_name }}</ion-col
+                <ion-col>
+                  Name: {{ bowler.name }} {{ bowler.bowler_name }}</ion-col
                 >
                 <ion-col>
                   Gender: {{ bowler.gender }}{{ bowler.bowler_gender }}</ion-col
