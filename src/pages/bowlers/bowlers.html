@@ -16,16 +16,22 @@
     <ion-scroll scrollY="true" style="width:100%;height:100vh">
       <ion-list>
         <ion-item *ngFor="let bowler of ListBowler">
-          <ion-label
-            >{{ bowler.name }} {{ bowler.bowler_name }}:</ion-label
-          >
-          <ion-label
-            >{{ bowler.gender }}{{ bowler.bowler_gender }}:</ion-label
-          >
-          <ion-label
-            >{{ bowler.average
-            }}{{ bowler.bowler_average }}</ion-label
-          >
+          <ion-label>
+            <ion-grid>
+              <ion-row>
+                <ion-col
+                  >Name: {{ bowler.name }} {{ bowler.bowler_name }}</ion-col
+                >
+                <ion-col>
+                  Gender: {{ bowler.gender }}{{ bowler.bowler_gender }}</ion-col
+                >
+                <ion-col>
+                  Current Average: {{ bowler.average
+                  }}{{ bowler.bowler_average }}</ion-col
+                >
+              </ion-row>
+            </ion-grid>
+          </ion-label>
           <ion-checkbox
             slot="end"
             checked="false"
