@@ -7,7 +7,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <h2>The Bowlers currently includes:</h2>
+  <h2>Current Roster:</h2>
   <br />
   <hr />
 
@@ -17,13 +17,13 @@
       <ion-list>
         <ion-item *ngFor="let bowler of ListBowler">
           <ion-label
-            >Name: {{ bowler.name }} {{ bowler.bowler_name }}</ion-label
+            >{{ bowler.name }} {{ bowler.bowler_name }}:</ion-label
           >
           <ion-label
-            >Gender: {{ bowler.gender }}{{ bowler.bowler_gender }}</ion-label
+            >{{ bowler.gender }}{{ bowler.bowler_gender }}:</ion-label
           >
           <ion-label
-            >Current Average: {{ bowler.average
+            >{{ bowler.average
             }}{{ bowler.bowler_average }}</ion-label
           >
           <ion-checkbox
