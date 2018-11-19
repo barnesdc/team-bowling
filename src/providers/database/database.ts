@@ -157,7 +157,7 @@ export class DatabaseProvider {
     return new Promise((resolve, reject) => {
       this.db
         .executeSql(
-          "SELECT bowler_id, bowler_name FROM bowlers ORDER BY random()",
+          "SELECT bowler_id, bowler_name, bowler_handicapPins FROM bowlers ORDER BY random()",
           []
         )
         .then(
@@ -167,7 +167,8 @@ export class DatabaseProvider {
               for (var i = 0; i < data.rows.length; i++) {
                 arrayTeams.push({
                   bowler_id: data.rows.item(i).bowler_id,
-                  bowler_name: data.rows.item(i).bowler_name
+                  bowler_name: data.rows.item(i).bowler_name,
+                  bowler_handicapPins: data.rows.item(i).bowler_handicapPins
                 });
               }
             }
