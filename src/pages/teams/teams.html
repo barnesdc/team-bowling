@@ -11,11 +11,8 @@
 <ion-content padding id="page3">
   <ion-list id="bowlers-list6">
     <hr />
-    <button ion-button block on-click="generateTeams()">Randomize Teams</button>
-    <!--
-      <button ion-button block on-click="showTeams()">Generate Teams</button>
-    -->
-    <h2>Teams List:</h2>
+    <button ion-button block on-click="generateTeams()" round>Randomize Teams</button>
+    <h2 class ="heads">Teams List:</h2>
     <ion-item-sliding *ngFor="let bowler of ListTeam" #item>
       <ion-item id="bowlers-list-item-container6">
         <ion-grid>
@@ -33,5 +30,5 @@
       </ion-item>
     </ion-item-sliding>
   </ion-list>
-  <button ion-button block on-click="displayWinner()">Submit Scores</button>
+  <button ion-button block on-click="displayWinner()" round>Submit Scores</button>
 </ion-content>
