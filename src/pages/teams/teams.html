@@ -33,13 +33,11 @@
           </ion-item>
         </ion-label>
       </ion-item>
-    </ion-list>
-  </ion-scroll>
-  <!--
-    <ion-item>
-      <ion-label>Score: </ion-label>
-      <ion-input type="number" [(ngModel)]="bowler.score"></ion-input>
-    </ion-item>
-  -->
+      <ion-item>
+        <ion-label>Score:</ion-label>
+        <ion-input type="number" [(ngModel)]="bowler.score"></ion-input>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
   <button ion-button block on-click="displayWinner()">Submit Scores</button>
 </ion-content>

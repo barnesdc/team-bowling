@@ -49,7 +49,10 @@ export class TeamsPage {
     let showTeams = [];
     // counting of bowlers,
     let count = 0,
-      teamNum = 1;
+    teamNum = 1;
+
+    //let handicapIndex = 0;
+    let handicapCount = 0;
 
     //clear teams table
     this.database.ClearTeams();
@@ -65,15 +68,65 @@ export class TeamsPage {
         for (var i = 0; i < teams.length; i++) {
           if (this.checked.indexOf(teams[i]["bowler_id"]) > -1) {
             showTeams[count] = teams[i];
-            showTeams[count]["team_id"] = teamNum;
+            showTeams[count]["team_id"] = null;
             showTeams[count]["score"] = 0;
             count++;
             console.log(showTeams[count - 1]["bowler_name"]);
-            if (count % 3 == 0) {
-              console.log("Team " + teamNum);
+            /*if (count % 3 == 0) {
+              console.log("Creating Team " + teamNum);
               this.database.CreateTeams(teamNum, showTeams[count-3], showTeams[count-2], showTeams[count-1]);
               teamNum++;
+            }*/
+          }
+        }
+        //check if bowlers can be fit into teams of three
+        if(showTeams.length%3 != 0){
+          //alert and break
+        }
+
+        for(var i = 0; i < showTeams.length; i++){
+          if(showTeams[i]["bowler_handicapPins"] >= 30){
+            handicapCount++;
+            if(handicapCount == 2){
+
+              console.log("Balancing Teams");
+              for(var j=i+2; j<showTeams.length; j++){
+                if(showTeams[j]["bowler_handicapPins"] < 30){
+                  var temp: any;
+                  temp = showTeams[i];
+                  showTeams[i] = showTeams[j];
+                  showTeams[j] = temp;
+                  handicapCount--;
+                  console.log("Teams balanced");
+                  break;
+                }
+              }
+              console.log("For loop Broken");
             }
+          }
+          if((i+1)%3 == 0){
+
+            //Pulls high handicap bowler into team if none are on the team
+            if(handicapCount == 0){
+              for(var j=i+1; j<showTeams.length; j++){
+                if(showTeams[j]["bowler_handicapPins"] >= 30){
+                  var temp: any;
+                  temp = showTeams[i];
+                  showTeams[i] = showTeams[j];
+                  showTeams[j] = temp;
+                  console.log("Added Handicap Bowler");
+                  break;
+                }
+              }
+              console.log("For loop broken");
+            }
+
+            console.log("Creating Team "+teamNum);
+            console.log("Team Members "+showTeams[i-2][""])
+            this.database.CreateTeams(teamNum, showTeams[i-2], showTeams[i-1], showTeams[i]);
+            showTeams[i-2]["team_id"] = showTeams[i-1]["team_id"] = showTeams[i]["team_id"] = teamNum;
+            teamNum++;
+            handicapCount = 0;
           }
         }
 
