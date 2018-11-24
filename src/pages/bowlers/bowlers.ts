@@ -101,7 +101,7 @@ export class BowlersPage {
         },
         {
           name: "Handicap",
-          placeholder: "# pins"
+          placeholder: "Handicap amount"
         }
         // {
         //   name: 'AverageScore',
@@ -119,6 +119,7 @@ export class BowlersPage {
           text: "Male",
           handler: data => {
             console.log(JSON.stringify(data));
+            if(data.Average >= 0 && data.Average <= 300 && data.Handicap >= 0 && data.Handicap <= 30 && data.Average != "" && data.Handicap != "" && data.Name != ""){
             this.database.CreateBowler(
               data.Name,
               "Male",
@@ -127,11 +128,18 @@ export class BowlersPage {
               null
             );
           }
+          else
+          {
+            prompt.setMessage("Invalid Entry");
+            return false;
+          }
+        }
         },
         {
           text: "Female",
           handler: data => {
             console.log(JSON.stringify(data));
+            if(data.Average >= 0 && data.Average <= 300 && data.Handicap >= 0 && data.Handicap <= 30 && data.Average != "" && data.Handicap != "" && data.Name != ""){
             this.database.CreateBowler(
               data.Name,
               "Female",
@@ -139,6 +147,11 @@ export class BowlersPage {
               data.Handicap,
               null
             );
+            }
+            else{
+              prompt.setMessage("Invalid Entry");
+              return false;
+            }
           }
         }
       ]
@@ -149,11 +162,24 @@ export class BowlersPage {
       });
   }
 
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Warning',
+      subTitle: 'Cannot make teams of three from selected bowlers!',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
+
   //console logs values in checked[] array, goes to teams page and shares checked[] array to teams page
   showNextPage() {
     this.getCheckedBoxes();
-    this.navCtrl.push(TeamsPage, {
-      checked: this.checked
-    });
+    if(this.checked.length%3 == 0 || this.checked.length < 3 || this.checked.length == null){
+      this.navCtrl.push(TeamsPage, {
+        checked: this.checked
+      });
+    }else{
+      this.presentAlert();
+    }
   }
 }

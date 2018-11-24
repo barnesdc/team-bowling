@@ -145,12 +145,33 @@ export class TeamsPage {
     );
   }
 
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Warning',
+      subTitle: 'Invalid score input!',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
+
   displayWinner(){
     console.log("Display Winner");
     console.log(this.ListTeam);
-    this.navCtrl.push(GamesScoresPage, {
-      Teams: this.ListTeam
-    });
+    var show = true;
+    for(var i=0; i<this.ListTeam.length; i++){
+      console.log("it "+i+" "+this.ListTeam[i]["score"]);
+      if(this.ListTeam[i]["score"] < 0 || this.ListTeam[i]["score"] > 300  || this.ListTeam[i]["score"] == "" && this.ListTeam[i]["score"] != "0"){
+        this.presentAlert();
+        show = false;
+        break;
+      }
+    }
+    if(show){
+      this.navCtrl.push(GamesScoresPage, {
+        Teams: this.ListTeam
+      });
+    }
+    show = true;
   }
   // this.database.CreateTeams(teams).then(
   //   (data: any) => {
