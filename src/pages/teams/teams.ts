@@ -160,7 +160,7 @@ export class TeamsPage {
     var show = true;
     for(var i=0; i<this.ListTeam.length; i++){
       console.log("it "+i+" "+this.ListTeam[i]["score"]);
-      if(this.ListTeam[i]["score"] < 0 || this.ListTeam[i]["score"] > 300  || this.ListTeam[i]["score"] == "" && this.ListTeam[i]["score"] != "0"){
+      if(this.ListTeam[i]["score"] < 0 || this.ListTeam[i]["score"] > 300  || this.ListTeam[i]["score"] == "" && this.ListTeam[i]["score"] != "0" || this.ListTeam[i]["score"]%1 != 0){
         this.presentAlert();
         show = false;
         break;

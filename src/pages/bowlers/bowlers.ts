@@ -119,7 +119,8 @@ export class BowlersPage {
           text: "Male",
           handler: data => {
             console.log(JSON.stringify(data));
-            if(data.Average >= 0 && data.Average <= 300 && data.Handicap >= 0 && data.Handicap <= 30 && data.Average != "" && data.Handicap != "" && data.Name != ""){
+            console.log(data.Average%1+" modded");
+            if(data.Average >= 0 && data.Average <= 300 && data.Handicap >= 0 && data.Handicap <= 30 && data.Average != "" && data.Handicap != "" && data.Name != "" && data.Handicap%1 == 0){
             this.database.CreateBowler(
               data.Name,
               "Male",
@@ -139,7 +140,7 @@ export class BowlersPage {
           text: "Female",
           handler: data => {
             console.log(JSON.stringify(data));
-            if(data.Average >= 0 && data.Average <= 300 && data.Handicap >= 0 && data.Handicap <= 30 && data.Average != "" && data.Handicap != "" && data.Name != ""){
+            if(data.Average >= 0 && data.Average <= 300 && data.Handicap >= 0 && data.Handicap <= 30 && data.Average != "" && data.Handicap != "" && data.Name != "" && data.Average%1 == 0){
             this.database.CreateBowler(
               data.Name,
               "Female",
