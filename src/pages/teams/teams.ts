@@ -68,7 +68,7 @@ export class TeamsPage {
         for (var i = 0; i < teams.length; i++) {
           if (this.checked.indexOf(teams[i]["bowler_id"]) > -1) {
             showTeams[count] = teams[i];
-            showTeams[count]["team_id"] = teamNum;
+            showTeams[count]["team_id"] = null;
             showTeams[count]["score"] = 0;
             count++;
             console.log(showTeams[count - 1]["bowler_name"]);
@@ -122,7 +122,9 @@ export class TeamsPage {
             }
 
             console.log("Creating Team "+teamNum);
-            this.database.CreateTeams(teamNum, showTeams[count-3], showTeams[count-2], showTeams[count-1]);
+            console.log("Team Members "+showTeams[i-2][""])
+            this.database.CreateTeams(teamNum, showTeams[i-2], showTeams[i-1], showTeams[i]);
+            showTeams[i-2]["team_id"] = showTeams[i-1]["team_id"] = showTeams[i]["team_id"] = teamNum;
             teamNum++;
             handicapCount = 0;
           }
@@ -143,12 +145,33 @@ export class TeamsPage {
     );
   }
 
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Warning',
+      subTitle: 'Invalid score input!',
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
+
   displayWinner(){
     console.log("Display Winner");
     console.log(this.ListTeam);
-    this.navCtrl.push(GamesScoresPage, {
-      Teams: this.ListTeam
-    });
+    var show = true;
+    for(var i=0; i<this.ListTeam.length; i++){
+      console.log("it "+i+" "+this.ListTeam[i]["score"]);
+      if(this.ListTeam[i]["score"] < 0 || this.ListTeam[i]["score"] > 300  || this.ListTeam[i]["score"] == "" && this.ListTeam[i]["score"] != "0" || this.ListTeam[i]["score"]%1 != 0){
+        this.presentAlert();
+        show = false;
+        break;
+      }
+    }
+    if(show){
+      this.navCtrl.push(GamesScoresPage, {
+        Teams: this.ListTeam
+      });
+    }
+    show = true;
   }
   // this.database.CreateTeams(teams).then(
   //   (data: any) => {

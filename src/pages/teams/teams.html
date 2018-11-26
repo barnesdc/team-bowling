@@ -15,17 +15,13 @@
     <h2 class ="heads">Teams List:</h2>
     <ion-item-sliding *ngFor="let bowler of ListTeam" #item>
       <ion-item id="bowlers-list-item-container6">
-        <ion-grid>
-          <ion-row>
-            <ion-col>Team #: {{ bowler.team_id }}</ion-col>
-            <ion-col> Bowler ID: {{ bowler.bowler_id }}</ion-col>
-            <ion-col> Bowler Name: {{ bowler.bowler_name }}</ion-col>
-          </ion-row>
-        </ion-grid>
+        <h3>Team #: {{ bowler.team_id }}</h3>
+        <h3>Bowler Handicap: {{ bowler.bowler_handicapPins }}</h3>
+        <h3>Bowler Name: {{ bowler.bowler_name }}</h3>
       </ion-item>
 
       <ion-item>
-        <ion-label>Score: </ion-label>
+        <ion-label>Score:</ion-label>
         <ion-input type="number" [(ngModel)]="bowler.score"></ion-input>
       </ion-item>
     </ion-item-sliding>
