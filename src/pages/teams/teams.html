@@ -16,28 +16,26 @@
     <button ion-button block on-click="showTeams()">Generate Teams</button>
   -->
   <h2>Teams List:</h2>
-  <ion-scroll scrolly="true" style="height:100vh">
-    <ion-list>
-      <ion-item *ngFor="let bowler of ListTeam">
-        <ion-label>
-          <ion-grid>
-            <ion-row>
-              <ion-col> Team #: {{ bowler.team_id }} </ion-col>
-              <ion-col> Bowler ID: {{ bowler.bowler_id }}</ion-col>
-              <ion-col> Bowler Name: {{ bowler.bowler_name }} </ion-col>
-            </ion-row>
-          </ion-grid>
-          <ion-item>
-            <ion-label>Score: </ion-label>
-            <ion-input type="number" [(ngModel)]="bowler.score"></ion-input>
-          </ion-item>
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Score:</ion-label>
-        <ion-input type="number" [(ngModel)]="bowler.score"></ion-input>
-      </ion-item>
-    </ion-item-sliding>
+  <ion-list>
+    <ion-item *ngFor="let bowler of ListTeam">
+      <ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-col> Team #: {{ bowler.team_id }} </ion-col>
+            <ion-col> Bowler ID: {{ bowler.bowler_id }}</ion-col>
+            <ion-col> Bowler Name: {{ bowler.bowler_name }} </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-item>
+          <ion-label>Score: </ion-label>
+          <ion-input type="number" [(ngModel)]="bowler.score"></ion-input>
+        </ion-item>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Score:</ion-label>
+      <ion-input type="number" [(ngModel)]="bowler.score"></ion-input>
+    </ion-item>
   </ion-list>
   <button ion-button block on-click="displayWinner()">Submit Scores</button>
 </ion-content>
