@@ -1,3 +1,18 @@
-page-teams {
+ion-content{
+    background: color($colors, primary);
+}
 
+ion-col{
+    color: color($colors, secondary);
+}
+
+.toolbar-title{
+    text-align: center;
+}
+
+.toolbar{
+    background: color($colors, primary);
+}
+.heads{
+    color: color($colors, secondary);
 }
