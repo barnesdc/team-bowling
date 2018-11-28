@@ -16,7 +16,7 @@
     </button>
     <h2 class="heads">Teams List:</h2>
     <ion-item-sliding *ngFor="let bowler of ListTeam" #item>
-      <ion-item id="bowlers-list-item-container6">
+      <ion-item id="bowlers-list-item-container6" style="color: white">
         <h3>
           <strong>Team #: {{ bowler.team_id }} </strong>
         </h3>
@@ -26,7 +26,7 @@
         </h3>
       </ion-item>
       <ion-item>
-        <ion-label>Score:</ion-label>
+        <ion-label style="color: white">Score:</ion-label>
         <ion-input
           type="number"
           [(ngModel)]="bowler.score"

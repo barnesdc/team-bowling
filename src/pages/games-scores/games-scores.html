@@ -13,15 +13,17 @@
     Start A Game
   </button>
   <hr />
-  <ion-card>
+  <ion-card class="heads">
     <img src="../../assets/imgs/IMG_3518.png" />
 
     <ion-card-content>
-      <ion-card-title> Winner is Team {{ winningTeam }}: </ion-card-title>
+      <ion-card-title style="color: white">
+        Winner is Team {{ winningTeam }}:
+      </ion-card-title>
 
       <div *ngIf="ShowWinner">
         <strong>Score: {{ score }} </strong> <br />
-        <p>
+        <p style="color: white">
           Bowlers: <br />{{ winningMembers[0] }} <br />{{ winningMembers[1]
           }}<br />
           {{ winningMembers[2] }}
