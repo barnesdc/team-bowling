@@ -49,7 +49,7 @@ export class TeamsPage {
     let showTeams = [];
     // counting of bowlers,
     let count = 0,
-    teamNum = 1;
+      teamNum = 1;
 
     //let handicapIndex = 0;
     let handicapCount = 0;
@@ -80,18 +80,17 @@ export class TeamsPage {
           }
         }
         //check if bowlers can be fit into teams of three
-        if(showTeams.length%3 != 0){
+        if (showTeams.length % 3 > -0.1 && showTeams.length % 3 < 0.1) {
           //alert and break
         }
 
-        for(var i = 0; i < showTeams.length; i++){
-          if(showTeams[i]["bowler_handicapPins"] >= 30){
+        for (var i = 0; i < showTeams.length; i++) {
+          if (showTeams[i]["bowler_handicapPins"] >= 30) {
             handicapCount++;
-            if(handicapCount == 2){
-
+            if (handicapCount == 2) {
               console.log("Balancing Teams");
-              for(var j=i+2; j<showTeams.length; j++){
-                if(showTeams[j]["bowler_handicapPins"] < 30){
+              for (var j = i + 2; j < showTeams.length; j++) {
+                if (showTeams[j]["bowler_handicapPins"] < 30) {
                   var temp: any;
                   temp = showTeams[i];
                   showTeams[i] = showTeams[j];
@@ -104,12 +103,11 @@ export class TeamsPage {
               console.log("For loop Broken");
             }
           }
-          if((i+1)%3 == 0){
-
+          if ((i + 1) % 3 == 0) {
             //Pulls high handicap bowler into team if none are on the team
-            if(handicapCount == 0){
-              for(var j=i+1; j<showTeams.length; j++){
-                if(showTeams[j]["bowler_handicapPins"] >= 30){
+            if (handicapCount == 0) {
+              for (var j = i + 1; j < showTeams.length; j++) {
+                if (showTeams[j]["bowler_handicapPins"] >= 30) {
                   var temp: any;
                   temp = showTeams[i];
                   showTeams[i] = showTeams[j];
@@ -121,10 +119,17 @@ export class TeamsPage {
               console.log("For loop broken");
             }
 
-            console.log("Creating Team "+teamNum);
-            console.log("Team Members "+showTeams[i-2][""])
-            this.database.CreateTeams(teamNum, showTeams[i-2], showTeams[i-1], showTeams[i]);
-            showTeams[i-2]["team_id"] = showTeams[i-1]["team_id"] = showTeams[i]["team_id"] = teamNum;
+            console.log("Creating Team " + teamNum);
+            console.log("Team Members " + showTeams[i - 2][""]);
+            this.database.CreateTeams(
+              teamNum,
+              showTeams[i - 2],
+              showTeams[i - 1],
+              showTeams[i]
+            );
+            showTeams[i - 2]["team_id"] = showTeams[i - 1][
+              "team_id"
+            ] = showTeams[i]["team_id"] = teamNum;
             teamNum++;
             handicapCount = 0;
           }
@@ -147,27 +152,32 @@ export class TeamsPage {
 
   presentAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Warning',
-      subTitle: 'Invalid score input!',
-      buttons: ['Dismiss']
+      title: "Warning",
+      subTitle: "Invalid score input!",
+      buttons: ["Dismiss"]
     });
     alert.present();
   }
 
-  displayWinner(){
+  displayWinner() {
     console.log("Display Winner");
     console.log(this.ListTeam);
     var show = true;
-    for(var i=0; i<this.ListTeam.length; i++){
-      console.log("it "+i+" "+this.ListTeam[i]["score"]);
-      if(this.ListTeam[i]["score"] < 0 || this.ListTeam[i]["score"] > 300  || this.ListTeam[i]["score"] == "" && this.ListTeam[i]["score"] != "0" || this.ListTeam[i]["score"]%1 != 0){
+    for (var i = 0; i < this.ListTeam.length; i++) {
+      console.log("it " + i + " " + this.ListTeam[i]["score"]);
+      if (
+        this.ListTeam[i]["score"] < 0 ||
+        this.ListTeam[i]["score"] > 300 ||
+        (this.ListTeam[i]["score"] == "" && this.ListTeam[i]["score"] != "0") ||
+        this.ListTeam[i]["score"] % 1 != 0
+      ) {
         this.presentAlert();
         show = false;
         break;
       }
     }
-    if(show){
-      this.navCtrl.push(GamesScoresPage, {
+    if (show) {
+      this.navCtrl.setRoot(GamesScoresPage, {
         Teams: this.ListTeam
       });
     }
@@ -233,7 +243,7 @@ export class TeamsPage {
   //       {
   //         text: "Save",
   //         handler: data => {
-  //           console.log(JSON.stringify(data));
+  //           console.log(JSON.striny(data));
   //           this.database.CreateBowler(
   //             data.Name,
   //             data.Gender,

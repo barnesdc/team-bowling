@@ -119,37 +119,52 @@ export class BowlersPage {
           text: "Male",
           handler: data => {
             console.log(JSON.stringify(data));
-            console.log(data.Average%1+" modded");
-            if(data.Average >= 0 && data.Average <= 300 && data.Handicap >= 0 && data.Handicap <= 30 && data.Average != "" && data.Handicap != "" && data.Name != "" && data.Handicap%1 == 0){
-            this.database.CreateBowler(
-              data.Name,
-              "Male",
-              data.Average,
-              data.Handicap,
-              null
-            );
+            console.log((data.Average % 1) + " modded");
+            if (
+              data.Average >= 0 &&
+              data.Average <= 300 &&
+              data.Handicap >= 0 &&
+              data.Handicap <= 30 &&
+              data.Average != "" &&
+              data.Handicap != "" &&
+              data.Name != "" &&
+              data.Handicap % 1 == 0
+            ) {
+              this.database.CreateBowler(
+                data.Name,
+                "Male",
+                data.Average,
+                data.Handicap,
+                null
+              );
+            } else {
+              prompt.setMessage("Invalid Entry");
+              return false;
+            }
           }
-          else
-          {
-            prompt.setMessage("Invalid Entry");
-            return false;
-          }
-        }
         },
         {
           text: "Female",
           handler: data => {
             console.log(JSON.stringify(data));
-            if(data.Average >= 0 && data.Average <= 300 && data.Handicap >= 0 && data.Handicap <= 30 && data.Average != "" && data.Handicap != "" && data.Name != "" && data.Average%1 == 0){
-            this.database.CreateBowler(
-              data.Name,
-              "Female",
-              data.Average,
-              data.Handicap,
-              null
-            );
-            }
-            else{
+            if (
+              data.Average >= 0 &&
+              data.Average <= 300 &&
+              data.Handicap >= 0 &&
+              data.Handicap <= 30 &&
+              data.Average != "" &&
+              data.Handicap != "" &&
+              data.Name != "" &&
+              data.Average % 1 == 0
+            ) {
+              this.database.CreateBowler(
+                data.Name,
+                "Female",
+                data.Average,
+                data.Handicap,
+                null
+              );
+            } else {
               prompt.setMessage("Invalid Entry");
               return false;
             }
@@ -165,9 +180,9 @@ export class BowlersPage {
 
   presentAlert() {
     let alert = this.alertCtrl.create({
-      title: 'Warning',
-      subTitle: 'Cannot make teams of three from selected bowlers!',
-      buttons: ['Dismiss']
+      title: "Warning",
+      subTitle: "Cannot make teams of three from selected bowlers!",
+      buttons: ["Dismiss"]
     });
     alert.present();
   }
@@ -175,12 +190,29 @@ export class BowlersPage {
   //console logs values in checked[] array, goes to teams page and shares checked[] array to teams page
   showNextPage() {
     this.getCheckedBoxes();
-    if(this.checked.length%3 == 0 || this.checked.length < 3 || this.checked.length == null){
-      this.navCtrl.push(TeamsPage, {
+    if (
+      this.checked.length % 3 == 0 ||
+      this.checked.length < 3 ||
+      this.checked.length == null
+    ) {
+      this.navCtrl.setRoot(TeamsPage, {
         checked: this.checked
       });
-    }else{
+    } else {
       this.presentAlert();
+    }
+  }
+
+  deleteBowler() {
+    this.getCheckedBoxes();
+    console.log(
+      "Deleting " + this.checked.length + " bowlers from the database."
+    );
+    let numBowlersToDelete = this.checked.length;
+    for (var i = 0; i < numBowlersToDelete; i++) {
+      console.log("Bowler deleted: " + this.checked[i]);
+      this.database.DeleteBowler(this.checked[i]);
+      this.GetAllBowlers();
     }
   }
 }

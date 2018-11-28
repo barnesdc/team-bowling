@@ -3,14 +3,15 @@ import { Platform } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 // import { NavController } from
-import { LoginPage } from "../pages/login/login";
-import { TabsPage } from "../pages/tabs/tabs";
+// import { LoginPage } from "../pages/login/login";
+// import { TabsPage } from "../pages/tabs/tabs";
+import { GamesScoresPage } from "../pages/games-scores/games-scores";
 
 @Component({
   templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage: any = TabsPage;
+  rootPage: any = GamesScoresPage;
   splash = true;
   constructor(
     platform: Platform,

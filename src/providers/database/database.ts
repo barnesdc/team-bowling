@@ -203,29 +203,22 @@ export class DatabaseProvider {
     let bowler3 = team3.bowler_id;
     return new Promise((resolve, reject) => {
       this.storage
-        .create({ name: "bolwerData.db", location: "default" })
+        .create({ name: "bowlerData.db", location: "default" })
         .then(() => {
           let sql =
             "INSERT INTO team (team_id, bowler_id1, bowler_id2, bowler_id3) VALUES(?, ?, ?, ?)";
-            console.log("Team Test: "+teamNum);
-            console.log("ID "+team1.bowler_id);
-          this.db
-            .executeSql(sql, [
-              teamNum,
-              bowler1,
-              bowler2,
-              bowler3
-            ])
-            .then(
-              data => {
-                console.log("Team insertion complete");
-                resolve(data);
-              },
-              error => {
-                console.log(error);
-                reject(error);
-              }
-            );
+          console.log("Team Test: " + teamNum);
+          console.log("ID " + team1.bowler_id);
+          this.db.executeSql(sql, [teamNum, bowler1, bowler2, bowler3]).then(
+            data => {
+              console.log("Team insertion complete");
+              resolve(data);
+            },
+            error => {
+              console.log(error);
+              reject(error);
+            }
+          );
         });
     });
   }
@@ -312,34 +305,31 @@ export class DatabaseProvider {
   /*****************************************************/
   DeleteBowler(item: any) {
     return new Promise((resolve, reject) => {
-      this.storage
-        .create({ name: "bowlerData.db", location: "default" })
-        .then(() => {
-          let sql = "SELECT * FROM bowlers WHERE bowler_id = ? ";
-          this.db.executeSql(sql, [item.bowler_id]).then(
-            data => {
-              resolve(data);
-            },
-            error => {
-              reject(error);
-            }
-          );
-        });
+      let sql = "DELETE FROM bowlers WHERE bowler_id = ? ";
+      this.db.executeSql(sql, [item.bowler_id]).then(
+        data => {
+          console.log("Delete Bowler complete");
+          resolve(data);
+        },
+        error => {
+          console.log(error);
+          reject(error);
+        }
+      );
     });
   }
 
   //clear teams table
-  ClearTeams(){
+  ClearTeams() {
     console.log("Clearing Teams");
     return new Promise((resolve, reject) => {
       this.db.executeSql("DELETE FROM team");
       error => {
         reject(error);
-      }
-    })
+      };
+    });
   }
 }
-
 
 /*
 Datagrip Table
