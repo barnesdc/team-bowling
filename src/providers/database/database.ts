@@ -306,7 +306,8 @@ export class DatabaseProvider {
   DeleteBowler(item: any) {
     return new Promise((resolve, reject) => {
       let sql = "DELETE FROM bowlers WHERE bowler_id = ? ";
-      this.db.executeSql(sql, [item.bowler_id]).then(
+      console.log("delete test: " + item);
+      this.db.executeSql(sql, [item]).then(
         data => {
           console.log("Delete Bowler complete");
           resolve(data);

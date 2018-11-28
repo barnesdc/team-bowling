@@ -211,7 +211,7 @@ export class BowlersPage {
     let numBowlersToDelete = this.checked.length;
     for (var i = 0; i < numBowlersToDelete; i++) {
       console.log("Bowler deleted: " + this.checked[i]);
-      this.database.DeleteBowler(this.checked[i]);
+      this.database.DeleteBowler(this.checked[i]); //key value pair
       this.GetAllBowlers();
     }
   }
