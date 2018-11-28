@@ -7,6 +7,7 @@ import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
 import { LoginPage } from "../login/login";
 import { GamesScoresPage } from "../games-scores/games-scores";
+import { BowlersPage } from "../bowlers/bowlers";
 
 /**
  * Generated class for the TeamsPage page.
@@ -183,19 +184,7 @@ export class TeamsPage {
     }
     show = true;
   }
-  // this.database.CreateTeams(teams).then(
-  //   (data: any) => {
-  //     console.log("\nGenerating teams");
-  //     console.log(data);
-  //     this.ListTeam = data;
-  //     showTeams = data;
-  //     console.log("Teams List\n" + showTeams.length);
-  //   },
-  //   error => {
-  //     console.log("Error generating teams");
-  //     console.log(error);
-  //   }
-  // );
+
   addGame() {
     this.database.CreateGames(2, 200);
   }
@@ -272,5 +261,8 @@ export class TeamsPage {
   // }
   showTeams() {
     window.alert("Working on queries at the moment");
+  }
+  goBack() {
+    this.navCtrl.setRoot(BowlersPage, { checked: this.checked });
   }
 }

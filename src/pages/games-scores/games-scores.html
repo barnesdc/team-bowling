@@ -13,13 +13,23 @@
     Start A Game
   </button>
   <hr />
-  <div *ngIf="ShowWinner">
-    Winner is Team {{ winningTeam }}: <br />
-    Score: {{ score }} <br />
-    Bowlers: {{ winningMembers[0] }}, {{ winningMembers[1] }},
-    {{ winningMembers[2] }}
-  </div>
-  <div *ngIf="tie">
-    Team {{ tieTeams[0] }} and Team {{ tieTeams[1] }} have tied!
-  </div>
+  <ion-card>
+    <img src="../../assets/imgs/IMG_3518.png" />
+
+    <ion-card-content>
+      <ion-card-title> Winner is Team {{ winningTeam }}: </ion-card-title>
+
+      <div *ngIf="ShowWinner">
+        <strong>Score: {{ score }} </strong> <br />
+        <p>
+          Bowlers: <br />{{ winningMembers[0] }} <br />{{ winningMembers[1]
+          }}<br />
+          {{ winningMembers[2] }}
+        </p>
+      </div>
+      <div *ngIf="tie">
+        <p>Team {{ tieTeams[0] }} and Team {{ tieTeams[1] }} have tied!</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
