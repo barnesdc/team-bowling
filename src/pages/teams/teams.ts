@@ -185,80 +185,88 @@ export class TeamsPage {
     show = true;
   }
 
+  // submit scores confirmation
+  showGoBackConfirm() {
+    const confirm = this.alertCtrl.create({
+      title: "GoBack",
+      message:
+        "Are you sure you want to go back, your teams selected bowlers will be reset?",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Return to teams pages");
+          }
+        },
+        {
+          text: "Go Back",
+          handler: () => {
+            console.log("Go Back to bowlers page");
+            this.goBack();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  // submit scores confirmation
+  showRandomizeConfirm() {
+    const confirm = this.alertCtrl.create({
+      title: "Randomize teams",
+      message: "Are you sure you want to randomize Teams?",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Return to teams pages");
+          }
+        },
+        {
+          text: "Randomize Teams",
+          handler: () => {
+            console.log("Generate teams");
+            this.generateTeams();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  // submit scores confirmation
+  showSubmitConfirm() {
+    const confirm = this.alertCtrl.create({
+      title: "Submit Scores",
+      message: "Are you sure you want to submit scores?",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Return to teams pages");
+          }
+        },
+        {
+          text: "Submit",
+          handler: () => {
+            console.log("Submit scores");
+            this.displayWinner();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
   addGame() {
     this.database.CreateGames(2, 200);
   }
-
-  // getGames() {
-  //   this.database.getGames().then(
-  //     (data: any) => {
-  //       console.log(data + "I AM WORKING for Games");
-  //       this.ListGame = data;
-  //     },
-  //     error => {
-  //       console.log(error + "getGames() error");
-  //     }
-  //   );
-  // }
-  // AddBowlerPrompt() {
-  //   const prompt = this.alertCtrl.create({
-  //     title: "Add Bowler",
-  //     message: "Fill out the following boxes to enter your bowler",
-  //     inputs: [
-  //       {
-  //         name: "Name",
-  //         placeholder: "Bowler name"
-  //       },
-  //       {
-  //         name: "Gender",
-  //         placeholder: "Gender (Ex. Male/Female)"
-  //       },
-  //       {
-  //         name: "Handicap",
-  //         placeholder: "Handicap (Ex. A, B or C)"
-  //       },
-  //       {
-  //         name: "Average",
-  //         placeholder: "Average Score (Ex. 200)"
-  //       }
-  //     ],
-  //     buttons: [
-  //       {
-  //         text: "Cancel",
-  //         handler: data => {
-  //           console.log("Cancel clicked");
-  //         }
-  //       },
-  //       {
-  //         text: "Save",
-  //         handler: data => {
-  //           console.log(JSON.striny(data));
-  //           this.database.CreateBowler(
-  //             data.Name,
-  //             data.Gender,
-  //             data.Handicap,
-  //             data.Average,
-  //             data.Score
-  //           );
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   prompt.present();
-  // }
 
   deleteGame(item) {
     console.log(item.game_id);
     window.alert("Attempting to delete " + item.game_id);
   }
 
-  // deleteBowler(item) {
-  //   console.log("first print " + item) + "\n";
-  //   console.log(
-  //     "Attempting to delete " + JSON.stringify(item) + " " + item.bowler_id
-  //   );
-  //   this.database.DeleteBowler(item);
-  // }
   showTeams() {
     window.alert("Working on queries at the moment");
   }

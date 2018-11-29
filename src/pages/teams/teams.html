@@ -11,7 +11,13 @@
 <ion-content padding id="page3">
   <ion-list id="bowlers-list6">
     <hr />
-    <button ion-button block on-click="generateTeams()" round color="secondary">
+    <button
+      ion-button
+      block
+      on-click="showRandomizeConfirm()"
+      round
+      color="secondary"
+    >
       Randomize Teams
     </button>
     <h2 class="heads">Teams List:</h2>
@@ -41,10 +47,12 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <button ion-button block on-click="goBack()">Go Back</button>
+          <button ion-button block on-click="showGoBackConfirm()">
+            Go Back
+          </button>
         </ion-col>
         <ion-col>
-          <button ion-button block on-click="displayWinner()">
+          <button ion-button block on-click="showSubmitConfirm()">
             Submit Scores
           </button>
         </ion-col>
