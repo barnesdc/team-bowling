@@ -175,7 +175,7 @@ export class BowlersPage {
   //console logs values in checked[] array, goes to teams page and shares checked[] array to teams page
   showNextPage() {
     this.getCheckedBoxes();
-    if(this.checked.length%3 == 0 || this.checked.length < 3 || this.checked.length == null){
+    if(this.checked.length%3 >= -.1 && this.checked.length%3 <= .1 && this.checked.length != 0 || this.checked.length >= 3 &&this.checked.length%3 >= -.1 && this.checked.length%3 <= .1){
       this.navCtrl.push(TeamsPage, {
         checked: this.checked
       });
