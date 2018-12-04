@@ -12,9 +12,13 @@
   >
     Start A Game
   </button>
-  <hr />
-  <ion-card class="heads">
-    <img src="../../assets/imgs/IMG_3518.png" />
+  <hr>
+
+  <!-- shows first, second and third place teams and team mebmers or tied teams -->
+  <div *ngIf="ShowWinner">Winner is Team {{winningTeam}}: {{winningMembers[0]}} {{winningMembers[1]}} {{winningMembers[2]}} with a score of {{winningScore}}</div>
+  <div *ngIf="ShowSecond">Second Place is {{secondTeam}}: {{secondMembers[0]}} {{secondMembers[1]}} {{secondMembers[2]}} with a score of {{secondScore}}</div>
+  <div *ngIf="ShowThird">Third Place is {{thirdTeam}}: {{thirdMembers[0]}} {{thirdMembers[1]}} {{thirdMembers[2]}} with a score of {{thirdScore}}</div>
+  <div *ngIf="tie">Team {{tieTeams[0]}} and Team {{tieTeams[1]}} have tied!</div>
 
     <ion-card-content>
       <ion-card-title style="color: white">

@@ -22,10 +22,9 @@
     </button>
     <h2 class="heads">Teams List:</h2>
     <ion-item-sliding *ngFor="let bowler of ListTeam" #item>
-      <ion-item id="bowlers-list-item-container6" style="color: white">
-        <h3>
-          <strong>Team #: {{ bowler.team_id }} </strong>
-        </h3>
+      <!-- generates list of teams and bowler information -->
+      <ion-item id="bowlers-list-item-container6">
+        <h3>Team #: {{ bowler.team_id }}</h3>
         <h3>Bowler Handicap: {{ bowler.bowler_handicapPins }}</h3>
         <h3>
           Bowler Name: <strong>{{ bowler.bowler_name }}</strong>
