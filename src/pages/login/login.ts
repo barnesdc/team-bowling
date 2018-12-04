@@ -22,11 +22,8 @@ export class LoginPage {
     }, 3000);
   }
 
-  createUser() {}
-
   goToTabs(params) {
     if (!params) params = {};
     this.navCtrl.push(TabsPage);
   }
-  signOut() {}
 }

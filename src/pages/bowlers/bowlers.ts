@@ -25,6 +25,8 @@ export class BowlersPage {
       { label: "D", name: "D", gender: "female", average: 200 }
     ];
   }
+
+  //refreshes page
   doRefresh(refresher) {
     console.log("Begin async operation");
 
@@ -36,6 +38,8 @@ export class BowlersPage {
   }
 
   private ListBowler: any;
+
+  //stores array of all bowler id's that are checked in the list
   checked = [];
 
   ionViewDidLoad() {
@@ -45,7 +49,7 @@ export class BowlersPage {
     this.GetAllBowlers();
   }
 
-  //adds checked names to checked[] array and checks if unchecked, removing it from checked[] array
+  //adds checked names to checked[] array and if unchecked, removes it from checked[] array
   addCheckbox(event, checkbox: String) {
     if (event.checked) {
       console.log(checkbox + " checked");
@@ -74,6 +78,7 @@ export class BowlersPage {
     console.log(this.checked);
   }
 
+  //stores all bowlers in the database in the ListBowler array
   GetAllBowlers() {
     this.database.GetAllBowlers().then(
       (data: any) => {
@@ -86,6 +91,7 @@ export class BowlersPage {
     );
   }
 
+  //Generates an alert prompt to create a new bowler. User enters bowler information and then this information is stored in the bowler table. 
   AddBowlerPrompt() {
     const prompt = this.alertCtrl.create({
       title: "Add Bowler",
@@ -158,11 +164,14 @@ export class BowlersPage {
       ]
     });
     prompt.present(),
+
+      //refreshes list of bowlers
       prompt.onDidDismiss(() => {
         this.GetAllBowlers();
       });
   }
 
+  //Alert user if selected number of bowlers do not evenly fill out teams of 3
   presentAlert() {
     let alert = this.alertCtrl.create({
       title: 'Warning',
@@ -180,6 +189,7 @@ export class BowlersPage {
         checked: this.checked
       });
     }else{
+      //Alerts user if teams cannot be made with 3 people
       this.presentAlert();
     }
   }

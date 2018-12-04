@@ -45,7 +45,7 @@ export class TeamsPage {
     // grabs all bowlers
     let teams = [];
     // same as checked array, includes names and ids
-    // compares teams to checked (pplaying bowlers)
+    // compares teams to checked (playing bowlers)
     let showTeams = [];
     // counting of bowlers,
     let count = 0,
@@ -84,9 +84,12 @@ export class TeamsPage {
           //alert and break
         }
 
+        //checks for high handicap bowlers and replaces or removes them as necessary
         for(var i = 0; i < showTeams.length; i++){
           if(showTeams[i]["bowler_handicapPins"] >= 30){
             handicapCount++;
+
+            //if 2 high handicap bowlers are on the same team, replace one with non-high handicap bowler, if available.
             if(handicapCount == 2){
 
               console.log("Balancing Teams");
@@ -121,6 +124,7 @@ export class TeamsPage {
               console.log("For loop broken");
             }
 
+            //pushes generated teams into the database and tracks team number with teamNum
             console.log("Creating Team "+teamNum);
             console.log("Team Members "+showTeams[i-2][""])
             this.database.CreateTeams(teamNum, showTeams[i-2], showTeams[i-1], showTeams[i]);
@@ -145,6 +149,7 @@ export class TeamsPage {
     );
   }
 
+  //alerts user when an invalid number has been entered as a score
   presentAlert() {
     let alert = this.alertCtrl.create({
       title: 'Warning',
@@ -154,10 +159,13 @@ export class TeamsPage {
     alert.present();
   }
 
+  //calculates and checks valid scores for the teams and changes page to the scores/start game page
   displayWinner(){
     console.log("Display Winner");
     console.log(this.ListTeam);
     var show = true;
+
+    //loop through all teams and gather total scores
     for(var i=0; i<this.ListTeam.length; i++){
       console.log("it "+i+" "+this.ListTeam[i]["score"]);
       if(this.ListTeam[i]["score"] < 0 || this.ListTeam[i]["score"] > 300  || this.ListTeam[i]["score"] == "" && this.ListTeam[i]["score"] != "0" || this.ListTeam[i]["score"]%1 != 0){
@@ -166,6 +174,8 @@ export class TeamsPage {
         break;
       }
     }
+
+    //if no errors have occured when calculating scores, the teams and scores will be pushed to the scores page and presented to the user
     if(show){
       this.navCtrl.push(GamesScoresPage, {
         Teams: this.ListTeam
@@ -186,6 +196,8 @@ export class TeamsPage {
   //     console.log(error);
   //   }
   // );
+
+  //function to add game to games table
   addGame() {
     this.database.CreateGames(2, 200);
   }
@@ -248,6 +260,7 @@ export class TeamsPage {
   //   prompt.present();
   // }
 
+  //function to remove game from games table
   deleteGame(item) {
     console.log(item.game_id);
     window.alert("Attempting to delete " + item.game_id);
@@ -260,6 +273,8 @@ export class TeamsPage {
   //   );
   //   this.database.DeleteBowler(item);
   // }
+
+  //status alert to show user while teams are being generated
   showTeams() {
     window.alert("Working on queries at the moment");
   }

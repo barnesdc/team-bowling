@@ -17,6 +17,8 @@
     -->
     <h2>Teams List:</h2>
     <ion-item-sliding *ngFor="let bowler of ListTeam" #item>
+
+      <!-- generates list of teams and bowler information -->
       <ion-item id="bowlers-list-item-container6">
         <h3>Team #: {{ bowler.team_id }}</h3>
         <h3>Bowler Handicap: {{ bowler.bowler_handicapPins }}</h3>
