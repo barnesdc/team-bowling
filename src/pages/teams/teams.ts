@@ -33,6 +33,7 @@ export class TeamsPage {
   private ListTeam: any;
   checked = [];
   winner: any;
+  bowlerScore: number;
 
   //Will save checked bowlers into checked[] array
   ionViewDidLoad() {
@@ -70,7 +71,7 @@ export class TeamsPage {
           if (this.checked.indexOf(teams[i]["bowler_id"]) > -1) {
             showTeams[count] = teams[i];
             showTeams[count]["team_id"] = null;
-            showTeams[count]["score"] = 0;
+            showTeams[count]["score"] = this.bowlerScore;
             count++;
             console.log(showTeams[count - 1]["bowler_name"]);
             /*if (count % 3 == 0) {
@@ -188,6 +189,7 @@ export class TeamsPage {
 
     //if no errors have occured when calculating scores, the teams and scores will be pushed to the scores page and presented to the user
     if (show) {
+      //this.database.updateAverage(this.ListTeam[i].);
       this.navCtrl.push(GamesScoresPage, {
         Teams: this.ListTeam
       });

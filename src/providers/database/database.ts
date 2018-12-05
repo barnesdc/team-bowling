@@ -149,7 +149,24 @@ export class DatabaseProvider {
         });
     });
   }
-
+  /*****************************************************/
+  /*            Update bowlers avg U/I                 */
+  /*****************************************************/
+  updateAverage(bowler_id: number, bowler_average: number) {
+    return new Promise((resolve, reject) => {
+      let sql = "UPDATE bowler_average FROM bowlers where bowler_id = ?";
+      this.db.executeSql(sql, [bowler_id]).then(
+        data => {
+          console.log("update average");
+          resolve(data);
+        },
+        error => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+  }
   /*****************************************************/
   /*       Randomize bowlers for team generation       */
   /*****************************************************/
