@@ -54,10 +54,25 @@ export class BowlersPage {
     if (event.checked) {
       console.log(checkbox + " checked");
       this.checked.push(checkbox);
+
+      //change date value in bowler table for checked bowler
+      this.database.PresentBowler(checkbox);
     } else {
       console.log(checkbox + " unchecked");
       let index = this.removeCheckedFromArray(checkbox);
+
+      //change date value in bowler table for unchecked bowler
+      this.database.AbsentBowler(checkbox);
       this.checked.splice(index, 1);
+    }
+  }
+
+  verifyList(date: any){
+    console.log("date: "+date);
+    if(date == 1){
+      return true;
+    }else{
+      return false;
     }
   }
 
@@ -75,15 +90,22 @@ export class BowlersPage {
 
   //Log elements of checked[] array
   getCheckedBoxes() {
+    for(var i=0; i<this.ListBowler.length; i++){
+      if(this.ListBowler[i]["bowler_date"] == 1 && this.checked.length != this.ListBowler.length){
+        this.checked.push(this.ListBowler[i]["bowler_id"]);
+      }
+    }
     console.log(this.checked);
   }
 
   //stores all bowlers in the database in the ListBowler array
   GetAllBowlers() {
+    this.checked = [];
     this.database.GetAllBowlers().then(
       (data: any) => {
         console.log(data + "\nI AM WORKING for Bowlers");
         this.ListBowler = data;
+        this.getCheckedBoxes();
       },
       error => {
         console.log(error);
@@ -197,7 +219,6 @@ export class BowlersPage {
 
   //console logs values in checked[] array, goes to teams page and shares checked[] array to teams page
   showNextPage() {
-    this.getCheckedBoxes();
     if (
       (this.checked.length % 3 >= -0.1 &&
         this.checked.length % 3 <= 0.1 &&
@@ -216,7 +237,6 @@ export class BowlersPage {
   }
 
   deleteBowler() {
-    this.getCheckedBoxes();
     console.log(
       "Deleting " + this.checked.length + " bowlers from the database."
     );

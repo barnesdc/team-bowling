@@ -34,7 +34,7 @@
         </ion-label>
         <ion-checkbox
           slot="end"
-          checked="false"
+          checked={{verifyList(bowler.bowler_date)}}
           (ionChange)="addCheckbox($event, bowler.bowler_id)"
         ></ion-checkbox>
       </ion-item>

@@ -4,6 +4,7 @@ import { SQLite, SQLiteObject } from "@ionic-native/sqlite";
 import { dateValueRange } from "ionic-angular/umd/util/datetime-util";
 import { database } from "firebase";
 import { ConvertActionBindingResult } from "@angular/compiler/src/compiler_util/expression_converter";
+import { BowlersPage } from "../../pages/bowlers/bowlers";
 
 /*
   Generated class for the DatabaseProvider provider.
@@ -30,7 +31,7 @@ export class DatabaseProvider {
         .then((db: SQLiteObject) => {
           this.db = db;
           db.executeSql(
-            "CREATE TABLE IF NOT EXISTS 'bowlers' (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_average INTEGER, bowler_score INTEGER, bowler_handicapPins INTEGER, bowler_date DATE)",
+            "CREATE TABLE IF NOT EXISTS 'bowlers' (bowler_id INTEGER PRIMARY KEY AUTOINCREMENT, bowler_name TEXT, bowler_gender TEXT, bowler_average INTEGER, bowler_score INTEGER, bowler_handicapPins INTEGER, bowler_date INTEGER)",
             []
           )
             .then(res => console.log("Executed SQL for bowlers"))
@@ -281,7 +282,8 @@ export class DatabaseProvider {
                 bowler_name: data.rows.item(i).bowler_name,
                 bowler_gender: data.rows.item(i).bowler_gender,
                 bowler_handicap: data.rows.item(i).bowler_handicap,
-                bowler_average: data.rows.item(i).bowler_average
+                bowler_average: data.rows.item(i).bowler_average,
+                bowler_date: data.rows.item(i).bowler_date
               });
             }
           }
@@ -342,6 +344,28 @@ export class DatabaseProvider {
     console.log("Clearing Teams");
     return new Promise((resolve, reject) => {
       this.db.executeSql("DELETE FROM team");
+      error => {
+        reject(error);
+      };
+    });
+  }
+
+  //update date for bowler to remember in checklist
+  PresentBowler(id: any){
+    console.log("marking present bowler id "+id);
+    return new Promise((resolve, reject) =>{
+      this.db.executeSql("UPDATE bowlers SET bowler_date = 1 WHERE bowler_id = ?", [id]);
+      error => {
+        reject(error);
+      };
+    });
+  }
+
+  //mark non-present bowlers date as null, to prevent them being checked
+  AbsentBowler(id: any){
+    console.log("marking bowler absent with id "+id);
+    return new Promise((resolve, reject) =>{
+      this.db.executeSql("UPDATE bowlers SET bowler_date = 0 WHERE bowler_id = ?", [id]);
       error => {
         reject(error);
       };
