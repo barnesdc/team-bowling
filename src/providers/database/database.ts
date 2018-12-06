@@ -159,10 +159,10 @@ export class DatabaseProvider {
     let sqlite_date = date.toISOString;
     return new Promise((resolve, reject) => {
       let sql =
-        "INSERT into scores (bowler_id, score_score, SELECT (strftime('%d-%m-%Y', 'now'))) VALUES (?,?)";
+        "INSERT into scores (bowler_id, score_score, score_date) VALUES (?,?,?)";
       this.db.executeSql(sql, [bowler_id, bowler_score, sqlite_date]).then(
         data => {
-          console.log("Inserted new score into table");
+          console.log("Inserted new score: " + bowler_score + " into table");
           resolve(data);
         },
         error => {
@@ -175,14 +175,28 @@ export class DatabaseProvider {
   /*****************************************************/
   /*            Update bowlers avg U/I                 */
   /*****************************************************/
+
+  /* This may be a better approach using a trigger
+
+  CREATE TRIGGER update_average_value_after_insert
+  AFTER INSERT ON table_1
+  FOR EACH ROW
+  BEGIN
+      UPDATE table_2
+      SET average_value = (SELECT AVG(value)
+                          FROM table1
+                          WHERE table1.field = NEW.field)
+      WHERE field = NEW.field;
+  END;
+  */
   updateAverage(bowler_id: number) {
     return new Promise((resolve, reject) => {
       let sql =
-        "UPDATE bowlers SET bowler_average = (SELECT AVG(scores_score) FROM scores WHERE bowler_id = ?)";
-
-      this.db.executeSql(sql, [bowler_id]).then(
+        "UPDATE bowlers SET bowler_average = (SELECT round(avg (score_score),2) FROM scores WHERE bowler_id = ?) WHERE bowler_id = ?";
+      console.log("updated bowler_id: " + bowler_id);
+      this.db.executeSql(sql, [bowler_id, bowler_id]).then(
         data => {
-          console.log("Update bowlers averages");
+          console.log("Updated bowler_id: " + bowler_id + " averages");
           resolve(data);
         },
         error => {

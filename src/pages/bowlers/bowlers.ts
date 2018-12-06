@@ -6,6 +6,7 @@ import { AlertController } from "ionic-angular";
 import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
 import { TeamsPage } from "../teams/teams";
+import { GamesScoresPage } from "../games-scores/games-scores";
 
 @Component({
   selector: "page-bowlers",
@@ -320,6 +321,18 @@ export class BowlersPage {
       });
   }
 
+  //Alert user if none selected
+  presentAlert0() {
+    let alert = this.alertCtrl.create({
+      title: "Warning",
+      subTitle:
+        "You currently have selected " +
+        this.checked.length +
+        " bowlers! Add 3 bowlers to start game!",
+      buttons: ["Dismiss"]
+    });
+    alert.present();
+  }
   //Alert user if selected number of bowlers do not evenly fill out teams of 3
   presentAlert1() {
     let alert = this.alertCtrl.create({
@@ -347,7 +360,9 @@ export class BowlersPage {
 
   //console logs values in checked[] array, goes to teams page and shares checked[] array to teams page
   showNextPage() {
-    if (
+    if (this.checked.length == 0) {
+      this.presentAlert0();
+    } else if (
       (this.checked.length % 3 >= -0.1 &&
         this.checked.length % 3 <= 0.1 &&
         this.checked.length != 0) ||
@@ -377,7 +392,34 @@ export class BowlersPage {
     for (var i = 0; i < numBowlersToDelete; i++) {
       console.log("Bowler deleted: " + this.checked[i]);
       this.database.DeleteBowler(this.checked[i]); //key value pair
-      this.GetAllBowlers();
+      this.removeCheckedFromArray(this.checked[i]);
     }
+    this.GetAllBowlers();
+  }
+  goToHomePage() {
+    this.navCtrl.setRoot(GamesScoresPage);
+  }
+
+  showDeleteConfirm() {
+    const confirm = this.alertCtrl.create({
+      title: "GoBack",
+      message: "Are you sure you want to delete selected bowler(s)?",
+      buttons: [
+        {
+          text: "No",
+          handler: () => {
+            console.log("Return to teams pages");
+          }
+        },
+        {
+          text: "Delete",
+          handler: () => {
+            console.log("Delete bowler(s)");
+            this.deleteBowler();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

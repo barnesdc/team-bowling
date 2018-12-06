@@ -1,5 +1,10 @@
 <ion-header>
-  <ion-navbar> <ion-title> Bowlers </ion-title> </ion-navbar>
+  <ion-navbar>
+    <ion-title> Bowlers </ion-title>
+    <button ion-fab on-click="goToHomePage()" item-end>
+      <ion-icon name="home"></ion-icon>
+    </button>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding id="page3">
@@ -14,7 +19,7 @@
   <ion-list>
     <ion-grid>
       <ion-row>
-        <ion-col col-sm><ion-checkbox checked="false"></ion-checkbox></ion-col>
+        <ion-col col-sm><ion-checkbox disabled="true"></ion-checkbox></ion-col>
         <ion-col col-4>Name</ion-col>
         <ion-col col-sm>Gender</ion-col>
         <ion-col>Average</ion-col>
@@ -85,7 +90,7 @@
             ion-button
             color="danger"
             icon-end
-            on-click="deleteBowler()"
+            on-click="showDeleteConfirm()"
             float-start
           >
             Delete
