@@ -46,7 +46,6 @@ export class BowlersPage {
     this.GetAllBowlers();
   }
   ionViewWillEnter() {
-    this.GetAllBowlers();
   }
 
   //adds checked names to checked[] array and if unchecked, removes it from checked[] array
@@ -208,10 +207,19 @@ export class BowlersPage {
   }
 
   //Alert user if selected number of bowlers do not evenly fill out teams of 3
-  presentAlert() {
+  presentAlert1() {
     let alert = this.alertCtrl.create({
       title: "Warning",
-      subTitle: "Cannot make teams of three from selected bowlers!",
+      subTitle: "You currently have selected "+this.checked.length+" bowlers! Add 2 bowlers or remove 1 bowler to start game!",
+      buttons: ["Dismiss"]
+    });
+    alert.present();
+  }
+
+  presentAlert2() {
+    let alert = this.alertCtrl.create({
+      title: "Warning",
+      subTitle: "You currently have selected "+this.checked.length+" bowlers! Add 1 bowler or remove 2 bowlers to start game!",
       buttons: ["Dismiss"]
     });
     alert.present();
@@ -230,9 +238,11 @@ export class BowlersPage {
       this.navCtrl.push(TeamsPage, {
         checked: this.checked
       });
-    } else {
+    } else if(this.checked.length%3 >= 0.9 && this.checked.length%3 <= 1.1){
       //Alerts user if teams cannot be made with 3 people
-      this.presentAlert();
+      this.presentAlert1();
+    } else {
+      this.presentAlert2();
     }
   }
 
