@@ -199,7 +199,24 @@ export class TeamsPage {
 
     //if no errors have occured when calculating scores, the teams and scores will be pushed to the scores page and presented to the user
     if (show) {
-      //this.database.updateAverage(this.ListTeam[i].);
+      // this.database.updateAverage(
+      //   this.ListTeam[i]["score"],
+      //   this.ListTeam[i]["bowler_id"]
+      // );
+      for (var i = 0; i < this.ListTeam.length; i++) {
+        // test score output
+        // window.alert(
+        //   "Score: " +
+        //     this.ListTeam[i]["score"] +
+        //     "\nBowlerId: " +
+        //     this.ListTeam[i]["bowler_id"]
+        // );
+        this.database.insertScore(
+          this.ListTeam[i]["score"],
+          this.ListTeam[i]["bowler_id"]
+        );
+        this.database.updateAverage(this.ListTeam[i]["bowler_id"]);
+      }
       this.navCtrl.push(GamesScoresPage, {
         Teams: this.ListTeam
       });

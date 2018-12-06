@@ -150,15 +150,39 @@ export class DatabaseProvider {
         });
     });
   }
+
+  /*****************************************************/
+  /*            Insert bowlers score                   */
+  /*****************************************************/
+  insertScore(bowler_score: number, bowler_id: number) {
+    let date = new Date();
+    let sqlite_date = date.toISOString;
+    return new Promise((resolve, reject) => {
+      let sql =
+        "INSERT into scores (bowler_id, score_score, SELECT (strftime('%d-%m-%Y', 'now'))) VALUES (?,?)";
+      this.db.executeSql(sql, [bowler_id, bowler_score, sqlite_date]).then(
+        data => {
+          console.log("Inserted new score into table");
+          resolve(data);
+        },
+        error => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+  }
   /*****************************************************/
   /*            Update bowlers avg U/I                 */
   /*****************************************************/
-  updateAverage(bowler_id: number, bowler_average: number) {
+  updateAverage(bowler_id: number) {
     return new Promise((resolve, reject) => {
-      let sql = "UPDATE bowler_average FROM bowlers where bowler_id = ?";
+      let sql =
+        "UPDATE bowlers SET bowler_average = (SELECT AVG(scores_score) FROM scores WHERE bowler_id = ?)";
+
       this.db.executeSql(sql, [bowler_id]).then(
         data => {
-          console.log("update average");
+          console.log("Update bowlers averages");
           resolve(data);
         },
         error => {
@@ -351,10 +375,13 @@ export class DatabaseProvider {
   }
 
   //update date for bowler to remember in checklist
-  PresentBowler(id: any){
-    console.log("marking present bowler id "+id);
-    return new Promise((resolve, reject) =>{
-      this.db.executeSql("UPDATE bowlers SET bowler_date = 1 WHERE bowler_id = ?", [id]);
+  PresentBowler(id: any) {
+    console.log("marking present bowler id " + id);
+    return new Promise((resolve, reject) => {
+      this.db.executeSql(
+        "UPDATE bowlers SET bowler_date = 1 WHERE bowler_id = ?",
+        [id]
+      );
       error => {
         reject(error);
       };
@@ -362,10 +389,13 @@ export class DatabaseProvider {
   }
 
   //mark non-present bowlers date as null, to prevent them being checked
-  AbsentBowler(id: any){
-    console.log("marking bowler absent with id "+id);
-    return new Promise((resolve, reject) =>{
-      this.db.executeSql("UPDATE bowlers SET bowler_date = 0 WHERE bowler_id = ?", [id]);
+  AbsentBowler(id: any) {
+    console.log("marking bowler absent with id " + id);
+    return new Promise((resolve, reject) => {
+      this.db.executeSql(
+        "UPDATE bowlers SET bowler_date = 0 WHERE bowler_id = ?",
+        [id]
+      );
       error => {
         reject(error);
       };

@@ -41,49 +41,22 @@
       </div>
     -->
 
-    <ion-card-content *ngIf="ShowWinner">
-      <ion-card-title> First Place: Team {{ winningTeam }}: </ion-card-title>
+    <ng-container *ngIf="ShowWinner">
+      <div *ngFor="let rank of rank; let count = index">
+        <ion-card-title>
+          Team {{ Teams[rank].team_id }}: Rank {{ count + 1 }}
+        </ion-card-title>
 
-      <div>
-        <strong>Score: {{ winningScore }} </strong> <br />
-        <p>
-          Bowlers: <br />{{ winningMembers[0] }} <br />{{ winningMembers[1] }}
-          <br />{{ winningMembers[2] }}
-        </p>
+        <div>
+          <strong>Score: {{ totalScores[count] }} </strong> <br />
+          <p>
+            Bowlers: <br />{{ Teams[rank].bowler_name }}:
+            {{ Teams[rank].score }} <br />{{ Teams[rank + 1].bowler_name }}:
+            {{ Teams[rank + 1].score }} <br />{{ Teams[rank + 2].bowler_name }}:
+            {{ Teams[rank + 2].score }}
+          </p>
+        </div>
       </div>
-    </ion-card-content>
-
-    <!-- Second place winner -->
-    <ion-card-content *ngIf="ShowSecond">
-      <ion-card-title> Second Place: Team {{ secondTeam }}: </ion-card-title>
-
-      <div>
-        <strong>Score: {{ secondScore }} </strong> <br />
-        <p>
-          Bowlers: <br />{{ secondMembers[0] }} <br />{{ secondMembers[1] }}
-          <br />{{ secondMembers[2] }}
-        </p>
-      </div>
-    </ion-card-content>
-
-    <!-- third place winner -->
-    <ion-card-content *ngIf="ShowThird">
-      <ion-card-title> Winner is Team {{ thirdTeam }}: </ion-card-title>
-
-      <div>
-        <strong>Score: {{ thirdTeam }} </strong> <br />
-        <p>
-          Bowlers: <br />{{ thirdMembers[0] }} <br />{{ thirdMembers[1] }}
-          <br />{{ thirdMembers[2] }}
-        </p>
-      </div>
-    </ion-card-content>
-
-    <!-- tie game -->
-    <ion-card-content *ngIf="tie">
-      <ion-card-title>
-        Team {{ tieTeams[0] }} and Team {{ tieTeams[1] }} have tied!
-      </ion-card-title>
-    </ion-card-content>
+    </ng-container>
   </ion-card>
 </ion-content>

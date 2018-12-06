@@ -117,14 +117,12 @@ export class BowlersPage {
     );
   }
 
-  // update bowler
-  UpdateBowler() {}
   //Generates an alert prompt to create a new bowler. User enters bowler information and then this information is stored in the bowler table.
   AddBowlerPrompt() {
     const prompt = this.alertCtrl.create({
       title: "Add Bowler",
       message:
-        "Fill out the following boxes to add your bowler. Average and Handicap defaults to 0",
+        "Fill out the following boxes to add your bowler. Average and Handicap default to 0",
       inputs: [
         {
           name: "Name",
@@ -151,31 +149,75 @@ export class BowlersPage {
           handler: data => {
             console.log(JSON.stringify(data));
             console.log((data.Average % 1) + " modded");
-            if (data.Name == "" && data.Average == "" && data.Handicap == "") {
-              prompt.setMessage("Error: Enter in bowler info or click cancel.");
+            // empty name error
+            if (data.Name == "") {
+              prompt.setMessage("Invalid Entry. Enter in a name.");
               return false;
-            } else if (data.Average < 0 || data.Average > 300) {
+            }
+            // average & handicap out of range
+            else if (
+              (data.Average < 0 || data.Average > 300) &&
+              (data.Handicap < 0 || data.Handicap > 30)
+            ) {
               prompt.setMessage(
-                "Error: Average can not be less than 0 or greater than 300 "
+                "Invalid Entry. Verify numbers within valid range \nAverage: 0-300 & \nHandicap: 0-30."
               );
               return false;
-            } else if (data.Handicap < 0 || data.Handicap > 30) {
+            }
+            // average out of range
+            else if (data.Average < 0 || data.Average > 300) {
+              prompt.setMessage("Invalid Entry. Out of range\nAverage: 0-300.");
+              return false;
+            }
+            // handicap out of range
+            else if (data.Handicap < 0 || data.Handicap > 30) {
               prompt.setMessage(
-                "Error: Handicap can not be less than 0 or greater than 30 "
+                "Invalid Entry. Out of range\nHandicap: 0-300."
               );
               return false;
-            } else if (data.Average == "" || data.Handicap == "") {
+            }
+            // average and handicap null
+            else if (data.Average == "" && data.Handicap == "") {
               this.database.CreateBowler(data.Name, "M", 0, 0, null);
-            } else if (
+            }
+            // average null and handicap valid
+            else if (
               data.Average >= 0 &&
               data.Average <= 300 &&
+              data.Handicap == "" &&
+              data.Handicap == "" &&
+              data.Handicap % 1 == 0
+            ) {
+              this.database.CreateBowler(data.Name, "M", data.Average, 0, null);
+            }
+            // average valid and handicap null
+            else if (
+              data.Average == "" &&
+              data.Average == "" &&
               data.Handicap >= 0 &&
               data.Handicap <= 30 &&
               data.Handicap % 1 == 0
             ) {
               this.database.CreateBowler(
                 data.Name,
-                "Male",
+                "M",
+                0,
+                data.Handicap,
+                null
+              );
+            }
+            // all entries valid
+            else if (
+              data.Average >= 0 &&
+              data.Average <= 300 &&
+              data.Handicap >= 0 &&
+              data.Handicap <= 30 &&
+              data.Name != "" &&
+              data.Handicap % 1 == 0
+            ) {
+              this.database.CreateBowler(
+                data.Name,
+                "M",
                 data.Average,
                 data.Handicap,
                 null
@@ -190,21 +232,75 @@ export class BowlersPage {
           text: "Female",
           handler: data => {
             console.log(JSON.stringify(data));
+            // empty name error
             if (data.Name == "") {
-              prompt.setMessage("Invalid Entry. Enter in a name");
-            } else if (data.Average == 0 || data.Average == "") {
+              prompt.setMessage("Invalid Entry. Enter in a name.");
+              return false;
+            }
+            // average & handicap out of range
+            else if (
+              (data.Average < 0 || data.Average > 300) &&
+              (data.Handicap < 0 || data.Handicap > 30)
+            ) {
+              prompt.setMessage(
+                "Invalid Entry. Verify numbers within valid range \nAverage: 0-300 & \nHandicap: 0-30."
+              );
+              return false;
+            }
+            // average out of range
+            else if (data.Average < 0 || data.Average > 300) {
+              prompt.setMessage("Invalid Entry. Out of range\nAverage: 0-300.");
+              return false;
+            }
+            // handicap out of range
+            else if (data.Handicap < 0 || data.Handicap > 30) {
+              prompt.setMessage(
+                "Invalid Entry. Out of range\nHandicap: 0-300."
+              );
+              return false;
+            }
+            // average and handicap null
+            else if (data.Average == "" && data.Handicap == "") {
               this.database.CreateBowler(data.Name, "F", 0, 0, null);
-            } else if (
-              data.Average > 0 &&
+            }
+            // average null and handicap valid
+            else if (
+              data.Average >= 0 &&
               data.Average <= 300 &&
-              data.Handicap > 0 &&
+              data.Handicap == "" &&
+              data.Handicap == "" &&
+              data.Handicap % 1 == 0
+            ) {
+              this.database.CreateBowler(data.Name, "F", data.Average, 0, null);
+            }
+            // average valid and handicap null
+            else if (
+              data.Average == "" &&
+              data.Average == "" &&
+              data.Handicap >= 0 &&
               data.Handicap <= 30 &&
-              data.Name != "" &&
-              data.Average % 1 == 0
+              data.Handicap % 1 == 0
             ) {
               this.database.CreateBowler(
                 data.Name,
-                "Female",
+                "F",
+                0,
+                data.Handicap,
+                null
+              );
+            }
+            // all entries valid
+            else if (
+              data.Average >= 0 &&
+              data.Average <= 300 &&
+              data.Handicap >= 0 &&
+              data.Handicap <= 30 &&
+              data.Name != "" &&
+              data.Handicap % 1 == 0
+            ) {
+              this.database.CreateBowler(
+                data.Name,
+                "F",
                 data.Average,
                 data.Handicap,
                 null
@@ -225,10 +321,25 @@ export class BowlersPage {
   }
 
   //Alert user if selected number of bowlers do not evenly fill out teams of 3
-  presentAlert() {
+  presentAlert1() {
     let alert = this.alertCtrl.create({
       title: "Warning",
-      subTitle: "Cannot make teams of three from selected bowlers!",
+      subTitle:
+        "You currently have selected " +
+        this.checked.length +
+        " bowlers! Add 2 bowlers or remove 1 bowler to start game!",
+      buttons: ["Dismiss"]
+    });
+    alert.present();
+  }
+
+  presentAlert2() {
+    let alert = this.alertCtrl.create({
+      title: "Warning",
+      subTitle:
+        "You currently have selected " +
+        this.checked.length +
+        " bowlers! Add 1 bowler or remove 2 bowlers to start game!",
       buttons: ["Dismiss"]
     });
     alert.present();
@@ -244,12 +355,17 @@ export class BowlersPage {
         this.checked.length % 3 >= -0.1 &&
         this.checked.length % 3 <= 0.1)
     ) {
-      this.navCtrl.push(TeamsPage, {
+      this.navCtrl.setRoot(TeamsPage, {
         checked: this.checked
       });
-    } else {
+    } else if (
+      this.checked.length % 3 >= 0.9 &&
+      this.checked.length % 3 <= 1.1
+    ) {
       //Alerts user if teams cannot be made with 3 people
-      this.presentAlert();
+      this.presentAlert1();
+    } else {
+      this.presentAlert2();
     }
   }
 
