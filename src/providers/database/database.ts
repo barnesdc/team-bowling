@@ -440,6 +440,7 @@ CREATE TABLE 'game'(
 
 CREATE TABLE 'scores'(
   bowler_id INTEGER ,
+  score_score
   score_date DATE ,
   FOREIGN KEY (bowler_id)references bowler(bowler_id));
 
