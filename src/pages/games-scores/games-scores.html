@@ -42,13 +42,11 @@
     -->
 
     <ion-card-content *ngIf="ShowWinner">
-      <ion-card-title style="color: white">
-        First Place: Team {{ winningTeam }}:
-      </ion-card-title>
+      <ion-card-title> First Place: Team {{ winningTeam }}: </ion-card-title>
 
       <div>
         <strong>Score: {{ winningScore }} </strong> <br />
-        <p style="color: white">
+        <p>
           Bowlers: <br />{{ winningMembers[0] }} <br />{{ winningMembers[1] }}
           <br />{{ winningMembers[2] }}
         </p>
@@ -57,13 +55,11 @@
 
     <!-- Second place winner -->
     <ion-card-content *ngIf="ShowSecond">
-      <ion-card-title style="color: white">
-        Second Place: Team {{ secondTeam }}:
-      </ion-card-title>
+      <ion-card-title> Second Place: Team {{ secondTeam }}: </ion-card-title>
 
       <div>
         <strong>Score: {{ secondScore }} </strong> <br />
-        <p style="color: white">
+        <p>
           Bowlers: <br />{{ secondMembers[0] }} <br />{{ secondMembers[1] }}
           <br />{{ secondMembers[2] }}
         </p>
@@ -72,13 +68,11 @@
 
     <!-- third place winner -->
     <ion-card-content *ngIf="ShowThird">
-      <ion-card-title style="color: white">
-        Winner is Team {{ thirdTeam }}:
-      </ion-card-title>
+      <ion-card-title> Winner is Team {{ thirdTeam }}: </ion-card-title>
 
       <div>
         <strong>Score: {{ thirdTeam }} </strong> <br />
-        <p style="color: white">
+        <p>
           Bowlers: <br />{{ thirdMembers[0] }} <br />{{ thirdMembers[1] }}
           <br />{{ thirdMembers[2] }}
         </p>
@@ -87,7 +81,7 @@
 
     <!-- tie game -->
     <ion-card-content *ngIf="tie">
-      <ion-card-title style="color: white">
+      <ion-card-title>
         Team {{ tieTeams[0] }} and Team {{ tieTeams[1] }} have tied!
       </ion-card-title>
     </ion-card-content>

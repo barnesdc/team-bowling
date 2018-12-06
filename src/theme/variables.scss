@@ -5,15 +5,12 @@
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
 
-
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
 // http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
 
-
 @import "ionic.globals";
-
 
 // Shared Variables
 // --------------------------------------------------
@@ -21,9 +18,6 @@ $app-direction: ltr;
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
-
-
 
 // Named Color Variables
 // --------------------------------------------------
@@ -34,52 +28,44 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #1f2c38,
-  secondary:  #fdb927,
-  pale-sky:   #6b717f,
-  nebula:     #d2e1dd,
-  iron:       #dadbdf,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  medium:     #c2c2c2,
-  dark:       #222
+  primary: #1f2c38,
+  secondary: #fdb927,
+  pale-sky: #6b717f,
+  nebula: #d2e1dd,
+  iron: #dadbdf,
+  danger: #f53d3d,
+  light: #f4f4f4,
+  medium: #c2c2c2,
+  dark: #222
 );
 
 //Generic customizations
 //--------------------------------------------------
 //Top Toolbar
-$toolbar-md-background: color($colors, secondary);
+// $toolbar-md-background: color($colors, secondary);
 
 //Bottom Buttons
-$tabs-md-background: color($colors, secondary);
-$tabs-md-tab-icon-color: color($colors, primary);
-$tabs-md-tab-text-color: color($colors, primary);
+// $tabs-md-background: color($colors, secondary);
+// $tabs-md-tab-icon-color: color($colors, primary);
+// $tabs-md-tab-text-color: color($colors, primary);
 
 //input background colors
-$list-md-background-color: color($colors, primary);
+// $list-md-background-color: color($colors, primary);
 
 //page background color
-$background-color: color($colors, primary);
+// $background-color: color($colors, primary);
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
-
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
-
 
 // App Theme
 // --------------------------------------------------
@@ -90,14 +76,12 @@ $background-color: color($colors, primary);
 
 @import "ionic.theme.default";
 
-
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/ionicons/
 
 @import "ionic.ionicons";
-
 
 // Fonts
 // --------------------------------------------------

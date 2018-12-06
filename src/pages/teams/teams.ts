@@ -5,7 +5,6 @@ import { FormsModule } from "@angular/forms";
 
 import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
-import { LoginPage } from "../login/login";
 import { GamesScoresPage } from "../games-scores/games-scores";
 import { BowlersPage } from "../bowlers/bowlers";
 
@@ -22,6 +21,17 @@ import { BowlersPage } from "../bowlers/bowlers";
 })
 export class TeamsPage {
   teams: any[];
+
+  // prettier-ignore
+  // rows = [
+  //   {
+  //     "Team": "1",
+  //     "Handicap": 10,
+  //     "Name": "John",
+  //     "Score": 300
+  //   }
+  // ];
+
   constructor(
     public alertCtrl: AlertController,
     public navCtrl: NavController,

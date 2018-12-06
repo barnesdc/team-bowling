@@ -12,7 +12,7 @@ import { InformationPage } from "../pages/information/information";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
-// firebase imports
+// firebase imports for future use
 // import { AngularFireModule } from "angularfire2";
 // import { AngularFireAuth } from "angularfire2/auth";
 // import { AngularFireAuthModule } from "angularfire2/auth"; // authentication
@@ -44,7 +44,7 @@ import { BowlersPage } from "../pages/bowlers/bowlers";
     // AngularFireAuthModule,
     // AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     // AngularFireDatabaseModule,
-    HttpModule
+    HttpModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

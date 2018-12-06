@@ -21,26 +21,84 @@
       Randomize Teams
     </button>
     <h2 class="heads">Teams List:</h2>
-    <ion-item-sliding *ngFor="let bowler of ListTeam" #item>
-      <!-- generates list of teams and bowler information -->
-      <ion-item id="bowlers-list-item-container6">
-        <h3>Team #: {{ bowler.team_id }}</h3>
-        <h3>Bowler Handicap: {{ bowler.bowler_handicapPins }}</h3>
-        <h3>
-          Bowler Name: <strong>{{ bowler.bowler_name }}</strong>
-        </h3>
-      </ion-item>
-      <ion-item>
-        <ion-label style="color: white">Score:</ion-label>
-        <ion-input
-          type="number"
-          [(ngModel)]="bowler.score"
-          placeholder="Enter Score"
-        ></ion-input>
-      </ion-item>
-    </ion-item-sliding>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>Team</ion-col>
+        <ion-col>Name</ion-col>
+        <ion-col>Score</ion-col>
+        <ion-col>Handicap</ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngFor="let bowler of ListTeam">
+      <ion-row>
+        <ion-col col-2>{{ bowler.team_id }}</ion-col>
+        <ion-col>{{ bowler.bowler_name }}</ion-col>
+        <ion-col>
+          <ion-input
+            type="number"
+            [(ngModel)]="bowler.score"
+            placeholder="Score"
+          ></ion-input
+        ></ion-col>
+        <ion-col>{{ bowler.bowler_handicapPins }}</ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-list>
+  <!--
+    <ion-grid> <ion-row></ion-row> </ion-grid>
+      <ion-item-sliding *ngFor="let bowler of ListTeam" #item>
+        generates list of teams and bowler information
+        <ion-item id="bowlers-list-item-container6">
+          <h3>Team #: {{ bowler.team_id }}</h3>
+          <h3>Bowler Handicap: {{ bowler.bowler_handicapPins }}</h3>
+          <h3>
+            Bowler Name: <strong>{{ bowler.bowler_name }}</strong>
+          </h3>
+        </ion-item>
+        <ion-item>
+          <ion-label>Score:</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="bowler.score"
+            placeholder="Enter Score"
+          ></ion-input>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  -->
 </ion-content>
+
+<!-- working on table to show teams -->
+<!--
+  <ion-content padding id="page3">
+    <button
+      ion-button
+      block
+      on-click="showRandomizeConfirm()"
+      round
+      color="secondary"
+    >
+      Randomize Teams
+    </button>
+    <hr />
+
+    <ngx-datatable
+      class="fullscreen"
+      [ngClass]="tablestyle"
+      [rows]="rows"
+      [columnMode]="'force'"
+      [sortType]="'multi'"
+      [reorderable]="false"
+    >
+      <ngx-datatable-column name="Team"> </ngx-datatable-column>
+      <ngx-datatable-column name="Handicap"></ngx-datatable-column>
+      <ngx-datatable-column name="Name"></ngx-datatable-column>
+      <ngx-datatable-column name="Score"> </ngx-datatable-column>
+    </ngx-datatable>
+  </ion-content>
+-->
+
+<!-- button at bottom of page -->
 <ion-footer>
   <ion-toolbar>
     <ion-grid>

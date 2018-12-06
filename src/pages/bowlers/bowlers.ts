@@ -18,12 +18,13 @@ export class BowlersPage {
     public navCtrl: NavController,
     private database: DatabaseProvider
   ) {
-    this.bowlers = [
-      { label: "A", name: "A", gender: "male", average: 257 },
-      { label: "B", name: "B", gender: "male", average: 100 },
-      { label: "C", name: "C", gender: "male", average: 175 },
-      { label: "D", name: "D", gender: "female", average: 200 }
-    ];
+    // test bowler object
+    // this.bowlers = [
+    //   { label: "A", name: "A", gender: "male", average: 257 },
+    //   { label: "B", name: "B", gender: "male", average: 100 },
+    //   { label: "C", name: "C", gender: "male", average: 175 },
+    //   { label: "D", name: "D", gender: "female", average: 200 }
+    // ];
   }
 
   //refreshes page
@@ -67,11 +68,11 @@ export class BowlersPage {
     }
   }
 
-  verifyList(date: any){
-    console.log("date: "+date);
-    if(date == 1){
+  verifyList(date: any) {
+    console.log("date: " + date);
+    if (date == 1) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
@@ -90,8 +91,11 @@ export class BowlersPage {
 
   //Log elements of checked[] array
   getCheckedBoxes() {
-    for(var i=0; i<this.ListBowler.length; i++){
-      if(this.ListBowler[i]["bowler_date"] == 1 && this.checked.length != this.ListBowler.length){
+    for (var i = 0; i < this.ListBowler.length; i++) {
+      if (
+        this.ListBowler[i]["bowler_date"] == 1 &&
+        this.checked.length != this.ListBowler.length
+      ) {
         this.checked.push(this.ListBowler[i]["bowler_id"]);
       }
     }
@@ -113,11 +117,14 @@ export class BowlersPage {
     );
   }
 
+  // update bowler
+  UpdateBowler() {}
   //Generates an alert prompt to create a new bowler. User enters bowler information and then this information is stored in the bowler table.
   AddBowlerPrompt() {
     const prompt = this.alertCtrl.create({
       title: "Add Bowler",
-      message: "Fill out the following boxes to enter your bowler",
+      message:
+        "Fill out the following boxes to add your bowler. Average and Handicap defaults to 0",
       inputs: [
         {
           name: "Name",
@@ -125,16 +132,12 @@ export class BowlersPage {
         },
         {
           name: "Average",
-          placeholder: "Average (Enter 0 if none)"
+          placeholder: "Average (Enter 0-300)"
         },
         {
           name: "Handicap",
-          placeholder: "Handicap amount"
+          placeholder: "Handicap (Enter 0-30)"
         }
-        // {
-        //   name: 'AverageScore',
-        //   placeholder: 'Average Score (Ex. 200)'
-        // },
       ],
       buttons: [
         {
@@ -148,14 +151,26 @@ export class BowlersPage {
           handler: data => {
             console.log(JSON.stringify(data));
             console.log((data.Average % 1) + " modded");
-            if (
+            if (data.Name == "" && data.Average == "" && data.Handicap == "") {
+              prompt.setMessage("Error: Enter in bowler info or click cancel.");
+              return false;
+            } else if (data.Average < 0 || data.Average > 300) {
+              prompt.setMessage(
+                "Error: Average can not be less than 0 or greater than 300 "
+              );
+              return false;
+            } else if (data.Handicap < 0 || data.Handicap > 30) {
+              prompt.setMessage(
+                "Error: Handicap can not be less than 0 or greater than 30 "
+              );
+              return false;
+            } else if (data.Average == "" || data.Handicap == "") {
+              this.database.CreateBowler(data.Name, "M", 0, 0, null);
+            } else if (
               data.Average >= 0 &&
               data.Average <= 300 &&
               data.Handicap >= 0 &&
               data.Handicap <= 30 &&
-              data.Average != "" &&
-              data.Handicap != "" &&
-              data.Name != "" &&
               data.Handicap % 1 == 0
             ) {
               this.database.CreateBowler(
@@ -166,7 +181,7 @@ export class BowlersPage {
                 null
               );
             } else {
-              prompt.setMessage("Invalid Entry");
+              prompt.setMessage("Error: try again");
               return false;
             }
           }
@@ -175,13 +190,15 @@ export class BowlersPage {
           text: "Female",
           handler: data => {
             console.log(JSON.stringify(data));
-            if (
-              data.Average >= 0 &&
+            if (data.Name == "") {
+              prompt.setMessage("Invalid Entry. Enter in a name");
+            } else if (data.Average == 0 || data.Average == "") {
+              this.database.CreateBowler(data.Name, "F", 0, 0, null);
+            } else if (
+              data.Average > 0 &&
               data.Average <= 300 &&
-              data.Handicap >= 0 &&
+              data.Handicap > 0 &&
               data.Handicap <= 30 &&
-              data.Average != "" &&
-              data.Handicap != "" &&
               data.Name != "" &&
               data.Average % 1 == 0
             ) {
