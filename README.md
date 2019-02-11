@@ -38,6 +38,7 @@ Advisory Meeting Weekly
 ## Need to update documentation on how to run cordova emulator
 
 - use cordova requirements
+  - verify your development environment is set up for cordova with: ionic cordova requirements
 - ionic cordova run ios --target="iPhone-x, 12.9" ??
 - Issues with IOS 12
   - ionic cordova emulate ios -- --buildFlag="-UseModernBuildSystem=0"
