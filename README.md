@@ -58,3 +58,7 @@ Advisory Meeting Weekly
   - missing team: https://stackoverflow.com/questions/19407439/general-tab-missing
   - ionic starter bundle issue: https://forums.developer.apple.com/thread/81887
 
+## Future Enhancments
+  - Utilizing NGX-Datatable
+    - http://swimlane.github.io/ngx-datatable/#multiple-tables
+    - https://github.com/swimlane/ngx-datatable/blob/master/demo/basic/multiple.component.ts
