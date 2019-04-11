@@ -7,6 +7,9 @@ import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
 import { TeamsPage } from "../teams/teams";
 import { GamesScoresPage } from "../games-scores/games-scores";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+
 
 @Component({
   selector: "page-bowlers",
@@ -14,6 +17,9 @@ import { GamesScoresPage } from "../games-scores/games-scores";
 })
 export class BowlersPage {
   bowlers: any[];
+  descending: boolean = false;
+  order: number;
+  column: string = "bowler_name";
   constructor(
     public alertCtrl: AlertController,
     public navCtrl: NavController,
@@ -116,6 +122,11 @@ export class BowlersPage {
         console.log(error);
       }
     );
+  }
+
+  sort(){
+    this.descending = !this.descending;
+    this.order = this.descending ? 1 : -1;
   }
 
   //Generates an alert prompt to create a new bowler. User enters bowler information and then this information is stored in the bowler table.

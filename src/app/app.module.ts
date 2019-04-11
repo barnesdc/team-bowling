@@ -27,6 +27,9 @@ import { SQLite } from "@ionic-native/sqlite";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
 import { BowlersPage } from "../pages/bowlers/bowlers";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { HttpClientModule } from "@angular/common/http";
+import { GroupmeProvider } from "../providers/groupme/groupme";
 
 @NgModule({
   declarations: [
@@ -45,6 +48,7 @@ import { BowlersPage } from "../pages/bowlers/bowlers";
     // AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     // AngularFireDatabaseModule,
     HttpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -62,7 +66,8 @@ import { BowlersPage } from "../pages/bowlers/bowlers";
     // AngularFireDatabase,
     // AngularFireAuth,
     SQLite,
-    DatabaseProvider
+    DatabaseProvider,
+    GroupmeProvider
   ]
 })
 export class AppModule {}
