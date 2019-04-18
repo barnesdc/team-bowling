@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http'; 
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'; 
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
-import { stringify } from 'querystring';
+
 
 /*
   Generated class for the GroupmeProvider provider.
@@ -13,7 +10,7 @@ import { stringify } from 'querystring';
 */
 @Injectable()
 export class GroupmeProvider {
-  private botID: string = "77af3b076f4c2027bc79d1eecd";
+  private botID: string = "";
   private apiUrl: string = "https://api.groupme.com/v3/bots/post";
   
   private d1 = new Date().getTime();
@@ -36,30 +33,32 @@ export class GroupmeProvider {
     return num + "th";
   }
 
+  createBot(idBody: any){
+    this.botID = idBody;
+  }
+
   parseTeamBody(body: any){
     var teamBodyString: string = " ";
     for(let i = 0; i < body.length; i++){
-      teamBodyString += "Hello Everyone for todays game: \n" + body[i].bowler_name + " will be on team " + body[i].team_id + "\n Happy Bowling!!!";
+      teamBodyString += body[i].bowler_name + " will be on team " + body[i].team_id + "\n";
     }
 
-    return teamBodyString;
+    return "Hello Everyone for todays game: \n\n" + teamBodyString + "\nHappy Bowling!!!";
   }
 
   parseResultBody(teamBody: any, rankBody: any, scoreBody: any){
     var resultBodyString: string = " ";
     var count: number = 0;
     for(let i = 0; i < rankBody.length; i++){
-      resultBodyString += "Now for the awaited results: \n Team: " + teamBody[rankBody[i]].team_id + " placed " + this.numOrdinal((count + 1)) + 
-                          " with a score of " + scoreBody[count] + "\n" + "Individual bowler scores: \n" +
+      resultBodyString += "Team: " + teamBody[rankBody[i]].team_id + " placed " + this.numOrdinal((count + 1)) + 
+                          " with a score of " + scoreBody[count] + "\n\n" + "Individual bowler scores: \n" +
                           teamBody[rankBody[i]].bowler_name + ": " + teamBody[rankBody[i]].score + " \n" +
                           teamBody[rankBody[i]+1].bowler_name + ": " + teamBody[rankBody[i]+1].score + " \n" +
                           teamBody[rankBody[i]+2].bowler_name + ": " + teamBody[rankBody[i]+2].score + " \n\n ";
       count += 1;
     }
-    return resultBodyString + "Congradulations to the winners!!!";
+    return "Now for the awaited results: \n\n" + resultBodyString + "Congratulations to the winners!!!";
   }
-
-
 
   postTeamData(postBody: any){
     return this.http.post(`${this.apiUrl}`, {bot_id: this.botID, text: this.parseTeamBody(postBody)}).subscribe(value => {
@@ -82,14 +81,3 @@ export class GroupmeProvider {
   }
 
 }
-
-
-/* possible call 
-return new Promise((resolve, reject) => 
-        resolve(this.http.post(`${this.apiUrl}`, {
-          bot_id: this.botID,
-          text: postBody
-        })),  
-    );
-  }
-*/

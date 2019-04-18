@@ -159,7 +159,12 @@ export class TeamsPage {
           console.log(data + "\nI AM WORKING for Teams");
           this.ListTeam = data;
         });*/
-        this.ListTeam = showTeams;
+        this.ListTeam = showTeams.sort(function(a, b) {
+          while(a.team_id == b.team_id){
+          var textA = a.bowler_name.toUpperCase();
+          var textB = b.bowler_name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      }});
         console.log("the number of bowlers are: " + showTeams.length);
 
         this.chat.postTeamData(this.ListTeam);
