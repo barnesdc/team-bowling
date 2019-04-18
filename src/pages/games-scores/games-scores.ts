@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 import { BowlersPage } from "../bowlers/bowlers";
+import { GroupmeProvider } from "../../providers/groupme/groupme";
 
 @Component({
   selector: "page-games-scores",
@@ -9,7 +10,7 @@ import { BowlersPage } from "../bowlers/bowlers";
 export class GamesScoresPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private chat: GroupmeProvider) {}
 
   Teams: any;
   public rank = [];
@@ -21,7 +22,7 @@ export class GamesScoresPage {
   ionViewDidLoad() {
     this.Teams = this.navParams.get("Teams");
     this.calculateWinner();
-  }
+    }
 
   ionViewWillEnter() {}
 
@@ -65,5 +66,6 @@ export class GamesScoresPage {
     }
     console.log("ranks " + this.rank);
     console.log("scores " + this.totalScores);
+    this.chat.postResultData(this.Teams, this.rank, this.totalScores);
   }
 }

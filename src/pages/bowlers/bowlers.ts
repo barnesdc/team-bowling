@@ -7,6 +7,11 @@ import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
 import { TeamsPage } from "../teams/teams";
 import { GamesScoresPage } from "../games-scores/games-scores";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { GroupmeProvider } from "../../providers/groupme/groupme";
+import { checkAndUpdateDirectiveDynamic } from "@angular/core/src/view/provider";
+
+
 
 @Component({
   selector: "page-bowlers",
@@ -14,10 +19,14 @@ import { GamesScoresPage } from "../games-scores/games-scores";
 })
 export class BowlersPage {
   bowlers: any[];
+  descending: boolean = false;
+  order: number;
+  column: string = "bowler_name";
   constructor(
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    private database: DatabaseProvider
+    private database: DatabaseProvider,
+    private chat: GroupmeProvider
   ) {
     // test bowler object
     // this.bowlers = [
@@ -40,9 +49,12 @@ export class BowlersPage {
   }
 
   private ListBowler: any;
+  private botID: any;
 
   //stores array of all bowler id's that are checked in the list
   checked = [];
+
+  counter = 0;
 
   ionViewDidLoad() {
     this.GetAllBowlers();
@@ -59,6 +71,8 @@ export class BowlersPage {
 
       //change date value in bowler table for checked bowler
       this.database.PresentBowler(checkbox);
+
+      this.counter = this.counter + 1;
     } else {
       console.log(checkbox + " unchecked");
       let index = this.removeCheckedFromArray(checkbox);
@@ -66,6 +80,34 @@ export class BowlersPage {
       //change date value in bowler table for unchecked bowler
       this.database.AbsentBowler(checkbox);
       this.checked.splice(index, 1);
+      this.counter = this.counter - 1;
+    }
+  }
+
+  addAllCheckboxes(event){
+    let checkboxes: any;
+    checkboxes = document.getElementsByName("presentBowlers");
+    if (event.checked){
+      console.log("checking all");
+      for (let i = 0; i < this.ListBowler.length; i++){
+        if (checkboxes[i].checked != event.checked){
+          checkboxes[i].checked = event.checked;
+          this.checked.push(this.ListBowler[i].bowler_id);
+          this.database.PresentBowler(this.ListBowler[i].bowler_id);
+          this.counter = this.counter + 1;
+        }
+      }
+    } else {
+      console.log("unchecking all");
+      for (let i = 0; i < this.ListBowler.length; i++){
+        if (checkboxes[i].checked != event.checked){
+          checkboxes[i].checked = event.checked;
+          let index = this.removeCheckedFromArray(this.ListBowler[i].bowler_id);
+          this.database.AbsentBowler(this.ListBowler[i].bowler_id);
+          this.checked.splice(index, 1);
+          this.counter = this.counter - 1;
+        }
+      }
     }
   }
 
@@ -76,6 +118,18 @@ export class BowlersPage {
     } else {
       return false;
     }
+  }
+
+  verifyListAll(){
+    let finish: boolean;
+    for (let i of this.ListBowler){
+      if (this.ListBowler[i].date == 1) {
+        finish = true;
+      } else {
+        finish = false;
+      }
+    }
+    return finish;
   }
 
   //removes checked element from checked[] array
@@ -100,6 +154,7 @@ export class BowlersPage {
         this.checked.push(this.ListBowler[i]["bowler_id"]);
       }
     }
+    this.counter = this.checked.length;
     console.log(this.checked);
   }
 
@@ -109,13 +164,59 @@ export class BowlersPage {
     this.database.GetAllBowlers().then(
       (data: any) => {
         console.log(data + "\nI AM WORKING for Bowlers");
-        this.ListBowler = data;
+        this.ListBowler = data.sort(function(a, b) {
+          var textA = a.bowler_name.toUpperCase();
+          var textB = b.bowler_name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      });
         this.getCheckedBoxes();
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  sort(){
+    this.descending = !this.descending;
+    this.order = this.descending ? 1 : -1;
+  }
+
+  generateBot(){
+    const prompt = this.alertCtrl.create({
+      title: "Creating a Groupme chatbot",
+      message: '<div>' + 
+      '<p>' + "Before you can start the setup, please visit this page and login using your Groupme username and password:" + '<\p>' +
+      '<p>' + '<a target="_blank" href="https://dev.groupme.com/session/new">' + "GroupMe Developers" + '<\a>' + '<\p>' +
+      '<p>' + "Click on the black drop down in top right corner, select Bots and then Create Bot, from there follow the propmt to create the chat bot. On completion you will be given a bot ID, please copy and past that ID in the field below to begin recieving messages in the bowling chat" + '<\p>',
+      inputs:[
+        {
+          name: "botID",
+          placeholder: "Bot ID"
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancel",
+          handler: data => {
+            console.log("Bot creation cancelled")
+          }
+        },
+        {
+          text: "OK",
+          handler: data => {
+            if (data.botID != "") {
+              this.botID = data.botID;
+              this.chat.createBot(this.botID);
+            }else {
+              prompt.setMessage("Error: try again");
+              return false;
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   //Generates an alert prompt to create a new bowler. User enters bowler information and then this information is stored in the bowler table.

@@ -7,6 +7,8 @@ import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
 import { GamesScoresPage } from "../games-scores/games-scores";
 import { BowlersPage } from "../bowlers/bowlers";
+import { PICKER_OPT_SELECTED } from "ionic-angular/umd/components/picker/picker-options";
+import { GroupmeProvider } from "../../providers/groupme/groupme";
 
 /**
  * Generated class for the TeamsPage page.
@@ -36,7 +38,8 @@ export class TeamsPage {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams,
-    private database: DatabaseProvider
+    private database: DatabaseProvider,
+    private chat: GroupmeProvider
   ) {}
 
   private ListBowler: any;
@@ -156,8 +159,15 @@ export class TeamsPage {
           console.log(data + "\nI AM WORKING for Teams");
           this.ListTeam = data;
         });*/
-        this.ListTeam = showTeams;
+        this.ListTeam = showTeams.sort(function(a, b) {
+          while(a.team_id == b.team_id){
+          var textA = a.bowler_name.toUpperCase();
+          var textB = b.bowler_name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      }});
         console.log("the number of bowlers are: " + showTeams.length);
+
+        this.chat.postTeamData(this.ListTeam);
       },
       error => {
         console.log("Error randomizing teams");
