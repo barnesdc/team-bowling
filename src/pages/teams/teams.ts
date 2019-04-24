@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, Checkbox } from "ionic-angular";
+import { IonicPage, NavController, NavParams, Checkbox,} from "ionic-angular";
 import { AlertController } from "ionic-angular";
 import { FormsModule } from "@angular/forms";
 
@@ -56,6 +56,7 @@ export class TeamsPage {
 
   ionViewWillEnter() {}
 
+  
   generateTeams() {
     // grabs all bowlers
     let teams = [];
@@ -159,15 +160,15 @@ export class TeamsPage {
           console.log(data + "\nI AM WORKING for Teams");
           this.ListTeam = data;
         });*/
-        this.ListTeam = showTeams.sort(function(a, b) {
+        this.ListTeam = showTeams
+        console.log("the number of bowlers are: " + showTeams.length);
+
+        this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
           while(a.team_id == b.team_id){
           var textA = a.bowler_name.toUpperCase();
           var textB = b.bowler_name.toUpperCase();
           return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-      }});
-        console.log("the number of bowlers are: " + showTeams.length);
-
-        this.chat.postTeamData(this.ListTeam);
+      }}));
       },
       error => {
         console.log("Error randomizing teams");
@@ -175,6 +176,88 @@ export class TeamsPage {
       }
     );
   }
+
+  private ascT: boolean = true;
+  private ascN: boolean = true;
+  private ascH: boolean = true;
+
+  sortByTeam(){
+    if(this.ascT === true){
+        this.sortTeamAsc();
+        this.ascT = false;
+    }else if(this.ascT === false){
+      this.sortTeamDesc();
+      this.ascT = true;
+    }
+  }
+
+  sortTeamAsc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.team_id;
+      var textB = b.team_id;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+  }
+
+  sortTeamDesc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.team_id;
+      var textB = b.team_id;
+      return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+  });
+  }
+
+  sortByName(){
+    if(this.ascN === true){
+        this.sortNameAsc();
+        this.ascN = false;
+    }else if(this.ascN === false){
+      this.sortNameDesc();
+      this.ascN = true;
+    }
+  }
+
+  sortNameAsc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.bowler_name.toUpperCase();
+      var textB = b.bowler_name.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+  }
+
+  sortNameDesc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.bowler_name.toUpperCase();
+      var textB = b.bowler_name.toUpperCase();
+      return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+  });
+}
+
+sortByHandicap(){
+  if(this.ascT === true){
+      this.sortHandAsc();
+      this.ascT = false;
+  }else if(this.ascT === false){
+    this.sortHandDesc();
+    this.ascT = true;
+  }
+}
+
+sortHandAsc(){
+  this.ListTeam.sort(function(a, b) {
+    var textA = a.bowler_handicapPins;
+    var textB = b.bowler_handicapPins;
+    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+});
+}
+
+sortHandDesc(){
+  this.ListTeam.sort(function(a, b) {
+    var textA = a.bowler_handicapPins;
+    var textB = b.bowler_handicapPins;
+    return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+});
+}
 
   //alerts user when an invalid number has been entered as a score
   presentAlert() {
@@ -189,7 +272,12 @@ export class TeamsPage {
   //calculates and checks valid scores for the teams and changes page to the scores/start game page
   displayWinner() {
     console.log("Display Winner");
-    console.log(this.ListTeam);
+    console.log(this.ListTeam.sort(function(a, b) {
+      while(a.team_id == b.team_id){
+      var textA = a.bowler_name.toUpperCase();
+      var textB = b.bowler_name.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  }}));
     var show = true;
 
     //loop through all teams and gather total scores

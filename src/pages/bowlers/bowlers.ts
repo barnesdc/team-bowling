@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { NavController, Refresher } from "ionic-angular";
 import { NavParams } from "ionic-angular";
 import { AlertController } from "ionic-angular";
 
@@ -7,7 +7,6 @@ import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
 import { TeamsPage } from "../teams/teams";
 import { GamesScoresPage } from "../games-scores/games-scores";
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { GroupmeProvider } from "../../providers/groupme/groupme";
 import { checkAndUpdateDirectiveDynamic } from "@angular/core/src/view/provider";
 
@@ -154,7 +153,7 @@ selectAllHelper(event){
       }
     }
     return finish;
-  }
+  } 
 
   //removes checked element from checked[] array
   removeCheckedFromArray(checkbox: String) {
