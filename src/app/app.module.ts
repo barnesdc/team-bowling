@@ -27,7 +27,6 @@ import { SQLite } from "@ionic-native/sqlite";
 import { DatabaseProvider } from "../providers/database/database";
 import { HttpModule } from "@angular/http";
 import { BowlersPage } from "../pages/bowlers/bowlers";
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { HttpClientModule } from "@angular/common/http";
 import { GroupmeProvider } from "../providers/groupme/groupme";
 
