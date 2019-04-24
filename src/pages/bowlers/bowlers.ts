@@ -83,8 +83,7 @@ export class BowlersPage {
       this.counter = this.counter - 1;
     }
   }
-
-  addAllCheckboxes(event){
+selectAllHelper(event){
     let checkboxes: any;
     checkboxes = document.getElementsByName("presentBowlers");
     if (event.checked){
@@ -109,7 +108,32 @@ export class BowlersPage {
         }
       }
     }
+    this.GetAllBowlers();
   }
+  addAllCheckboxes(event){
+        const confirm = this.alertCtrl.create({
+        title: "SelectAll?",
+        message : "Are you sure you want to select/unselect all bowlers?",
+        buttons: [
+        {
+        text: "No",
+        handler: () => {
+          console.log("Select all cancelled.");
+        }
+      },
+      {
+        text: "Yes",
+        handler:() =>{
+          console.log("Select all valid.");
+          this.selectAllHelper(event);
+        }
+      }
+      ]
+      });
+      confirm.present();
+   }
+
+  
 
   verifyList(date: any) {
     console.log("date: " + date);
