@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, Refresher } from "ionic-angular";
+import { NavController, Refresher, Platform } from "ionic-angular";
 import { NavParams } from "ionic-angular";
 import { AlertController } from "ionic-angular";
 
@@ -9,7 +9,10 @@ import { TeamsPage } from "../teams/teams";
 import { GamesScoresPage } from "../games-scores/games-scores";
 import { GroupmeProvider } from "../../providers/groupme/groupme";
 import { checkAndUpdateDirectiveDynamic } from "@angular/core/src/view/provider";
-
+import { FileTransfer } from "@ionic-native/file-transfer/ngx";
+import { File } from "@ionic-native/file/ngx";
+import { DocumentViewer } from "@ionic-native/document-viewer/ngx";
+import { element } from "@angular/core/src/render3/instructions";
 
 
 @Component({
@@ -25,7 +28,11 @@ export class BowlersPage {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     private database: DatabaseProvider,
-    private chat: GroupmeProvider
+    private chat: GroupmeProvider,
+    private transfer: FileTransfer,
+    private file: File,
+    private platform: Platform,
+    private document: DocumentViewer
   ) {
     // test bowler object
     // this.bowlers = [
@@ -546,4 +553,54 @@ selectAllHelper(event){
     });
     confirm.present();
   }
+
+
+  exportBowlerList(){
+    let path = null;
+    let jsonBody = JSON.stringify(this.ListBowler);
+    let nativeURL: string;
+    const fileName = "BowlerList.json"
+
+    if (this.platform.is("ios")){
+      path = this.file.documentsDirectory;
+      console.log(path);
+    } else {
+      path = this.file.dataDirectory;
+      console.log(path);
+    }
+
+    let jsonFile = this.file.writeFile(path, fileName, jsonBody, {append: false, replace: true})
+      .then((result) => {
+        console.log('Success: Writefile')
+        console.log(result)
+      })
+      .catch((error) => {
+        console.log('Failure: WriteFile')
+        console.log(error)
+      })
+
+    const transfer = this.transfer.create();
+    transfer.download("https://github.com/JaekwonS/team-bowling/blob/version2-production/README.md", 
+                      path + fileName).then(entry => {
+      let url = entry.toUrL();
+      this.document.viewDocument(url, "appliation/json", {});
+    })
+    
+  }
 }
+ /*
+  let path = null;
+
+    if (this.platform.is('ios')){
+      path = this.file.documentsDirectory
+    } else {
+      path = this.file.dataDirectory
+    }
+
+    let url = encodeURI(path);
+
+    let jsonBody = JSON.stringify(this.ListBowler);
+
+
+    const transfer = this.transfer.create();
+ */

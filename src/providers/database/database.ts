@@ -5,6 +5,8 @@ import { dateValueRange } from "ionic-angular/umd/util/datetime-util";
 import { database } from "firebase";
 import { ConvertActionBindingResult } from "@angular/compiler/src/compiler_util/expression_converter";
 import { BowlersPage } from "../../pages/bowlers/bowlers";
+import { SQLitePorterOriginal } from '@ionic-native/sqlite-porter';
+import { analyzeAndValidateNgModules } from "@angular/compiler";
 
 /*
   Generated class for the DatabaseProvider provider.

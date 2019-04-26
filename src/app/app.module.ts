@@ -29,6 +29,10 @@ import { HttpModule } from "@angular/http";
 import { BowlersPage } from "../pages/bowlers/bowlers";
 import { HttpClientModule } from "@angular/common/http";
 import { GroupmeProvider } from "../providers/groupme/groupme";
+import { FileTransfer } from "@ionic-native/file-transfer/ngx";
+import { File } from "@ionic-native/file/ngx";
+import { DocumentViewer } from "@ionic-native/document-viewer/ngx"
+
 
 @NgModule({
   declarations: [
@@ -66,7 +70,10 @@ import { GroupmeProvider } from "../providers/groupme/groupme";
     // AngularFireAuth,
     SQLite,
     DatabaseProvider,
-    GroupmeProvider
+    GroupmeProvider,
+    File,
+    FileTransfer,
+    DocumentViewer
   ]
 })
 export class AppModule {}
