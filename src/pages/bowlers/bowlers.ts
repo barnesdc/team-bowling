@@ -125,6 +125,8 @@ selectAllHelper(event){
         text: "No",
         handler: () => {
           console.log("Select all cancelled.");
+          event.checked = false;
+          
         }
       },
       {
@@ -149,18 +151,6 @@ selectAllHelper(event){
       return false;
     }
   }
-
-  verifyListAll(){
-    let finish: boolean;
-    for (let i of this.ListBowler){
-      if (this.ListBowler[i].date == 1) {
-        finish = true;
-      } else {
-        finish = false;
-      }
-    }
-    return finish;
-  } 
 
   //removes checked element from checked[] array
   removeCheckedFromArray(checkbox: String) {
@@ -556,35 +546,10 @@ selectAllHelper(event){
 
 
   exportBowlerList(){
-    let path = null;
     let jsonBody = JSON.stringify(this.ListBowler);
-    let nativeURL: string;
-    const fileName = "BowlerList.json"
+    const fileName = "BowlerList.json";
 
-    if (this.platform.is("ios")){
-      path = this.file.documentsDirectory;
-      console.log(path);
-    } else {
-      path = this.file.dataDirectory;
-      console.log(path);
-    }
-
-    let jsonFile = this.file.writeFile(path, fileName, jsonBody, {append: false, replace: true})
-      .then((result) => {
-        console.log('Success: Writefile')
-        console.log(result)
-      })
-      .catch((error) => {
-        console.log('Failure: WriteFile')
-        console.log(error)
-      })
-
-    const transfer = this.transfer.create();
-    transfer.download("https://github.com/JaekwonS/team-bowling/blob/version2-production/README.md", 
-                      path + fileName).then(entry => {
-      let url = entry.toUrL();
-      this.document.viewDocument(url, "appliation/json", {});
-    })
+    this.file.writeFile(this.file.externalDataDirectory, fileName, jsonBody, {append: false, replace: true});
     
   }
 }
@@ -603,4 +568,9 @@ selectAllHelper(event){
 
 
     const transfer = this.transfer.create();
+    transfer.download("https://github.com/JaekwonS/team-bowling/blob/version2-production/README.md", 
+                      path + fileName).then(entry => {
+      let url = entry.toUrL();
+      this.document.viewDocument(url, "appliation/json", {});
+    });
  */
