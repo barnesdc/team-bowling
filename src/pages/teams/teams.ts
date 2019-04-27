@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, Checkbox } from "ionic-angular";
+import { IonicPage, NavController, NavParams, Checkbox,} from "ionic-angular";
 import { AlertController } from "ionic-angular";
 import { FormsModule } from "@angular/forms";
 
@@ -56,7 +56,8 @@ export class TeamsPage {
 
   ionViewWillEnter() {}
 
-  generateTeams() {
+  
+  generateTeamsOf3() {
     // grabs all bowlers
     let teams = [];
     // same as checked array, includes names and ids
@@ -94,9 +95,15 @@ export class TeamsPage {
             }*/
           }
         }
-        //check if bowlers can be fit into teams of three
-        if (showTeams.length % 3 > -0.1 && showTeams.length % 3 < 0.1) {
-          //alert and break
+        //check if bowlers can be fit into teams of three 
+        //this.checked.length % 3 >= 0.9 && this.checked.length % 3 <= 1.1 &&
+        if ((showTeams.length % 3 >= 0.9 && showTeams.length % 3 <= 1.1) || (showTeams.length % 3 <= 2.1 && showTeams.length % 3 >= 1.9)) {
+          let alert = this.alertCtrl.create({
+            title: "Warning",
+            subTitle:"You will need to do teams of 2 instead, go back and rerandomize",
+            buttons: ["Dismiss"]
+          });
+          alert.present();
         }
 
         //checks for high handicap bowlers and replaces or removes them as necessary
@@ -140,7 +147,7 @@ export class TeamsPage {
             //pushes generated teams into the database and tracks team number with teamNum
             console.log("Creating Team " + teamNum);
             console.log("Team Members " + showTeams[i - 2][""]);
-            this.database.CreateTeams(
+            this.database.CreateTeamsOf3(
               teamNum,
               showTeams[i - 2],
               showTeams[i - 1],
@@ -159,10 +166,15 @@ export class TeamsPage {
           console.log(data + "\nI AM WORKING for Teams");
           this.ListTeam = data;
         });*/
-        this.ListTeam = showTeams;
+        this.ListTeam = showTeams
         console.log("the number of bowlers are: " + showTeams.length);
 
-        this.chat.postTeamData(this.ListTeam);
+        this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
+          while(a.team_id == b.team_id){
+          var textA = a.bowler_name.toUpperCase();
+          var textB = b.bowler_name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      }}));
       },
       error => {
         console.log("Error randomizing teams");
@@ -170,6 +182,211 @@ export class TeamsPage {
       }
     );
   }
+
+  generateTeamsOf2() {
+    // grabs all bowlers
+    let teams = [];
+    // same as checked array, includes names and ids
+    // compares teams to checked (playing bowlers)
+    let showTeams = [];
+    // counting of bowlers,
+    let count = 0,
+      teamNum = 1;
+
+    //let handicapIndex = 0;
+    let handicapCount = 0;
+
+    //clear teams table
+    this.database.ClearTeams();
+
+    //returns array with indexes "bowler_name" and "bowler_id"
+    this.database.randomizeBowlers(this.checked).then(
+      (data: any) => {
+        console.log("\nRandomizing bowlers");
+        console.log(data);
+        teams = data;
+
+        //loops through checked[] array and matches it with bowlers returned from randomizeBowlers()
+        for (var i = 0; i < teams.length; i++) {
+          if (this.checked.indexOf(teams[i]["bowler_id"]) > -1) {
+            showTeams[count] = teams[i];
+            showTeams[count]["team_id"] = null;
+            showTeams[count]["score"] = this.bowlerScore;
+            count++;
+            console.log(showTeams[count - 1]["bowler_name"]);
+            /*if (count % 3 == 0) {
+              console.log("Creating Team " + teamNum);
+              this.database.CreateTeams(teamNum, showTeams[count-3], showTeams[count-2], showTeams[count-1]);
+              teamNum++;
+            }*/
+          }
+        }
+        //check if bowlers can be fit into teams of three
+        //this.checked.length % 2 >= 0.9 && this.checked.length % 2 <= 1.1
+        if (showTeams.length % 2 >= 0.9 && showTeams.length % 2 <= 1.1) {
+          let alert = this.alertCtrl.create({
+            title: "Warning",
+            subTitle:"You will need to do teams of 3 instead, go back and rerandomize",
+            buttons: ["Dismiss"]
+          });
+          alert.present();
+        }
+
+        //checks for high handicap bowlers and replaces or removes them as necessary
+        for (var i = 0; i < showTeams.length; i++) {
+          if (showTeams[i]["bowler_handicapPins"] >= 30) {
+            handicapCount++;
+
+            //if 2 high handicap bowlers are on the same team, replace one with non-high handicap bowler, if available.
+            if (handicapCount == 2) {
+              console.log("Balancing Teams");
+              for (var j = i + 2; j < showTeams.length; j++) {
+                if (showTeams[j]["bowler_handicapPins"] < 30) {
+                  var temp: any;
+                  temp = showTeams[i];
+                  showTeams[i] = showTeams[j];
+                  showTeams[j] = temp;
+                  handicapCount--;
+                  console.log("Teams balanced");
+                  break;
+                }
+              }
+              console.log("For loop Broken");
+            }
+          }
+          if ((i + 1) % 2 == 0) {
+            //Pulls high handicap bowler into team if none are on the team
+            if (handicapCount == 0) {
+              for (var j = i + 1; j < showTeams.length; j++) {
+                if (showTeams[j]["bowler_handicapPins"] >= 30) {
+                  var temp: any;
+                  temp = showTeams[i];
+                  showTeams[i] = showTeams[j];
+                  showTeams[j] = temp;
+                  console.log("Added Handicap Bowler");
+                  break;
+                }
+              }
+              console.log("For loop broken");
+            }
+
+            //pushes generated teams into the database and tracks team number with teamNum
+            console.log("Creating Team " + teamNum);
+            console.log("Team Members " + showTeams[i - 1][""]);
+            this.database.CreateTeamsOf2(
+              teamNum,
+              showTeams[i - 1],
+              showTeams[i]
+            );
+            showTeams[i - 1]["team_id"] = showTeams[i]["team_id"] = teamNum;
+            teamNum++;
+            handicapCount = 0;
+          }
+        }
+
+        //call function here passing showteams[] array to put bowlers into teams table, which should include handicap checking
+        /*this.database.GetAllBowlers().then((data: any) => {
+          console.log(data + "\nI AM WORKING for Teams");
+          this.ListTeam = data;
+        });*/
+        this.ListTeam = showTeams
+        console.log("the number of bowlers are: " + showTeams.length);
+
+        this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
+          while(a.team_id == b.team_id){
+          var textA = a.bowler_name.toUpperCase();
+          var textB = b.bowler_name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      }}));
+      },
+      error => {
+        console.log("Error randomizing teams");
+        console.log(error);
+      }
+    );
+  }
+
+  private ascT: boolean = true;
+  private ascN: boolean = true;
+  private ascH: boolean = true;
+
+  sortByTeam(){
+    if(this.ascT === true){
+        this.sortTeamAsc();
+        this.ascT = false;
+    }else if(this.ascT === false){
+      this.sortTeamDesc();
+      this.ascT = true;
+    }
+  }
+
+  sortTeamAsc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.team_id;
+      var textB = b.team_id;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+  }
+
+  sortTeamDesc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.team_id;
+      var textB = b.team_id;
+      return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+  });
+  }
+
+  sortByName(){
+    if(this.ascN === true){
+        this.sortNameAsc();
+        this.ascN = false;
+    }else if(this.ascN === false){
+      this.sortNameDesc();
+      this.ascN = true;
+    }
+  }
+
+  sortNameAsc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.bowler_name.toUpperCase();
+      var textB = b.bowler_name.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+  }
+
+  sortNameDesc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.bowler_name.toUpperCase();
+      var textB = b.bowler_name.toUpperCase();
+      return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+  });
+}
+
+sortByHandicap(){
+  if(this.ascT === true){
+      this.sortHandAsc();
+      this.ascT = false;
+  }else if(this.ascT === false){
+    this.sortHandDesc();
+    this.ascT = true;
+  }
+}
+
+sortHandAsc(){
+  this.ListTeam.sort(function(a, b) {
+    var textA = a.bowler_handicapPins;
+    var textB = b.bowler_handicapPins;
+    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+});
+}
+
+sortHandDesc(){
+  this.ListTeam.sort(function(a, b) {
+    var textA = a.bowler_handicapPins;
+    var textB = b.bowler_handicapPins;
+    return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+});
+}
 
   //alerts user when an invalid number has been entered as a score
   presentAlert() {
@@ -184,7 +401,12 @@ export class TeamsPage {
   //calculates and checks valid scores for the teams and changes page to the scores/start game page
   displayWinner() {
     console.log("Display Winner");
-    console.log(this.ListTeam);
+    console.log(this.ListTeam.sort(function(a, b) {
+      while(a.team_id == b.team_id){
+      var textA = a.bowler_name.toUpperCase();
+      var textB = b.bowler_name.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  }}));
     var show = true;
 
     //loop through all teams and gather total scores
@@ -267,10 +489,17 @@ export class TeamsPage {
           }
         },
         {
-          text: "Randomize Teams",
+          text: "Randomize Teams of 3",
           handler: () => {
             console.log("Generate teams");
-            this.generateTeams();
+            this.generateTeamsOf3();
+          }
+        },
+        {
+          text: "Randomize teams of 2",
+          handler: () => {
+            console.log("Generate teams of 2");
+            this.generateTeamsOf2();
           }
         }
       ]

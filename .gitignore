@@ -35,3 +35,4 @@ package-lock.json
 Thumbs.db
 UserInterfaceState.xcuserstate
 
+.vs/slnx.sqlite

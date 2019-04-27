@@ -21,12 +21,13 @@
       Randomize Teams
     </button>
     <h2 class="heads">Teams List:</h2>
+
     <ion-grid>
       <ion-row>
-        <ion-col col-2>Team</ion-col>
-        <ion-col>Name</ion-col>
-        <ion-col>Score</ion-col>
-        <ion-col>Handicap</ion-col>
+        <ion-col col-2><button ion-button size="small" on-click="sortByTeam()" float-right clear>Team</button></ion-col>
+        <ion-col col-3><button ion-button size="small" on-click="sortByName()" clear>Name</button></ion-col>
+        <ion-col col-3><button ion-button size="small" disabled="true" clear>Score</button></ion-col>
+        <ion-col col-3><button ion-button size="small" on-click="sortByHandicap()" float-left clear>Handicap</button></ion-col>
       </ion-row>
     </ion-grid>
     <ion-grid *ngFor="let bowler of ListTeam">
