@@ -336,6 +336,32 @@ export class TeamsPage {
   });
   }
 
+  sortByHand(){
+    if(this.ascT === true){
+        this.sortHandAsc();
+        this.ascT = false;
+    }else if(this.ascT === false){
+      this.sortTeamDesc();
+      this.ascT = true;
+    }
+  }
+
+  sortHandAsc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.bowler_handicapPins;
+      var textB = b.bowler_handicapPins;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+  }
+
+  sortHandDesc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.bowler_handicapPins;
+      var textB = b.bowler_handicapPins;
+      return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+  });
+  }
+
   sortByName(){
     if(this.ascN === true){
         this.sortNameAsc();
@@ -360,32 +386,6 @@ export class TeamsPage {
       var textB = b.bowler_name.toUpperCase();
       return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
   });
-}
-
-sortByHandicap(){
-  if(this.ascT === true){
-      this.sortHandAsc();
-      this.ascT = false;
-  }else if(this.ascT === false){
-    this.sortHandDesc();
-    this.ascT = true;
-  }
-}
-
-sortHandAsc(){
-  this.ListTeam.sort(function(a, b) {
-    var textA = a.bowler_handicapPins;
-    var textB = b.bowler_handicapPins;
-    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-});
-}
-
-sortHandDesc(){
-  this.ListTeam.sort(function(a, b) {
-    var textA = a.bowler_handicapPins;
-    var textB = b.bowler_handicapPins;
-    return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
-});
 }
 
   //alerts user when an invalid number has been entered as a score
