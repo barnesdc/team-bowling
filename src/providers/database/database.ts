@@ -251,7 +251,7 @@ export class DatabaseProvider {
         - if not divisble by 3, remainder on a team of two
     - select these bowlers and 
   */
-  CreateTeams(teamNum: number, team1: any, team2: any, team3: any) {
+  CreateTeamsOf3(teamNum: number, team1: any, team2: any, team3: any) {
     /*
     
     */
@@ -268,6 +268,35 @@ export class DatabaseProvider {
           console.log("Team Test: " + teamNum);
           console.log("ID " + team1.bowler_id);
           this.db.executeSql(sql, [teamNum, bowler1, bowler2, bowler3]).then(
+            data => {
+              console.log("Team insertion complete");
+              resolve(data);
+            },
+            error => {
+              console.log(error);
+              reject(error);
+            }
+          );
+        });
+    });
+  }
+
+  CreateTeamsOf2(teamNum: number, team1: any, team2: any) {
+    /*
+    
+    */
+    console.log("Stepped into Create Teams function");
+    let bowler1 = team1.bowler_id;
+    let bowler2 = team2.bowler_id;
+    return new Promise((resolve, reject) => {
+      this.storage
+        .create({ name: "bowlerData.db", location: "default" })
+        .then(() => {
+          let sql =
+            "INSERT INTO team (team_id, bowler_id1, bowler_id2, bowler_id3) VALUES(?, ?, ?, ?)";
+          console.log("Team Test: " + teamNum);
+          console.log("ID " + team1.bowler_id);
+          this.db.executeSql(sql, [teamNum, bowler1, bowler2]).then(
             data => {
               console.log("Team insertion complete");
               resolve(data);
