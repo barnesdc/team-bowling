@@ -93,4 +93,5 @@
     <allow-navigation href="http://192.168.0.180:8101" sessionid="d85adfa9" />
     <engine name="android" spec="7.1.1" />
     <engine name="ios" spec="4.5.5" />
+    <plugin name="uk.co.workingedge.cordova.plugin.sqliteporter" spec="1.1.0" />
 </widget>

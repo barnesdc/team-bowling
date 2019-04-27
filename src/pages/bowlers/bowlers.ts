@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController, Refresher } from "ionic-angular";
+import { NavController, Refresher, Platform } from "ionic-angular";
 import { NavParams } from "ionic-angular";
 import { AlertController } from "ionic-angular";
 
@@ -9,7 +9,11 @@ import { TeamsPage } from "../teams/teams";
 import { GamesScoresPage } from "../games-scores/games-scores";
 import { GroupmeProvider } from "../../providers/groupme/groupme";
 import { checkAndUpdateDirectiveDynamic } from "@angular/core/src/view/provider";
-
+import { FileTransfer } from "@ionic-native/file-transfer/ngx";
+import { File } from "@ionic-native/file/ngx";
+import { DocumentViewer } from "@ionic-native/document-viewer/ngx";
+import { element } from "@angular/core/src/render3/instructions";
+import { isAbsolute } from "path";
 
 
 @Component({
@@ -25,7 +29,11 @@ export class BowlersPage {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     private database: DatabaseProvider,
-    private chat: GroupmeProvider
+    private chat: GroupmeProvider,
+    private transfer: FileTransfer,
+    private file: File,
+    private platform: Platform,
+    private document: DocumentViewer
   ) {
     // test bowler object
     // this.bowlers = [
@@ -82,7 +90,10 @@ export class BowlersPage {
       this.counter = this.counter - 1;
     }
   }
-selectAllHelper(event){
+
+  private isAll: boolean;
+  
+  selectAllHelper(event){
     let checkboxes: any;
     checkboxes = document.getElementsByName("presentBowlers");
     if (event.checked){
@@ -93,6 +104,7 @@ selectAllHelper(event){
           this.checked.push(this.ListBowler[i].bowler_id);
           this.database.PresentBowler(this.ListBowler[i].bowler_id);
           this.counter = this.counter + 1;
+          this.isAll = true;
         }
       }
     } else {
@@ -104,11 +116,13 @@ selectAllHelper(event){
           this.database.AbsentBowler(this.ListBowler[i].bowler_id);
           this.checked.splice(index, 1);
           this.counter = this.counter - 1;
+          this.isAll = false;
         }
       }
     }
     this.GetAllBowlers();
   }
+
   addAllCheckboxes(event){
         const confirm = this.alertCtrl.create({
         title: "SelectAll?",
@@ -132,7 +146,9 @@ selectAllHelper(event){
       confirm.present();
    }
 
-  
+  verifyAll(){
+    return this.isAll;
+  }
 
   verifyList(date: any) {
     console.log("date: " + date);
@@ -142,18 +158,6 @@ selectAllHelper(event){
       return false;
     }
   }
-
-  verifyListAll(){
-    let finish: boolean;
-    for (let i of this.ListBowler){
-      if (this.ListBowler[i].date == 1) {
-        finish = true;
-      } else {
-        finish = false;
-      }
-    }
-    return finish;
-  } 
 
   //removes checked element from checked[] array
   removeCheckedFromArray(checkbox: String) {
@@ -452,7 +456,7 @@ selectAllHelper(event){
       subTitle:
         "You currently have selected " +
         this.checked.length +
-        " bowlers! Add 3 bowlers to start game!",
+        " bowlers! Add 2 or 3 bowlers to start game!",
       buttons: ["Dismiss"]
     });
     alert.present();
@@ -464,7 +468,19 @@ selectAllHelper(event){
       subTitle:
         "You currently have selected " +
         this.checked.length +
-        " bowlers! Add 2 bowlers or remove 1 bowler to start game!",
+        " bowlers! Add 1 or 2 bowlers or remove 1 bowler to start game!",
+      buttons: ["Dismiss"]
+    });
+    alert.present();
+  }
+
+  presentAlert3() {
+    let alert = this.alertCtrl.create({
+      title: "Warning",
+      subTitle:
+        "You currently have selected " +
+        this.checked.length +
+        " bowlers! Add 1 or 2 bowlers to start game!",
       buttons: ["Dismiss"]
     });
     alert.present();
@@ -476,7 +492,7 @@ selectAllHelper(event){
       subTitle:
         "You currently have selected " +
         this.checked.length +
-        " bowlers! Add 1 bowler or remove 2 bowlers to start game!",
+        " bowlers! Add 1 bowler or remove 1 or 2 bowlers to start game!",
       buttons: ["Dismiss"]
     });
     alert.present();
@@ -492,18 +508,29 @@ selectAllHelper(event){
         this.checked.length != 0) ||
       (this.checked.length >= 3 &&
         this.checked.length % 3 >= -0.1 &&
-        this.checked.length % 3 <= 0.1)
+        this.checked.length % 3 <= 0.1) ||
+      (this.checked.length % 2 >= -0.1 &&
+        this.checked.length % 2 <= 0.1 &&
+        this.checked.length != 0) ||
+      (this.checked.length >= 2 &&
+        this.checked.length % 2 >= -0.1 &&
+        this.checked.length % 2 <= 0.1)
     ) {
       this.navCtrl.setRoot(TeamsPage, {
         checked: this.checked
       });
     } else if (
       this.checked.length % 3 >= 0.9 &&
-      this.checked.length % 3 <= 1.1
+      this.checked.length % 3 <= 1.1 &&
+      this.checked.length % 2 >= 0.9 &&
+      this.checked.length % 2 <= 1.1 && 
+      this.checked.length > 1
     ) {
       //Alerts user if teams cannot be made with 3 people
       this.presentAlert1();
-    } else {
+    } else if (this.checked.length == 1) {
+      this.presentAlert3();
+    }else {
       this.presentAlert2();
     }
   }
@@ -546,4 +573,34 @@ selectAllHelper(event){
     });
     confirm.present();
   }
+
+
+  exportBowlerList(){
+    let jsonBody = JSON.stringify(this.ListBowler);
+    const fileName = "BowlerList.json";
+
+    this.file.writeFile("src\assets", fileName, jsonBody, {append: false, replace: true});
+    
+  }
 }
+ /*
+  let path = null;
+
+    if (this.platform.is('ios')){
+      path = this.file.documentsDirectory
+    } else {
+      path = this.file.dataDirectory
+    }
+
+    let url = encodeURI(path);
+
+    let jsonBody = JSON.stringify(this.ListBowler);
+
+
+    const transfer = this.transfer.create();
+    transfer.download("https://github.com/JaekwonS/team-bowling/blob/version2-production/README.md", 
+                      path + fileName).then(entry => {
+      let url = entry.toUrL();
+      this.document.viewDocument(url, "appliation/json", {});
+    });
+ */
