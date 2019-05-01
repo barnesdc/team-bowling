@@ -100,7 +100,7 @@ export class TeamsPage {
         if ((showTeams.length % 3 >= 0.9 && showTeams.length % 3 <= 1.1) || (showTeams.length % 3 <= 2.1 && showTeams.length % 3 >= 1.9)) {
           let alert = this.alertCtrl.create({
             title: "Warning",
-            subTitle:"You will need to do teams of 2 in order to get even teams for the game, go back and rerandomize",
+            subTitle:"You will need to do teams of 2 instead, go back and rerandomize",
             buttons: ["Dismiss"]
           });
           alert.present();
@@ -226,7 +226,7 @@ export class TeamsPage {
         if (showTeams.length % 2 >= 0.9 && showTeams.length % 2 <= 1.1) {
           let alert = this.alertCtrl.create({
             title: "Warning",
-            subTitle:"You will need to do teams of 3 in order to get even teams for the game, go back and rerandomize",
+            subTitle:"You will need to do teams of 3 instead, go back and rerandomize",
             buttons: ["Dismiss"]
           });
           alert.present();
@@ -445,8 +445,7 @@ export class TeamsPage {
         this.database.updateAverage(this.ListTeam[i]["bowler_id"]);
       }
       this.navCtrl.push(GamesScoresPage, {
-        Teams: this.ListTeam,
-        Results: true
+        Teams: this.ListTeam
       });
     }
     show = true;
