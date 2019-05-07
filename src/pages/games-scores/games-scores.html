@@ -40,7 +40,7 @@
         Team {{ tieTeams[0] }} and Team {{ tieTeams[1] }} have tied!
       </div>
     -->
-
+    
     <ng-container *ngIf="ShowWinner">
       <div *ngFor="let rank of rank; let count = index">
         <ion-card-title>
@@ -58,5 +58,21 @@
         </div>
       </div>
     </ng-container>
+    <ng-container *ngIf="ShowWinner2">
+        <div *ngFor="let rank of rank; let count = index">
+          <ion-card-title>
+            Team {{ Teams[rank].team_id }}: Rank {{ count + 1 }}
+          </ion-card-title>
+  
+          <div>
+            <strong>Score: {{ totalScores[count] }} </strong> <br />
+            <p>
+              Bowlers: <br />{{ Teams[rank].bowler_name }}:
+              {{ Teams[rank].score }} <br />{{ Teams[rank + 1].bowler_name }}:
+              {{ Teams[rank + 1].score }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
   </ion-card>
 </ion-content>

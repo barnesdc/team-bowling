@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { NavController, Refresher, Platform } from "ionic-angular";
 import { NavParams } from "ionic-angular";
 import { AlertController } from "ionic-angular";
 
@@ -7,6 +7,14 @@ import "rxjs/add/operator/map";
 import { DatabaseProvider } from "../../providers/database/database";
 import { TeamsPage } from "../teams/teams";
 import { GamesScoresPage } from "../games-scores/games-scores";
+import { GroupmeProvider } from "../../providers/groupme/groupme";
+import { checkAndUpdateDirectiveDynamic } from "@angular/core/src/view/provider";
+import { FileTransfer } from "@ionic-native/file-transfer/ngx";
+import { File } from "@ionic-native/file/ngx";
+import { DocumentViewer } from "@ionic-native/document-viewer/ngx";
+import { element } from "@angular/core/src/render3/instructions";
+import { isAbsolute } from "path";
+
 
 @Component({
   selector: "page-bowlers",
@@ -14,10 +22,18 @@ import { GamesScoresPage } from "../games-scores/games-scores";
 })
 export class BowlersPage {
   bowlers: any[];
+  descending: boolean = false;
+  order: number;
+  column: string = "bowler_name";
   constructor(
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    private database: DatabaseProvider
+    private database: DatabaseProvider,
+    private chat: GroupmeProvider,
+    private transfer: FileTransfer,
+    private file: File,
+    private platform: Platform,
+    private document: DocumentViewer
   ) {
     // test bowler object
     // this.bowlers = [
@@ -40,9 +56,12 @@ export class BowlersPage {
   }
 
   private ListBowler: any;
+  private botID: any;
 
   //stores array of all bowler id's that are checked in the list
   checked = [];
+
+  counter = 0;
 
   ionViewDidLoad() {
     this.GetAllBowlers();
@@ -59,6 +78,8 @@ export class BowlersPage {
 
       //change date value in bowler table for checked bowler
       this.database.PresentBowler(checkbox);
+
+      this.counter = this.counter + 1;
     } else {
       console.log(checkbox + " unchecked");
       let index = this.removeCheckedFromArray(checkbox);
@@ -66,7 +87,67 @@ export class BowlersPage {
       //change date value in bowler table for unchecked bowler
       this.database.AbsentBowler(checkbox);
       this.checked.splice(index, 1);
+      this.counter = this.counter - 1;
     }
+  }
+
+  private isAll: boolean;
+  
+  selectAllHelper(event){
+    let checkboxes: any;
+    checkboxes = document.getElementsByName("presentBowlers");
+    if (event.checked){
+      console.log("checking all");
+      for (let i = 0; i < this.ListBowler.length; i++){
+        if (checkboxes[i].checked != event.checked){
+          checkboxes[i].checked = event.checked;
+          this.checked.push(this.ListBowler[i].bowler_id);
+          this.database.PresentBowler(this.ListBowler[i].bowler_id);
+          this.counter = this.counter + 1;
+          this.isAll = true;
+        }
+      }
+    } else {
+      console.log("unchecking all");
+      for (let i = 0; i < this.ListBowler.length; i++){
+        if (checkboxes[i].checked != event.checked){
+          checkboxes[i].checked = event.checked;
+          let index = this.removeCheckedFromArray(this.ListBowler[i].bowler_id);
+          this.database.AbsentBowler(this.ListBowler[i].bowler_id);
+          this.checked.splice(index, 1);
+          this.counter = this.counter - 1;
+          this.isAll = false;
+        }
+      }
+    }
+    this.GetAllBowlers();
+  }
+
+  addAllCheckboxes(event){
+        const confirm = this.alertCtrl.create({
+        title: "SelectAll?",
+        message : "Are you sure you want to select/unselect all bowlers?",
+        buttons: [
+        {
+        text: "No",
+        handler: () => {
+          console.log("Select all cancelled.");
+        }
+      },
+      {
+        text: "Yes",
+        handler:() =>{
+          console.log("Select all valid.");
+          this.selectAllHelper(event);
+        }
+      }
+      ]
+      });
+      confirm.present();
+   }
+
+  verifyAll(){
+    return this.isAll;
   }
 
   verifyList(date: any) {
@@ -100,6 +181,7 @@ export class BowlersPage {
         this.checked.push(this.ListBowler[i]["bowler_id"]);
       }
     }
+    this.counter = this.checked.length;
     console.log(this.checked);
   }
 
@@ -109,13 +191,59 @@ export class BowlersPage {
     this.database.GetAllBowlers().then(
       (data: any) => {
         console.log(data + "\nI AM WORKING for Bowlers");
-        this.ListBowler = data;
+        this.ListBowler = data.sort(function(a, b) {
+          var textA = a.bowler_name.toUpperCase();
+          var textB = b.bowler_name.toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      });
         this.getCheckedBoxes();
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  sort(){
+    this.descending = !this.descending;
+    this.order = this.descending ? 1 : -1;
+  }
+
+  generateBot(){
+    const prompt = this.alertCtrl.create({
+      title: "Creating a Groupme chatbot",
+      message: '<div>' + 
+      '<p>' + "Before you can start the setup, please visit this page and login using your Groupme username and password:" + '<\p>' +
+      '<p>' + '<a target="_blank" href="https://dev.groupme.com/session/new">' + "GroupMe Developers" + '<\a>' + '<\p>' +
+      '<p>' + "Click on the black drop down in top right corner, select Bots and then Create Bot, from there follow the propmt to create the chat bot. On completion you will be given a bot ID, please copy and past that ID in the field below to begin recieving messages in the bowling chat" + '<\p>',
+      inputs:[
+        {
+          name: "botID",
+          placeholder: "Bot ID"
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancel",
+          handler: data => {
+            console.log("Bot creation cancelled")
+          }
+        },
+        {
+          text: "OK",
+          handler: data => {
+            if (data.botID != "") {
+              this.botID = data.botID;
+              this.chat.createBot(this.botID);
+            }else {
+              prompt.setMessage("Error: try again");
+              return false;
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   //Generates an alert prompt to create a new bowler. User enters bowler information and then this information is stored in the bowler table.
@@ -328,7 +456,7 @@ export class BowlersPage {
       subTitle:
         "You currently have selected " +
         this.checked.length +
-        " bowlers! Add 3 bowlers to start game!",
+        " bowlers! Add 2 or 3 bowlers to start game!",
       buttons: ["Dismiss"]
     });
     alert.present();
@@ -340,7 +468,19 @@ export class BowlersPage {
       subTitle:
         "You currently have selected " +
         this.checked.length +
-        " bowlers! Add 2 bowlers or remove 1 bowler to start game!",
+        " bowlers! Add 1 or 2 bowlers or remove 1 bowler to start game!",
+      buttons: ["Dismiss"]
+    });
+    alert.present();
+  }
+
+  presentAlert3() {
+    let alert = this.alertCtrl.create({
+      title: "Warning",
+      subTitle:
+        "You currently have selected " +
+        this.checked.length +
+        " bowlers! Add 1 or 2 bowlers to start game!",
       buttons: ["Dismiss"]
     });
     alert.present();
@@ -352,7 +492,7 @@ export class BowlersPage {
       subTitle:
         "You currently have selected " +
         this.checked.length +
-        " bowlers! Add 1 bowler or remove 2 bowlers to start game!",
+        " bowlers! Add 1 bowler or remove 1 or 2 bowlers to start game!",
       buttons: ["Dismiss"]
     });
     alert.present();
@@ -368,18 +508,29 @@ export class BowlersPage {
         this.checked.length != 0) ||
       (this.checked.length >= 3 &&
         this.checked.length % 3 >= -0.1 &&
-        this.checked.length % 3 <= 0.1)
+        this.checked.length % 3 <= 0.1) ||
+      (this.checked.length % 2 >= -0.1 &&
+        this.checked.length % 2 <= 0.1 &&
+        this.checked.length != 0) ||
+      (this.checked.length >= 2 &&
+        this.checked.length % 2 >= -0.1 &&
+        this.checked.length % 2 <= 0.1)
     ) {
       this.navCtrl.setRoot(TeamsPage, {
         checked: this.checked
       });
     } else if (
       this.checked.length % 3 >= 0.9 &&
-      this.checked.length % 3 <= 1.1
+      this.checked.length % 3 <= 1.1 &&
+      this.checked.length % 2 >= 0.9 &&
+      this.checked.length % 2 <= 1.1 && 
+      this.checked.length > 1
     ) {
       //Alerts user if teams cannot be made with 3 people
       this.presentAlert1();
-    } else {
+    } else if (this.checked.length == 1) {
+      this.presentAlert3();
+    }else {
       this.presentAlert2();
     }
   }
@@ -422,4 +573,34 @@ export class BowlersPage {
     });
     confirm.present();
   }
+
+
+  exportBowlerList(){
+    let jsonBody = JSON.stringify(this.ListBowler);
+    const fileName = "BowlerList.json";
+
+    this.file.writeFile("src\assets", fileName, jsonBody, {append: false, replace: true});
+    
+  }
 }
+ /*
+  let path = null;
+
+    if (this.platform.is('ios')){
+      path = this.file.documentsDirectory
+    } else {
+      path = this.file.dataDirectory
+    }
+
+    let url = encodeURI(path);
+
+    let jsonBody = JSON.stringify(this.ListBowler);
+
+
+    const transfer = this.transfer.create();
+    transfer.download("https://github.com/JaekwonS/team-bowling/blob/version2-production/README.md", 
+                      path + fileName).then(entry => {
+      let url = entry.toUrL();
+      this.document.viewDocument(url, "appliation/json", {});
+    });
+ */

@@ -1,9 +1,21 @@
 <ion-header>
   <ion-navbar>
     <ion-title> Bowlers </ion-title>
-    <button ion-fab on-click="goToHomePage()" item-end>
-      <ion-icon name="home"></ion-icon>
-    </button>
+    <ion-grid>
+      <ion-row no-padding no-margin>
+          <ion-col col-4 no-padding>
+            <button ion-fab on-click="goToHomePage()" item-end>
+              <ion-icon name="home"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-4 no-padding>
+            <button ion-button size="small" on-click="generateBot()" float-right>Bot Setup</button>
+          </ion-col>
+          <ion-col col-4 no-padding>
+            <ion-label float-right>Bowlers:{{counter}}</ion-label>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-navbar>
 </ion-header>
 
@@ -16,34 +28,39 @@
   <br />
   <hr />
 
-  <ion-list>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-sm><ion-checkbox disabled="true"></ion-checkbox></ion-col>
-        <ion-col col-4>Name</ion-col>
-        <ion-col col-sm>Gender</ion-col>
-        <ion-col>Average</ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-grid *ngFor="let bowler of ListBowler">
-      <ion-row>
-        <ion-col col-sm>
-          <ion-checkbox
-            slot="end"
-            checked="{{verifyList(bowler.bowler_date)}}"
-            (ionChange)="addCheckbox($event, bowler.bowler_id)"
-          ></ion-checkbox
-        ></ion-col>
-        <ion-col col-4>{{ bowler.bowler_name }}</ion-col>
-        <ion-col col-sm>{{ bowler.bowler_gender }}</ion-col>
-        <ion-col>{{ bowler.bowler_average }}</ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-list>
-  <!-- Checkboxes in a List -->
-  <div>
-    <!-- <ion-scroll scrollY="true" style="width:100%;height:100vh"> -->
-    <!--
+   <ion-list>
+     <ion-grid>
+       <ion-row>
+         <ion-col col-sm><ion-checkbox
+          checked={{verifyAll()}}
+          (ionChange)="addAllCheckboxes($event)"
+          ></ion-checkbox></ion-col>
+         <ion-col col-4>Name</ion-col>
+         <ion-col col-sm>Gender</ion-col>
+         <ion-col>Average</ion-col>
+       </ion-row>
+     </ion-grid>
+     <ion-grid *ngFor="let bowler of ListBowler">
+       <ion-row>
+         <ion-col col-sm>
+           <ion-checkbox
+             name="presentBowlers"
+             slot="end"
+             checked="{{verifyList(bowler.bowler_date)}}"
+             (ionChange)="addCheckbox($event, bowler.bowler_id)"
+           ></ion-checkbox
+         ></ion-col>
+         <ion-col col-4>{{ bowler.bowler_name }}</ion-col>
+         <ion-col col-sm>{{ bowler.bowler_gender }}</ion-col>
+         <ion-col>{{ bowler.bowler_average }}</ion-col>
+       </ion-row>
+     </ion-grid>
+   </ion-list>
+
+      <!-- Checkboxes in a List -->
+      <div>
+        <!-- <ion-scroll scrollY="true" style="width:100%;height:100vh"> -->
+        <!--
       <ion-list>
         <ion-item *ngFor="let bowler of ListBowler">
           <ion-label>
@@ -76,10 +93,10 @@
         </ion-item>
       </ion-list>
     -->
-    <!-- </ion-scroll> -->
-  </div>
+        <!-- </ion-scroll> -->
+      </div>
 
-  <div></div>
+      <div></div>
 </ion-content>
 <ion-footer style="align-items: center">
   <ion-toolbar>
