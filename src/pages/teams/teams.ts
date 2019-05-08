@@ -47,6 +47,7 @@ export class TeamsPage {
   checked = [];
   winner: any;
   bowlerScore: number;
+  private sendTeams: boolean = true;
 
   //Will save checked bowlers into checked[] array
   ionViewDidLoad() {
@@ -104,6 +105,9 @@ export class TeamsPage {
             buttons: ["Dismiss"]
           });
           alert.present();
+          this.sendTeams = false;
+        }else{
+          this.sendTeams = true;
         }
 
         //checks for high handicap bowlers and replaces or removes them as necessary
@@ -169,12 +173,14 @@ export class TeamsPage {
         this.ListTeam = showTeams
         console.log("the number of bowlers are: " + showTeams.length);
 
-        this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
-          while(a.team_id == b.team_id){
-          var textA = a.bowler_name.toUpperCase();
-          var textB = b.bowler_name.toUpperCase();
-          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-      }}));
+        if(this.sendTeams == true){
+          this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
+            while(a.team_id == b.team_id){
+            var textA = a.bowler_name.toUpperCase();
+            var textB = b.bowler_name.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        }}));
+      }
       },
       error => {
         console.log("Error randomizing teams");
@@ -230,6 +236,9 @@ export class TeamsPage {
             buttons: ["Dismiss"]
           });
           alert.present();
+          this.sendTeams = false;
+        }else{
+          this.sendTeams = true;
         }
 
         //checks for high handicap bowlers and replaces or removes them as necessary
@@ -292,12 +301,14 @@ export class TeamsPage {
         this.ListTeam = showTeams
         console.log("the number of bowlers are: " + showTeams.length);
 
-        this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
-          while(a.team_id == b.team_id){
-          var textA = a.bowler_name.toUpperCase();
-          var textB = b.bowler_name.toUpperCase();
-          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-      }}));
+        if(this.sendTeams == true){
+          this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
+            while(a.team_id == b.team_id){
+            var textA = a.bowler_name.toUpperCase();
+            var textB = b.bowler_name.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        }}));
+      }
       },
       error => {
         console.log("Error randomizing teams");

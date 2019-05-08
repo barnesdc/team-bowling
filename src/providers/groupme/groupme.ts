@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class GroupmeProvider {
-  private botID: string = "";
+  private botID: any;
   private apiUrl: string = "https://api.groupme.com/v3/bots/post";
   
   private d1 = new Date().getTime();

@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "6.1.9",
     "@ionic-native/core": "~4.15.0",
     "@ionic-native/document-viewer": "^5.5.0",
-    "@ionic-native/file": "^5.5.0",
+    "@ionic-native/file": "^5.5.1",
     "@ionic-native/file-transfer": "^5.5.0",
     "@ionic-native/splash-screen": "~4.15.0",
     "@ionic-native/sqlite": "^4.20.0",

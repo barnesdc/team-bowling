@@ -542,9 +542,55 @@ export class BowlersPage {
   private jsonBody = JSON.stringify(this.ListBowler);
   private fileName = 'BowlerList.json';
 
-  exportBowlerList(){
+  manipulateBowlerList(){
 
-      this.file.checkFile(this.file.dataDirectory, this.fileName)
+    const confirm = this.alertCtrl.create({
+      title: "Sending or Recieving Data",
+      message:
+        "Do you want import or export the list of bowlers?",
+      buttons: [
+        {
+          text: "Export",
+          handler: () => {
+            console.log("exports bowler list");
+            this.exportBL();
+          }
+        },
+        {
+          text: "Import",
+          handler: () => {
+            console.log("imports bowler list");
+            //method for import
+          }
+        }
+      ]
+    });
+    confirm.present(); 
+    
+  }
+
+  exportBL(){
+    this.file.createFile(this.file.dataDirectory, this.fileName, true);
+    /*
+    this.file.checkFile(this.file.dataDirectory, this.fileName)
+      .then(doesExist => {
+          console.log("doesExist : " + doesExist);
+          return this.writeToFile(this.jsonBody);
+      }).catch(err => {
+          return this.file.createFile(this.file.dataDirectory, this.fileName, true)
+              .then(FileEntry => this.writeToFile(this.jsonBody))
+              .catch(err => console.log("Couldn't create file"));
+      });
+      */
+  }
+
+  writeToFile(text: string){
+    this.file.writeFile(this.file.dataDirectory, this.fileName, text, {replace:true});
+  }
+}
+ /*
+ 
+ this.file.checkFile(this.file.dataDirectory, this.fileName)
       .then(doesExist => {
           console.log("doesExist : " + doesExist);
           return this.writeToFile(this.jsonBody);
@@ -558,9 +604,8 @@ export class BowlersPage {
   writeToFile(text: string){
     this.file.writeFile(this.file.dataDirectory, this.fileName, text, {replace:true});
   }
-    
-}
- /*
+
+
   let path = null;
 
     if (this.platform.is('ios')){

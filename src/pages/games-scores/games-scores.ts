@@ -84,15 +84,15 @@ export class GamesScoresPage {
           handler: () => {
             console.log("Calculate socres without handicap");
             this.useHDC = false;
-            this.calculateWinner()
+            this.calculateWinner();
           }
         },
         {
           text: "Yes",
           handler: () => {
             console.log("Calculate scores with handicap");
-            this.useHDC = true
-            this.calculateWinner()
+            this.useHDC = true;
+            this.calculateWinner();
           }
         }
       ]
