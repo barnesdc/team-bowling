@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http'; 
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 
 /*
@@ -10,13 +11,13 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class GroupmeProvider {
-  private botID: string = "";
+  private botID: any;
   private apiUrl: string = "https://api.groupme.com/v3/bots/post";
   
   private d1 = new Date().getTime();
   private counter = 0;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, private storage: Storage) { }
 
   numOrdinal(num : any){
     var j = num % 10,
@@ -34,7 +35,27 @@ export class GroupmeProvider {
   }
 
   createBot(idBody: any){
-    this.botID = idBody;
+    this.storage.ready().then(() => {
+      this.storage.set('botID', idBody);
+    },
+    error => {
+      console.log(error);
+    });
+    
+  }
+
+  getBot(){
+    this.storage.ready().then(() => {
+      this.storage.get('botID').then((id) => {
+        this.botID = id;
+      },
+      error => {
+        console.log(error);
+      });
+    },
+    error => {
+      console.log(error);
+    });
   }
 
   parseTeamBody(body: any){
@@ -74,7 +95,8 @@ export class GroupmeProvider {
   }
 
   postTeamData(postBody: any){
-    return this.http.post(`${this.apiUrl}`, {bot_id: this.botID, text: this.parseTeamBody(postBody)}).subscribe(value => {
+    this.getBot();
+    this.http.post(`${this.apiUrl}`, {bot_id: this.botID, text: this.parseTeamBody(postBody)}).subscribe(value => {
       this.counter++;
             if (this.counter === 100) {
               const d2: number = new Date().getTime();
@@ -84,7 +106,8 @@ export class GroupmeProvider {
   }
 
   postResultData3(teamBody: any, rankBody: any, scoreBody: any){
-    return this.http.post(`${this.apiUrl}`, {bot_id: this.botID, text: this.parseResultBody3(teamBody, rankBody, scoreBody)}).subscribe(value => {
+    this.getBot();
+    this.http.post(`${this.apiUrl}`, {bot_id: this.botID, text: this.parseResultBody3(teamBody, rankBody, scoreBody)}).subscribe(value => {
       this.counter++;
             if (this.counter === 100) {
               const d2: number = new Date().getTime();
@@ -94,7 +117,8 @@ export class GroupmeProvider {
   }
 
   postResultData2(teamBody: any, rankBody: any, scoreBody: any){
-    return this.http.post(`${this.apiUrl}`, {bot_id: this.botID, text: this.parseResultBody2(teamBody, rankBody, scoreBody)}).subscribe(value => {
+    this.getBot();
+    this.http.post(`${this.apiUrl}`, {bot_id: this.botID, text: this.parseResultBody2(teamBody, rankBody, scoreBody)}).subscribe(value => {
       this.counter++;
             if (this.counter === 100) {
               const d2: number = new Date().getTime();

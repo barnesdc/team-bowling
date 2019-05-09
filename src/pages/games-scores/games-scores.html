@@ -2,6 +2,13 @@
   <ion-navbar> <ion-title> Games Scores </ion-title> </ion-navbar>
 </ion-header>
 <ion-content padding id="page2">
+  <button 
+  ion-button
+  block
+  on-click="generateBot()" 
+  >
+  Bot Setup
+  </button>
   <button
     id="startGame-button1"
     ion-button
@@ -40,7 +47,13 @@
         Team {{ tieTeams[0] }} and Team {{ tieTeams[1] }} have tied!
       </div>
     -->
-    
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+              <button *ngIf="Results" ion-button size="small" on-click="handicapScores()" float-left>Calculate Scores</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     <ng-container *ngIf="ShowWinner">
       <div *ngFor="let rank of rank; let count = index">
         <ion-card-title>
