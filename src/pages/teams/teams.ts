@@ -47,7 +47,7 @@ export class TeamsPage {
   checked = [];
   winner: any;
   bowlerScore: number;
-  private sendTeams: boolean = true;
+  private sendTeams: boolean;
 
   //Will save checked bowlers into checked[] array
   ionViewDidLoad() {
@@ -106,7 +106,7 @@ export class TeamsPage {
           });
           alert.present();
           this.sendTeams = false;
-        }else{
+        }else {
           this.sendTeams = true;
         }
 
@@ -237,7 +237,7 @@ export class TeamsPage {
           });
           alert.present();
           this.sendTeams = false;
-        }else{
+        }else {
           this.sendTeams = true;
         }
 
