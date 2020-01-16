@@ -62,7 +62,7 @@
     "@ionic/app-scripts": "3.2.3",
     "@ionic/lab": "1.0.9",
     "ionic": "4.12.0",
-    "typescript": "2.9.2"
+    "typescript": "3.7.5"
   },
   "description": "An Ionic project",
   "cordova": {
