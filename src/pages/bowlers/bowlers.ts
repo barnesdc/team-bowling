@@ -14,6 +14,7 @@ import { File } from "@ionic-native/file/ngx";
 import { DocumentViewer } from "@ionic-native/document-viewer/ngx";
 import { element } from "@angular/core/src/render3/instructions";
 import { isAbsolute } from "path";
+import { writeFile } from "fs";
 
 
 @Component({
@@ -33,7 +34,8 @@ export class BowlersPage {
     private transfer: FileTransfer,
     private file: File,
     private platform: Platform,
-    private document: DocumentViewer
+    private document: DocumentViewer,
+    public navParams: NavParams
   ) {
     // test bowler object
     // this.bowlers = [
@@ -65,10 +67,9 @@ export class BowlersPage {
 
   ionViewDidLoad() {
     this.GetAllBowlers();
+    this.botID = this.navParams.get("bot")
   }
-  ionViewWillEnter() {
-    this.GetAllBowlers();
-  }
+  ionViewWillEnter() {}
 
   //adds checked names to checked[] array and if unchecked, removes it from checked[] array
   addCheckbox(event, checkbox: String) {
@@ -78,7 +79,6 @@ export class BowlersPage {
 
       //change date value in bowler table for checked bowler
       this.database.PresentBowler(checkbox);
-
       this.counter = this.counter + 1;
     } else {
       console.log(checkbox + " unchecked");
@@ -91,7 +91,7 @@ export class BowlersPage {
     }
   }
 
-  private isAll: boolean;
+  private isAll: boolean = false;
   
   selectAllHelper(event){
     let checkboxes: any;
@@ -104,9 +104,9 @@ export class BowlersPage {
           this.checked.push(this.ListBowler[i].bowler_id);
           this.database.PresentBowler(this.ListBowler[i].bowler_id);
           this.counter = this.counter + 1;
-          this.isAll = true;
         }
       }
+      this.isAll = true;
     } else {
       console.log("unchecking all");
       for (let i = 0; i < this.ListBowler.length; i++){
@@ -116,9 +116,9 @@ export class BowlersPage {
           this.database.AbsentBowler(this.ListBowler[i].bowler_id);
           this.checked.splice(index, 1);
           this.counter = this.counter - 1;
-          this.isAll = false;
         }
       }
+      this.isAll = false;
     }
     this.GetAllBowlers();
   }
@@ -169,6 +169,7 @@ export class BowlersPage {
   //Empties checked[] array
   emptyCheckedArray() {
     this.checked = [];
+    this.counter = 0;
   }
 
   //Log elements of checked[] array
@@ -181,8 +182,8 @@ export class BowlersPage {
         this.checked.push(this.ListBowler[i]["bowler_id"]);
       }
     }
-    this.counter = this.checked.length;
     console.log(this.checked);
+    this.counter = this.checked.length;
   }
 
   //stores all bowlers in the database in the ListBowler array
@@ -197,6 +198,7 @@ export class BowlersPage {
           return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
       });
         this.getCheckedBoxes();
+       // this.counter = this.checked.length
       },
       error => {
         console.log(error);
@@ -207,43 +209,6 @@ export class BowlersPage {
   sort(){
     this.descending = !this.descending;
     this.order = this.descending ? 1 : -1;
-  }
-
-  generateBot(){
-    const prompt = this.alertCtrl.create({
-      title: "Creating a Groupme chatbot",
-      message: '<div>' + 
-      '<p>' + "Before you can start the setup, please visit this page and login using your Groupme username and password:" + '<\p>' +
-      '<p>' + '<a target="_blank" href="https://dev.groupme.com/session/new">' + "GroupMe Developers" + '<\a>' + '<\p>' +
-      '<p>' + "Click on the black drop down in top right corner, select Bots and then Create Bot, from there follow the propmt to create the chat bot. On completion you will be given a bot ID, please copy and past that ID in the field below to begin recieving messages in the bowling chat" + '<\p>',
-      inputs:[
-        {
-          name: "botID",
-          placeholder: "Bot ID"
-        }
-      ],
-      buttons: [
-        {
-          text: "Cancel",
-          handler: data => {
-            console.log("Bot creation cancelled")
-          }
-        },
-        {
-          text: "OK",
-          handler: data => {
-            if (data.botID != "") {
-              this.botID = data.botID;
-              this.chat.createBot(this.botID);
-            }else {
-              prompt.setMessage("Error: try again");
-              return false;
-            }
-          }
-        }
-      ]
-    });
-    prompt.present();
   }
 
   //Generates an alert prompt to create a new bowler. User enters bowler information and then this information is stored in the bowler table.
@@ -574,16 +539,73 @@ export class BowlersPage {
     confirm.present();
   }
 
+  private jsonBody = JSON.stringify(this.ListBowler);
+  private fileName = 'BowlerList.json';
 
-  exportBowlerList(){
-    let jsonBody = JSON.stringify(this.ListBowler);
-    const fileName = "BowlerList.json";
+  manipulateBowlerList(){
 
-    this.file.writeFile("src\assets", fileName, jsonBody, {append: false, replace: true});
+    const confirm = this.alertCtrl.create({
+      title: "Sending or Recieving Data",
+      message:
+        "Do you want import or export the list of bowlers?",
+      buttons: [
+        {
+          text: "Export",
+          handler: () => {
+            console.log("exports bowler list");
+            this.exportBL();
+          }
+        },
+        {
+          text: "Import",
+          handler: () => {
+            console.log("imports bowler list");
+            //method for import
+          }
+        }
+      ]
+    });
+    confirm.present(); 
     
+  }
+
+  exportBL(){
+    this.file.createFile(this.file.dataDirectory, this.fileName, true);
+    /*
+    this.file.checkFile(this.file.dataDirectory, this.fileName)
+      .then(doesExist => {
+          console.log("doesExist : " + doesExist);
+          return this.writeToFile(this.jsonBody);
+      }).catch(err => {
+          return this.file.createFile(this.file.dataDirectory, this.fileName, true)
+              .then(FileEntry => this.writeToFile(this.jsonBody))
+              .catch(err => console.log("Couldn't create file"));
+      });
+      */
+  }
+
+  writeToFile(text: string){
+    this.file.writeFile(this.file.dataDirectory, this.fileName, text, {replace:true});
   }
 }
  /*
+ 
+ this.file.checkFile(this.file.dataDirectory, this.fileName)
+      .then(doesExist => {
+          console.log("doesExist : " + doesExist);
+          return this.writeToFile(this.jsonBody);
+      }).catch(err => {
+          return this.file.createFile(this.file.dataDirectory, this.fileName, true)
+              .then(FileEntry => this.writeToFile(this.jsonBody))
+              .catch(err => console.log("Couldn't create file"));
+      });
+  }
+
+  writeToFile(text: string){
+    this.file.writeFile(this.file.dataDirectory, this.fileName, text, {replace:true});
+  }
+
+
   let path = null;
 
     if (this.platform.is('ios')){
