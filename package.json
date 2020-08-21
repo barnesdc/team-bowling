@@ -29,7 +29,7 @@
     "@ionic-native/sqlite-porter": "^5.5.0",
     "@ionic-native/status-bar": "~4.15.0",
     "@ionic-native/toast": "^4.20.0",
-    "@ionic/pro": "2.0.3",
+    "@ionic/pro": "2.0.4",
     "@ionic/storage": "2.2.0",
     "@swimlane/ngx-datatable": "^14.0.0",
     "angularfire2": "5.3.0",
