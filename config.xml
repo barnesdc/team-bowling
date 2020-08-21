@@ -82,16 +82,15 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-sqlite-storage" spec="2.4.0" />
     <plugin name="cordova-plugin-x-toast" spec="2.7.0" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <plugin name="cordova-sqlite-storage" spec="2.4.0" />
     <plugin name="cordova-plugin-x-toast" spec="2.7.0" />
     <allow-navigation href="http://192.168.0.180:8100" sessionid="a936d4db" />
     <allow-navigation href="http://10.200.217.231:8100" sessionid="919080ca" />
     <allow-navigation href="http://10.200.155.180:8101" sessionid="95515884" />
     <allow-navigation href="http://192.168.0.180:8101" sessionid="d85adfa9" />
+    <plugin name="uk.co.workingedge.cordova.plugin.sqliteporter" spec="1.1.0" />
+    <plugin name="cordova-sqlite-storage" spec="^2.6.0" />
     <engine name="android" spec="7.1.1" />
     <engine name="ios" spec="4.5.5" />
-    <plugin name="uk.co.workingedge.cordova.plugin.sqliteporter" spec="1.1.0" />
 </widget>
