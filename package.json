@@ -59,7 +59,7 @@
     "zone.js": "0.10.2"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.2.3",
+    "@ionic/app-scripts": "3.2.4",
     "@ionic/lab": "1.0.9",
     "ionic": "5.4.15",
     "typescript": "2.9.2"
