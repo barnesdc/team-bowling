@@ -47,6 +47,7 @@ export class TeamsPage {
   checked = [];
   winner: any;
   bowlerScore: number;
+  private sendTeams: boolean;
 
   //Will save checked bowlers into checked[] array
   ionViewDidLoad() {
@@ -100,10 +101,13 @@ export class TeamsPage {
         if ((showTeams.length % 3 >= 0.9 && showTeams.length % 3 <= 1.1) || (showTeams.length % 3 <= 2.1 && showTeams.length % 3 >= 1.9)) {
           let alert = this.alertCtrl.create({
             title: "Warning",
-            subTitle:"You will need to do teams of 2 instead, go back and rerandomize",
+            subTitle:"You will need to do teams of 2 in order to get even teams for the game, go back and rerandomize",
             buttons: ["Dismiss"]
           });
           alert.present();
+          this.sendTeams = false;
+        }else {
+          this.sendTeams = true;
         }
 
         //checks for high handicap bowlers and replaces or removes them as necessary
@@ -169,12 +173,14 @@ export class TeamsPage {
         this.ListTeam = showTeams
         console.log("the number of bowlers are: " + showTeams.length);
 
-        this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
-          while(a.team_id == b.team_id){
-          var textA = a.bowler_name.toUpperCase();
-          var textB = b.bowler_name.toUpperCase();
-          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-      }}));
+        if(this.sendTeams == true){
+          this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
+            while(a.team_id == b.team_id){
+            var textA = a.bowler_name.toUpperCase();
+            var textB = b.bowler_name.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        }}));
+      }
       },
       error => {
         console.log("Error randomizing teams");
@@ -226,10 +232,13 @@ export class TeamsPage {
         if (showTeams.length % 2 >= 0.9 && showTeams.length % 2 <= 1.1) {
           let alert = this.alertCtrl.create({
             title: "Warning",
-            subTitle:"You will need to do teams of 3 instead, go back and rerandomize",
+            subTitle:"You will need to do teams of 3 in order to get even teams for the game, go back and rerandomize",
             buttons: ["Dismiss"]
           });
           alert.present();
+          this.sendTeams = false;
+        }else {
+          this.sendTeams = true;
         }
 
         //checks for high handicap bowlers and replaces or removes them as necessary
@@ -292,12 +301,14 @@ export class TeamsPage {
         this.ListTeam = showTeams
         console.log("the number of bowlers are: " + showTeams.length);
 
-        this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
-          while(a.team_id == b.team_id){
-          var textA = a.bowler_name.toUpperCase();
-          var textB = b.bowler_name.toUpperCase();
-          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-      }}));
+        if(this.sendTeams == true){
+          this.chat.postTeamData(this.ListTeam.sort(function(a, b) {
+            while(a.team_id == b.team_id){
+            var textA = a.bowler_name.toUpperCase();
+            var textB = b.bowler_name.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        }}));
+      }
       },
       error => {
         console.log("Error randomizing teams");
@@ -336,6 +347,32 @@ export class TeamsPage {
   });
   }
 
+  sortByHand(){
+    if(this.ascT === true){
+        this.sortHandAsc();
+        this.ascT = false;
+    }else if(this.ascT === false){
+      this.sortTeamDesc();
+      this.ascT = true;
+    }
+  }
+
+  sortHandAsc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.bowler_handicapPins;
+      var textB = b.bowler_handicapPins;
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+  });
+  }
+
+  sortHandDesc(){
+    this.ListTeam.sort(function(a, b) {
+      var textA = a.bowler_handicapPins;
+      var textB = b.bowler_handicapPins;
+      return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+  });
+  }
+
   sortByName(){
     if(this.ascN === true){
         this.sortNameAsc();
@@ -360,32 +397,6 @@ export class TeamsPage {
       var textB = b.bowler_name.toUpperCase();
       return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
   });
-}
-
-sortByHandicap(){
-  if(this.ascT === true){
-      this.sortHandAsc();
-      this.ascT = false;
-  }else if(this.ascT === false){
-    this.sortHandDesc();
-    this.ascT = true;
-  }
-}
-
-sortHandAsc(){
-  this.ListTeam.sort(function(a, b) {
-    var textA = a.bowler_handicapPins;
-    var textB = b.bowler_handicapPins;
-    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-});
-}
-
-sortHandDesc(){
-  this.ListTeam.sort(function(a, b) {
-    var textA = a.bowler_handicapPins;
-    var textB = b.bowler_handicapPins;
-    return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
-});
 }
 
   //alerts user when an invalid number has been entered as a score
@@ -445,7 +456,8 @@ sortHandDesc(){
         this.database.updateAverage(this.ListTeam[i]["bowler_id"]);
       }
       this.navCtrl.push(GamesScoresPage, {
-        Teams: this.ListTeam
+        Teams: this.ListTeam,
+        Results: true
       });
     }
     show = true;
