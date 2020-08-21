@@ -31,7 +31,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { GroupmeProvider } from "../providers/groupme/groupme";
 import { FileTransfer } from "@ionic-native/file-transfer/ngx";
 import { File } from "@ionic-native/file/ngx";
-import { DocumentViewer } from "@ionic-native/document-viewer/ngx"
+import { DocumentViewer } from "@ionic-native/document-viewer/ngx";
+import { IonicStorageModule } from "@ionic/storage";
 
 
 @NgModule({
@@ -51,7 +52,11 @@ import { DocumentViewer } from "@ionic-native/document-viewer/ngx"
     // AngularFirestoreModule.enablePersistence(), //.enablePersistence() used for offline storage
     // AngularFireDatabaseModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+     driverOrder: ['indexeddb', 'sqlite', 'websql']
+   })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
